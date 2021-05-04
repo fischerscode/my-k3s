@@ -1,0 +1,116 @@
+---
+- name: Install WireGuard
+  become: true
+  apt:
+    name: wireguard
+    cache_valid_time: 3600
+    update_cache: true
+    state: present
+
+- name: Check if private key is already generated
+  become: true
+  stat:
+    path: "/etc/wireguard/{{ wireguard_interface }}.key"
+  register: wg_key_existance
+
+- when: not wg_key_existance.stat.exists
+  block:
+    - name: generate private key if needed
+      shell: wg genkey
+      register: wg_key
+
+    - name: save generated key
+      become: true
+      copy:
+        dest: "/etc/wireguard/{{ wireguard_interface }}.key"
+        content: "{{ wg_key.stdout }}"
+        mode: 0600
+
+    - name: extract private key
+      set_fact:
+        wg_key: "{{ wg_key.stdout }}"
+
+- when: wg_key_existance.stat.exists
+  block:
+    - name: read private key
+      become: true
+      slurp:
+        src: "/etc/wireguard/{{ wireguard_interface }}.key"
+      register: wg_key_file
+
+    - name: extract private key
+      set_fact:
+        wg_key: "{{ wg_key_file.content | b64decode }}"
+
+- name: calculate pub key
+  become: true
+  shell: "wg pubkey < /etc/wireguard/{{ wireguard_interface }}.key"
+  register: wg_pub
+  changed_when: false
+
+- name: extract public key
+  set_fact:
+    wg_pub: "{{ wg_pub.stdout }}"
+
+- name: create configfile from template
+  become: true
+  template:
+    src: wg.conf.j2
+    dest: "/etc/wireguard/{{ wireguard_interface }}.conf"
+    mode: 0600
+    force: yes
+  notify: restart wireguard
+
+- name: "Ensure wireguard-{{ wireguard_interface }} config for ufw"
+  become: true
+  copy:
+    content: |
+      [wireguard-{{ wireguard_interface }}]
+      title=wireguard-{{ wireguard_interface }}
+      description=The WireGuard VPN for node communication.
+      ports={{ wireguard_port }}/udp
+    mode: 0644
+    dest: "/etc/ufw/applications.d/wireguard-{{ wireguard_interface }}"
+
+- name: "allow wireguard-{{ wireguard_interface }} in ufw"
+  become: true
+  ufw:
+    rule: allow
+    name: "wireguard-{{ wireguard_interface }}"
+    state: enabled
+
+- name: Ensure IPv6 not disabled with sysctl
+  become: true
+  sysctl:
+    name: "{{ item }}"
+    value: "0"
+    state: present
+    reload: true
+  with_items:
+    - net.ipv6.conf.all.disable_ipv6
+    - net.ipv6.conf.default.disable_ipv6
+    - net.ipv6.conf.lo.disable_ipv6
+
+- name: enable and start wireguard
+  become: true
+  systemd:
+    name: "wg-quick@{{ wireguard_interface }}"
+    enabled: true
+    state: started
+# - name: Consider the wireguard network to be safe
+#   become: true
+#   community.general.ufw:
+#     comment: Allow all wireguard nodes
+#     rule: allow
+#     src: "{{ hostvars[item].wireguard_address_ipv4 }}"
+#     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'vpn', wantlist=True) }}"
+
+# - name: Consider the wireguard network to be safe
+#   become: true
+#   community.general.ufw:
+#     comment: Allow all wireguard nodes
+#     rule: allow
+#     src: "{{ hostvars[item].wireguard_address_ipv6 }}"
+#     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'vpn', wantlist=True) }}"

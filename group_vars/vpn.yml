@@ -1,0 +1,6 @@
+wireguard_network: 10.1.0.1/24
+wireguard_address_ipv4: "{{ internalIPv4 }}/32"
+wireguard_address_ipv6: "{{ internalIPv6 }}/128"
+wireguard_endpoint: "{{ externalIPv4 }}"
+wireguard_port: 51820
+wireguard_persistent_keepalive: "30"

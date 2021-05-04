@@ -1,0 +1,18 @@
+[Interface]
+PrivateKey = {{ wg_key }}
+ListenPort = {{ wireguard_port }}
+SaveConfig = false
+Address = {{ wireguard_address_ipv4 }}
+Address = {{ wireguard_address_ipv6 }}
+
+{% for host in play_hosts %}
+{% if inventory_hostname != hostvars[host]['inventory_hostname'] %}
+[Peer]
+PublicKey = {{ hostvars[host].wg_pub }}
+AllowedIPs = {{ hostvars[host].wireguard_address_ipv4 }}
+AllowedIPs = {{ hostvars[host].wireguard_address_ipv6 }}
+Endpoint = {{ hostvars[host].wireguard_endpoint }}:{{ hostvars[host].wireguard_port }}
+PersistentKeepalive = {{ wireguard_persistent_keepalive }}
+
+{% endif %}
+{% endfor %}

@@ -1,0 +1,12 @@
+- name: restart wireguard
+  become: true
+  systemd:
+    name: "wg-quick@{{ wireguard_interface }}"
+    state: restarted
+
+- name: restart network
+  systemd:
+    name: network-manager
+    state: restarted
+  async: 45
+  poll: 0

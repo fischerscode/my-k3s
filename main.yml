@@ -1,0 +1,22 @@
+- name: Prepare the servers.
+  hosts: vpn
+  become: true
+  gather_facts: false
+  roles:
+    - base
+  tags:
+    - base
+
+- name: Setup WireGuard
+  hosts: vpn
+  roles:
+    - vpn
+  tags:
+    - vpn
+
+- name: Download executable
+  hosts: k8s-cluster
+  roles:
+    - k3s
+  tags:
+    - k3s
