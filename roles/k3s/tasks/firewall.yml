@@ -6,71 +6,86 @@
     dest: "{{ kubernetes_api_public_address }}"
     state: enabled
 
-- name: Setup firewall for Kubernetes API Server
+- name: Allow node network
   become: true
   community.general.ufw:
-    comment: Kubernetes API Server
+    comment: node network
     rule: allow
-    src: "{{ hostvars[item].wireguard_address_ipv4 }}"
-    port: "6443"
-    protocol: tcp
+    src: "{{ node_network }}"
     state: enabled
-  loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
-  when: inventory_hostname in groups['kube-master']
 
-- name: Setup firewall for Flannel VXLAN
+- name: Allow pod cidr
   become: true
   community.general.ufw:
-    comment: Flannel VXLAN
+    comment: pod cidr
     rule: allow
-    src: "{{ hostvars[item].wireguard_address_ipv4 }}"
-    port: "8472"
-    protocol: udp
+    src: "{{ cluster_cidr }}"
     state: enabled
-  loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
-
-- name: Setup firewall for Kubelet metrics
-  become: true
-  community.general.ufw:
-    comment: Kubelet metrics
-    rule: allow
-    src: "{{ hostvars[item].wireguard_address_ipv4 }}"
-    port: "10250"
-    protocol: tcp
-    state: enabled
-  loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
-
-- name: Setup firewall for embedded etcd
-  become: true
-  community.general.ufw:
-    comment: embedded etcd
-    rule: allow
-    src: "{{ hostvars[item].wireguard_address_ipv4 }}"
-    port: "2379:2380"
-    protocol: tcp
-    state: enabled
-  loop: "{{ lookup('inventory_hostnames', 'kube-master', wantlist=True) }}"
-  when: inventory_hostname in groups['kube-master']
-# - name: Allow pod cidr
+# - name: Setup firewall for Kubernetes API Server
 #   become: true
 #   community.general.ufw:
-#     comment: pod cidr
+#     comment: Kubernetes API Server
 #     rule: allow
-#     src: "{{ cluster_cidr }}"
+#     src: "{{ hostvars[item].wireguard_address_ipv4 }}"
+#     port: "6443"
+#     protocol: tcp
 #     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
+#   when: inventory_hostname in groups['kube-master']
 
-# - name: Allow wireguard network
+# - name: Setup firewall for Flannel VXLAN
 #   become: true
 #   community.general.ufw:
-#     comment: wireguard network
+#     comment: Flannel VXLAN
 #     rule: allow
-#     src: "10.1.0.0/16"
+#     src: "{{ hostvars[item].wireguard_address_ipv4 }}"
+#     port: "8472"
+#     protocol: udp
 #     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
 
-- name: Allow virtual ips
-  become: true
-  community.general.ufw:
-    comment: virtual ips
-    rule: allow
-    dst: "{{ kubernetes_api_public_address }}"
-    state: enabled
+# - name: Setup firewall for Kubelet metrics
+#   become: true
+#   community.general.ufw:
+#     comment: Kubelet metrics
+#     rule: allow
+#     src: "{{ hostvars[item].wireguard_address_ipv4 }}"
+#     port: "10250"
+#     protocol: tcp
+#     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) }}"
+
+# - name: Setup firewall for embedded etcd
+#   become: true
+#   community.general.ufw:
+#     comment: embedded etcd
+#     rule: allow
+#     src: "{{ hostvars[item].wireguard_address_ipv4 }}"
+#     port: "2379:2380"
+#     protocol: tcp
+#     state: enabled
+#   loop: "{{ lookup('inventory_hostnames', 'kube-master', wantlist=True) }}"
+#   when: inventory_hostname in groups['kube-master']
+# # - name: Allow pod cidr
+# #   become: true
+# #   community.general.ufw:
+# #     comment: pod cidr
+# #     rule: allow
+# #     src: "{{ cluster_cidr }}"
+# #     state: enabled
+
+# # - name: Allow wireguard network
+# #   become: true
+# #   community.general.ufw:
+# #     comment: wireguard network
+# #     rule: allow
+# #     src: "10.1.0.0/16"
+# #     state: enabled
+
+# - name: Allow virtual ips
+#   become: true
+#   community.general.ufw:
+#     comment: virtual ips
+#     rule: allow
+#     dst: "{{ kubernetes_api_public_address }}"
+#     state: enabled

@@ -14,6 +14,9 @@
 - name: Allow nodes in firewall
   import_tasks: firewall.yml
 
+- name: Allow nodes in firewall
+  import_tasks: manifests.yml
+
 - name: Init cluster
   run_once: yes
   delegate_to: "{{ groups['kube-master'][0] }}"
@@ -51,8 +54,6 @@
       set_fact:
         token: "{{ node_token.content | b64decode | regex_replace('\n', '') }}"
 
-# - debug:
-#     msg: "{{ hostvars[groups['kube-master'][0]].internalIPv4 }}"
 - name: Join masters to cluster
   when:
     - inventory_hostname in groups['kube-master']
@@ -77,6 +78,18 @@
         state: started
         enabled: yes
 
+- name: Create memberlist secret for metallb
+  become: true
+  run_once: yes
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  shell:
+    cmd: k3s kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+  register: result
+  failed_when:
+    - "not 'already exists' in result.stderr"
+    - "not 'secret/memberlist created' in result.stdout"
+  changed_when: "'secret/memberlist created' in result.stdout"
+
 - name: Join agents to cluster
   when:
     - inventory_hostname in groups['kube-node']
@@ -96,7 +109,7 @@
       systemd:
         name: k3s
         daemon_reload: yes
-        state: restarted
+        state: started
         enabled: yes
 # - debug:
 #     var: token

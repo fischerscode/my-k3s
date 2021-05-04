@@ -1,0 +1,55 @@
+- name: Make sure manifest directory exists
+  become: true
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+    owner: root
+    group: root
+  loop:
+    - path: /var/lib/rancher
+      mode: "0755"
+    - path: /var/lib/rancher/k3s
+      mode: "0755"
+    - path: /var/lib/rancher/k3s/server
+      mode: "0700"
+    - path: /var/lib/rancher/k3s/server/manifests
+      mode: "0700"
+    - path: /var/lib/rancher/k3s/server/manifests/metallb
+      mode: "0700"
+
+- name: Download the manifest file for the metallb namespace
+  become: true
+  get_url:
+    url: https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
+    dest: /var/lib/rancher/k3s/server/manifests/metallb/namespace.yaml
+    mode: "0600"
+    owner: root
+    group: root
+
+- name: Download the manifest file for the metallb installation
+  become: true
+  get_url:
+    url: https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
+    dest: /var/lib/rancher/k3s/server/manifests/metallb/metallb.yaml
+    mode: "0600"
+    owner: root
+    group: root
+
+- name: Create the manifest for the metallb conf
+  become: true
+  template:
+    src: manifests/metallb.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/metallb/config.yaml
+    mode: "0600"
+    owner: root
+    group: root
+
+- name: Create the manifest for the HA api-server
+  become: true
+  template:
+    src: manifests/apiserver-loadbalancer.yaml.j2
+    dest: /var/lib/rancher/k3s/server/manifests/api-server-ha.yaml
+    mode: "0600"
+    owner: root
+    group: root

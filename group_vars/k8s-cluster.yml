@@ -2,5 +2,6 @@ k3sToken: secret
 
 kubernetes_api_public_address: 172.16.17.100
 
+node_network: 10.1.0.0/24
 cluster_cidr: 10.42.0.0/16
 service_cidr: 10.43.0.0/16

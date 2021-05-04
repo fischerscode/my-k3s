@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-server-ha-config
+  namespace: kube-system
+  labels:
+    k8s-app: api-server-ha
+data:
+  haproxy.cfg: |
+    frontend k8s-api
+      bind 0.0.0.0:6443
+      mode tcp
+      option tcplog
+      default_backend k8s-api
+
+    backend k8s-api
+      mode tcp
+      option tcplog
+      option tcp-check
+      balance roundrobin
+      default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100
+      {% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}server {{host}} {{ hostvars[host].internalIPv4 }}:6443 check
+      {% endfor %}
+
+---
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: api-server-ha
+  namespace: kube-system
+  labels:
+    k8s-app: api-server-ha
+spec:
+  selector:
+    matchLabels:
+      name: api-server-ha
+  template:
+    metadata:
+      labels:
+        name: api-server-ha
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role.kubernetes.io/master"
+                    operator: Exists
+      containers:
+        - name: api-server-ha
+          image: haproxy:2.2
+          ports:
+            - containerPort: 6443
+          volumeMounts:
+            - name: conf
+              mountPath: /usr/local/etc/haproxy/haproxy.cfg
+              readOnly: true
+      volumes:
+        - name: conf
+          configMap:
+            name: api-server-ha-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-server-ha
+  namespace: kube-system
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "true"
+  labels:
+    k8s-app: api-server-ha
+spec:
+  selector:
+    name: api-server-ha
+  type: LoadBalancer
+  loadBalancerIP: "{{ kubernetes_api_public_address }}"
+  ports:
+    - port: 6443
+      targetPort: 6443
