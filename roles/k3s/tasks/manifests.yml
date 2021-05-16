@@ -17,6 +17,8 @@
       mode: "0700"
     - path: /var/lib/rancher/k3s/server/manifests/metallb
       mode: "0700"
+    - path: /var/lib/rancher/k3s/server/manifests/rook
+      mode: "0700"
 
 - name: Download the manifest file for the metallb namespace
   become: true
@@ -53,3 +55,20 @@
     mode: "0600"
     owner: root
     group: root
+
+- name: Create the manifests for rook
+  become: true
+  copy:
+    src: "rook/{{ item }}"
+    dest: "/var/lib/rancher/k3s/server/manifests/rook/{{ item }}"
+    mode: "0600"
+    owner: root
+    group: root
+  loop:
+    - block-storageclass.yaml
+    - cluster.yaml
+    - common.yaml
+    - crds.yaml
+    - fs-storageclass.yaml
+    - operator.yaml
+    - toolbox.yaml

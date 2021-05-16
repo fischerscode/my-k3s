@@ -1,3 +1,5 @@
+# export VAGRANT_EXPERIMENTAL="disks"
+# jq -n 'range(5) | . + 1' | xargs -P10 -I {} vagrant up k3s{}.test
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004"
 
@@ -11,7 +13,7 @@ Vagrant.configure("2") do |config|
   EOC
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
-#   config.vm.network "public_network", type: "dhcp", :bridge => 'en0: Ethernet'
+  config.vm.network "public_network", type: "dhcp", :bridge => 'en0: Ethernet'
 
   (1..5).each do |i|
     config.vm.define "k3s#{i}.test" do |node|
@@ -24,6 +26,7 @@ Vagrant.configure("2") do |config|
           v.memory = 2048
           v.cpus = 2
         end
+        node.vm.disk :disk, name: "data", size: "100GB"
     end
   end
 

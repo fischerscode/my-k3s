@@ -7,7 +7,7 @@ After=network-online.target
 Type=notify
 ExecStartPre=-/sbin/modprobe br_netfilter
 ExecStartPre=-/sbin/modprobe overlay
-ExecStart=/usr/local/bin/k3s server --cluster-init --advertise-address {{ internalIPv4 }} --bind-address {{ internalIPv4 }}  --flannel-iface={{ wireguard_interface }} --cluster-cidr {{ cluster_cidr }} --service-cidr {{ service_cidr }} --disable servicelb --no-deploy traefik
+ExecStart=/usr/local/bin/k3s server --cluster-init --tls-san {{kubernetes_api_public_address}} --advertise-address {{ internalIPv4 }} --bind-address {{ internalIPv4 }}  --flannel-iface={{ wireguard_interface }} --cluster-cidr {{ cluster_cidr }} --service-cidr {{ service_cidr }} --disable servicelb --no-deploy traefik
 KillMode=process
 Delegate=yes
 # Having non-zero Limit*s causes performance problems due to accounting overhead
