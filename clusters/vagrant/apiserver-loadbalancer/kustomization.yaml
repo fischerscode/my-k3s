@@ -5,5 +5,5 @@ namespace: kube-system
 
 resources:
   - generated/configmap.yaml
-  - generated/daemonset.yaml
-  - service.yaml
+  - generated/service.yaml
+  - daemonset.yaml
