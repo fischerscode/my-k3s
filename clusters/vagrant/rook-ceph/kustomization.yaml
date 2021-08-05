@@ -1,0 +1,12 @@
+---
+resources:
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/crds.yaml?ref=v1.7.0
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/common.yaml?ref=v1.7.0
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/operator.yaml?ref=v1.7.0
+
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/cluster.yaml?ref=v1.7.0
+
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml?ref=v1.7.0
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/filesystem.yaml?ref=v1.7.0
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/csi/cephfs/storageclass.yaml?ref=v1.7.0
+  - github.com/rook/rook//cluster/examples/kubernetes/ceph/toolbox.yaml?ref=v1.7.0
