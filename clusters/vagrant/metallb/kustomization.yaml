@@ -1,3 +1,4 @@
+---
 namespace: metallb-system
 
 resources:
