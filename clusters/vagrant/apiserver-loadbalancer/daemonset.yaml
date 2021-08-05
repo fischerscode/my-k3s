@@ -1,0 +1,39 @@
+---
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: api-server-ha
+  labels:
+    k8s-app: api-server-ha
+spec:
+  selector:
+    matchLabels:
+      name: api-server-ha
+  template:
+    metadata:
+      labels:
+        name: api-server-ha
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role.kubernetes.io/master"
+                    operator: Exists
+      containers:
+        - name: api-server-ha
+          image: haproxy:2.2
+          ports:
+            - containerPort: 6443
+          volumeMounts:
+            - name: conf
+              mountPath: /usr/local/etc/haproxy/haproxy.cfg
+              readOnly: true
+      volumes:
+        - name: conf
+          configMap:
+            name: api-server-ha-config
