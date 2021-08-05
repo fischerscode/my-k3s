@@ -1,0 +1,20 @@
+---
+- name: Update the manifests for the cluster "{{ cluster_name }}".
+  hosts: all
+  gather_facts: no
+  tasks:
+    - delegate_to: localhost
+      run_once: true
+      block:
+        - name: "Ensure clusters/{{ cluster_name }}/apiserver-loadbalancer/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/apiserver-loadbalancer/generated"
+            state: directory
+        - name: "Template apiserver-loadbalancer/generated/configmap.yaml"
+          template:
+            src: api-loadbalancer/configmap.yaml.j2
+            dest: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/apiserver-loadbalancer/generated/configmap.yaml"
+        - name: "Template apiserver-loadbalancer/service.yaml"
+          template:
+            src: api-loadbalancer/service.yaml.j2
+            dest: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/apiserver-loadbalancer/generated/service.yaml"

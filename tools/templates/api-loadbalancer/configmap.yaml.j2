@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-server-ha-config
+  labels:
+    k8s-app: api-server-ha
+data:
+  haproxy.cfg: |
+    frontend k8s-api
+      bind 0.0.0.0:6443
+      mode tcp
+      option tcplog
+      default_backend k8s-api
+
+    backend k8s-api
+      mode tcp
+      option tcplog
+      option tcp-check
+      balance roundrobin
+      default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100
+      {% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}server {{host}} {{ hostvars[host].internalIPv4 }}:6443 check
+      {% endfor %}
