@@ -1,8 +1,8 @@
 ---
 namespace: rook-ceph
 
-bases:
-  - rook
-
 resources:
   - cluster-on-pvc.yaml
+  - crds.yaml
+  - common.yaml
+  - operator.yaml
