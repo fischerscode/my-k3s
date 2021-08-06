@@ -27,7 +27,7 @@ spec:
     # size appropriate for monitor data will be used.
     volumeClaimTemplate:
       spec:
-        storageClassName: local-storage
+        storageClassName: local-path
         resources:
           requests:
             storage: 10Gi
@@ -126,7 +126,7 @@ spec:
                 requests:
                   storage: 100Gi
               # IMPORTANT: Change the storage class depending on your environment
-              storageClassName: local-storage
+              storageClassName: local-path
               volumeMode: Block
               accessModes:
                 - ReadWriteOnce
