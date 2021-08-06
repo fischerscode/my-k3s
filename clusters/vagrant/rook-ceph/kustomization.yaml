@@ -2,7 +2,7 @@
 namespace: rook-ceph
 
 resources:
-  - cluster-on-pvc.yaml
   - crds.yaml
   - common.yaml
   - operator.yaml
+  # - cluster-on-pvc.yaml
