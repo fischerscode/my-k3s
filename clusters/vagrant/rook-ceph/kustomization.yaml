@@ -5,4 +5,4 @@ resources:
   - crds.yaml
   - common.yaml
   - operator.yaml
-  # - cluster-on-pvc.yaml
+  - cluster-on-pvc.yaml
