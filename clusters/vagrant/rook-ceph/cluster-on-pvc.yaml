@@ -127,7 +127,7 @@ spec:
                   storage: 100Gi
               # IMPORTANT: Change the storage class depending on your environment
               storageClassName: local-path
-              volumeMode: Block
+              volumeMode: Filesystem
               accessModes:
                 - ReadWriteOnce
         # dedicated block device to store bluestore database (block.db)
