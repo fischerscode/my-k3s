@@ -1,0 +1,8 @@
+---
+namespace: rook-ceph
+
+bases:
+  - rook
+
+resources:
+  - cluster-on-pvc.yaml
