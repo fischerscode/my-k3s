@@ -221,19 +221,19 @@ spec:
     nodes:
       - name: knode1
         devices:
-          - name: "loop0"
+          - name: "sdb"
       - name: knode2
         devices:
-          - name: "loop0"
+          - name: "sdb"
       - name: knode3
         devices:
-          - name: "loop0"
+          - name: "sdb"
       - name: knode4
         devices:
-          - name: "loop0"
+          - name: "sdb"
       - name: knode5
         devices:
-          - name: "loop0"
+          - name: "sdb"
   #    nodes:
   #    - name: "172.17.4.201"
   #      devices: # specific devices to use for storage can be specified for each node

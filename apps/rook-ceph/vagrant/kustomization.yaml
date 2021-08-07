@@ -1,0 +1,7 @@
+---
+namespace: rook-ceph
+
+resources:
+  - operator.yaml
+  - cluster.yaml
+  - storageclass.yaml
