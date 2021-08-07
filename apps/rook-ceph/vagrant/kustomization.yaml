@@ -5,3 +5,4 @@ resources:
   - operator.yaml
   - cluster.yaml
   - storageclass.yaml
+  - toolbox.yaml
