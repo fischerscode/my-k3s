@@ -3,7 +3,9 @@ kind: Kustomization
 
 namespace: kube-system
 
+bases:
+  - ../../base/apiserver-loadbalancer
+
 resources:
   - generated/configmap.yaml
   - generated/service.yaml
-  - daemonset.yaml

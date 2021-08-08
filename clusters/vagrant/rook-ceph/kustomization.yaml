@@ -1,5 +1,0 @@
----
-resources:
-  - crds.yaml
-  - common.yaml
-  - sync.yaml

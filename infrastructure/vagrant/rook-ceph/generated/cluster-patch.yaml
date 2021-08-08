@@ -1,0 +1,23 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  storage:
+    nodes:
+      - name: knode1
+        devices:
+          - name: "sdb"
+      - name: knode2
+        devices:
+          - name: "sdb"
+      - name: knode3
+        devices:
+          - name: "sdb"
+      - name: knode4
+        devices:
+          - name: "sdb"
+      - name: knode5
+        devices:
+          - name: "sdb"
