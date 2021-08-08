@@ -1,5 +1,6 @@
 # export VAGRANT_EXPERIMENTAL="disks"
 # jq -n 'range(5) | . + 1' | xargs -P10 -I {} vagrant up k3s{}.test
+# jq -n 'range(5) | . + 1' | xargs -P10 -I {} vagrant reload k3s{}.test
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004"
 
@@ -23,10 +24,10 @@ Vagrant.configure("2") do |config|
         node.vm.network "private_network", ip: "fd34:fe56:7891:2f3b::#{i}"
         node.vm.provider "virtualbox" do |v|
           v.name = "k3s#{i}.test"
-          v.memory = 2048
-          v.cpus = 2
+          v.memory = 3072
+          v.cpus = 4
         end
-        node.vm.disk :disk, name: "data", size: "100GB"
+        node.vm.disk :disk, name: "data", size: "150GB"
     end
   end
 
