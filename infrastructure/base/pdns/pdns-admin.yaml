@@ -48,6 +48,31 @@ spec:
                   name: pdns-config
             - name: PDNS_VERSION
               value: "4.5"
+        - name: admin-frontend
+          image: fischerscode/dev-ca.pdns-admin-frontend:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: PDNS_ADMIN_HOST
+              value: "localhost"
+            - name: PDNS_ADMIN_HOST_PORT
+              value: "9494"
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: admin
+# spec:
+#   selector:
+#     app: admin
+#   ports:
+#     - port: 9494
+#       targetPort: 9494
 ---
 apiVersion: v1
 kind: Service
@@ -57,5 +82,5 @@ spec:
   selector:
     app: admin
   ports:
-    - port: 9494
-      targetPort: 9494
+    - port: 80
+      targetPort: 80

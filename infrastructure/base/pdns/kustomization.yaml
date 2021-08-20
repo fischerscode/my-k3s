@@ -4,7 +4,7 @@ resources:
   - mariadb-auth.yaml
   - pdns-auth.yaml
   - pdns-admin.yaml
-  - pdns-admin-frontend.yaml
+  # - pdns-admin-frontend.yaml
 
 namePrefix: pdns-
 
@@ -26,8 +26,8 @@ vars:
       kind: Service
       name: auth-api
       apiVersion: v1
-  - name: PDNS_ADMIN_HOST
-    objref:
-      kind: Service
-      name: admin
-      apiVersion: v1
+  # - name: PDNS_ADMIN_HOST
+  #   objref:
+  #     kind: Service
+  #     name: admin
+  #     apiVersion: v1
