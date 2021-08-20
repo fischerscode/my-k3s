@@ -67,7 +67,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: "true"
 spec:
   selector:
-    app: auth-dns
+    app: auth
   type: LoadBalancer
   loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
   ports:
@@ -75,10 +75,10 @@ spec:
       port: 53
       targetPort: 53
       protocol: TCP
-    - name: dns-udp
-      port: 53
-      targetPort: 53
-      protocol: UDP
+    # - name: dns-udp
+    #   port: 53
+    #   targetPort: 53
+    #   protocol: UDP
 ---
 apiVersion: v1
 kind: Service
@@ -86,7 +86,7 @@ metadata:
   name: auth-api
 spec:
   selector:
-    app: auth-api
+    app: auth
   ports:
     - port: 8081
       targetPort: 8081
