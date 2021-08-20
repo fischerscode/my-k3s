@@ -6,7 +6,7 @@ resources:
   - pdns-admin.yaml
   # - pdns-admin-frontend.yaml
 
-namePrefix: pdns-
+namePrefix: powerdns-
 
 namespace: powerdns
 

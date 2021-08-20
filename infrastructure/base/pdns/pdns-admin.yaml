@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: admin
-          image: fischerscode/powerdns-admin:latest
+          image: fischerscode/powerdns-admin:test
           imagePullPolicy: Always
           resources:
             limits:
@@ -25,6 +25,8 @@ spec:
           env:
             - name: PDNS_ADMIN_SQLA_DB_HOST
               value: "$(MARIADB_ADMIN_NAME)"
+            - name: PDNS_ADMIN_SQLA_DB_PORT
+              value: "3306"
             - name: PDNS_ADMIN_SQLA_DB_NAME
               valueFrom:
                 configMapKeyRef:
@@ -78,7 +80,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pdnsadmin
+  name: admin
 spec:
   selector:
     app: admin
