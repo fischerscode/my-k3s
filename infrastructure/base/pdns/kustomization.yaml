@@ -1,0 +1,33 @@
+resources:
+  - namespace.yaml
+  - mariadb-admin.yaml
+  - mariadb-auth.yaml
+  - pdns-auth.yaml
+  - pdns-admin.yaml
+  - pdns-admin-frontend.yaml
+
+namePrefix: pdns-
+
+namespace: powerdns
+
+vars:
+  - name: MARIADB_AUTH_NAME
+    objref:
+      kind: Service
+      name: mariadb-auth
+      apiVersion: v1
+  - name: MARIADB_ADMIN_NAME
+    objref:
+      kind: Service
+      name: mariadb-admin
+      apiVersion: v1
+  - name: PDNS_API_HOST
+    objref:
+      kind: Service
+      name: auth-api
+      apiVersion: v1
+  - name: PDNS_ADMIN_HOST
+    objref:
+      kind: Service
+      name: admin
+      apiVersion: v1

@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: fischerscode/powerdns-auth:4.5.1
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 53
+              protocol: TCP
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 8081
+              protocol: TCP
+          env:
+            - name: PDNS_gmysql_host
+              value: "$(MARIADB_AUTH_NAME)"
+            - name: PDNS_gmysql_dbname
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE
+                  name: mariadb-auth-config
+            - name: PDNS_gmysql_user
+              valueFrom:
+                configMapKeyRef:
+                  key: USER
+                  name: mariadb-auth-config
+            - name: PDNS_gmysql_password
+              valueFrom:
+                secretKeyRef:
+                  key: USER_PASSWORD
+                  name: mariadb-auth-config
+            - name: PDNS_api
+              value: "yes"
+            - name: PDNS_api_key
+              valueFrom:
+                secretKeyRef:
+                  key: API_KEY
+                  name: pdns-config
+            - name: PDNS_webserver
+              value: "yes"
+            - name: PDNS_webserver_address
+              value: "0.0.0.0"
+            - name: PDNS_webserver_allow_from
+              value: "${NETWORK_K8S_CLUSTER_CIDR}"
+            - name: PDNS_version_string
+              value: "anonymous"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-dns
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "true"
+spec:
+  selector:
+    app: auth-dns
+  type: LoadBalancer
+  loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
+  ports:
+    - port: 53
+      containerPort: 53
+      protocol: TCP
+    - port: 53
+      containerPort: 53
+      protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-api
+spec:
+  selector:
+    app: auth-api
+  ports:
+    - port: 8081
+      containerPort: 8081
+      protocol: TCP

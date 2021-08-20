@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-auth
+spec:
+  selector:
+    matchLabels:
+      app: mariadb-auth
+  serviceName: mariadb-auth
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mariadb-auth
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb:10.5
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ROOT_PASSWORD
+                  name: mariadb-auth-config
+            - name: MARIADB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE
+                  name: mariadb-auth-config
+            - name: MARIADB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: USER
+                  name: mariadb-auth-config
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: USER_PASSWORD
+                  name: mariadb-auth-config
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - name: mariadb-auth
+              mountPath: /var/lib/mysql
+          livenessProbe:
+            exec:
+              command:
+                - "mysqladmin ping -h localhost"
+            timeoutSeconds: 10
+            failureThreshold: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: mariadb-auth
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-auth
+spec:
+  selector:
+    app: mariadb-auth
+  ports:
+    - port: 3306
+      targetPort: 3306

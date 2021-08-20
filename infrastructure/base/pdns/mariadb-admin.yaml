@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-admin
+spec:
+  selector:
+    matchLabels:
+      app: mariadb-admin
+  serviceName: mariadb-admin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mariadb-admin
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb:10.5
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ROOT_PASSWORD
+                  name: mariadb-admin-config
+            - name: MARIADB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE
+                  name: mariadb-admin-config
+            - name: MARIADB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: USER
+                  name: mariadb-admin-config
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: USER_PASSWORD
+                  name: mariadb-admin-config
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - name: mariadb-admin
+              mountPath: /var/lib/mysql
+          livenessProbe:
+            exec:
+              command:
+                - "mysqladmin ping -h localhost"
+            timeoutSeconds: 10
+            failureThreshold: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: mariadb-admin
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-admin
+spec:
+  selector:
+    app: mariadb-admin
+  ports:
+    - port: 3306
+      targetPort: 3306
