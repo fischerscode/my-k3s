@@ -38,7 +38,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: USER_PASSWORD
-                  name: mariadb-config
+                  name: mariadb-admin-config
             - name: PDNS_ENV_PDNS_webserver_host
               value: "$(PDNS_API_HOST)"
             - name: PDNS_API_KEY
@@ -49,7 +49,7 @@ spec:
             - name: PDNS_VERSION
               value: "4.5"
         - name: admin-frontend
-          image: fischerscode/dev-ca.pdns-admin-frontend:latest
+          image: fischerscode/powerdns-admin-frontend:latest
           resources:
             limits:
               memory: "128Mi"
