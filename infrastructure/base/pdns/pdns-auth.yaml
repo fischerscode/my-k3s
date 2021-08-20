@@ -71,11 +71,11 @@ spec:
   type: LoadBalancer
   loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
   ports:
-    - name: DNS-TCP
+    - name: dns-tcp
       port: 53
       targetPort: 53
       protocol: TCP
-    # - name: DNS UDP
+    # - name: dns-udp
     #   port: 53
     #   targetPort: 53
     #   protocol: UDP
