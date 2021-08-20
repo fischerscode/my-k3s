@@ -1,3 +1,4 @@
 ---
 resources:
   - daemonset.yaml
+  - service.yaml

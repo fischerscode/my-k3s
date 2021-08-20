@@ -11,7 +11,7 @@ spec:
   selector:
     name: api-server-ha
   type: LoadBalancer
-  loadBalancerIP: "172.16.17.100"
+  loadBalancerIP: "$(SVC_KUBERNETES_API_PUBLIC)"
   ports:
     - port: 6443
       targetPort: 6443

@@ -8,4 +8,3 @@ bases:
 
 resources:
   - generated/configmap.yaml
-  - generated/service.yaml
