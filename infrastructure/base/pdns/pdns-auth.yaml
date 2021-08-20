@@ -72,10 +72,10 @@ spec:
   loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
   ports:
     - port: 53
-      containerPort: 53
+      targetPort: 53
       protocol: TCP
     - port: 53
-      containerPort: 53
+      targetPort: 53
       protocol: UDP
 ---
 apiVersion: v1
@@ -87,5 +87,5 @@ spec:
     app: auth-api
   ports:
     - port: 8081
-      containerPort: 8081
+      targetPort: 8081
       protocol: TCP
