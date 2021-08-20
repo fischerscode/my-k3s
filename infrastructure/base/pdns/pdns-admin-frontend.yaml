@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: admin-frontend
-          image: fischerscode/powerdns-admin-frontend:test
+          image: fischerscode/dev-ca.pdns-admin-frontend:latest
           resources:
             limits:
               memory: "128Mi"
