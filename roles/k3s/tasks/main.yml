@@ -4,19 +4,19 @@
 - name: Download executable
   become: true
   get_url:
-    url: https://github.com/k3s-io/k3s/releases/download/v1.21.0%2Bk3s1/k3s
+    url: https://github.com/k3s-io/k3s/releases/download/v1.21.4%2Bk3s1/k3s
     dest: /usr/local/bin/k3s
     mode: 0755
     owner: root
     group: root
-    checksum: sha256:28b732998138e3185988cd2aefb352461e1bf517cf8f7435d8511352cc5d962b
+    checksum: sha256:47e686ad5390670da79a467ba94399d72e472364bc064a20fecd3937a8d928b5
 
 - name: Allow nodes in firewall
   import_tasks: firewall.yml
 
-- name: Copy manifests to masters
-  when: inventory_hostname in groups['kube-master']
-  import_tasks: manifests.yml
+# - name: Copy manifests to masters
+#   when: inventory_hostname in groups['kube-master']
+#   import_tasks: manifests.yml
 
 - name: Init cluster
   run_once: yes
@@ -79,17 +79,74 @@
         state: started
         enabled: yes
 
-- name: Create memberlist secret for metallb
+# - name: Create ns for metallb
+#   become: true
+#   run_once: yes
+#   delegate_to: "{{ groups['kube-master'][0] }}"
+#   shell:
+#     cmd: k3s kubectl create ns metallb-system
+#   register: result
+#   failed_when:
+#     - "not 'already exists' in result.stderr"
+#     - "not 'namespace/metallb-system created' in result.stdout"
+#   changed_when: "'namespace/metallb-system created' in result.stdout"
+
+# - name: Create memberlist secret for metallb
+#   become: true
+#   run_once: yes
+#   delegate_to: "{{ groups['kube-master'][0] }}"
+#   shell:
+#     cmd: k3s kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+#   register: result
+#   failed_when:
+#     - "not 'already exists' in result.stderr"
+#     - "not 'secret/memberlist created' in result.stdout"
+#   changed_when: "'secret/memberlist created' in result.stdout"
+
+- name: Check if SOPS key exists
+  run_once: yes
+  delegate_to: 127.0.0.1
+  stat:
+    path: "{{ playbook_dir }}/{{ cluster_name }}.key"
+  register: stat_result
+
+- name: Create ns for flux
   become: true
   run_once: yes
   delegate_to: "{{ groups['kube-master'][0] }}"
   shell:
-    cmd: k3s kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+    cmd: k3s kubectl create ns flux-system
   register: result
   failed_when:
     - "not 'already exists' in result.stderr"
-    - "not 'secret/memberlist created' in result.stdout"
-  changed_when: "'secret/memberlist created' in result.stdout"
+    - "not 'namespace/flux-system created' in result.stdout"
+  changed_when: "'namespace/flux-system created' in result.stdout"
+  when: stat_result.stat.exists
+
+- name: Copy SOPS key
+  become: true
+  run_once: yes
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  copy:
+    src: "{{ playbook_dir }}/{{ cluster_name }}.key"
+    dest: "/tmp/sops.asc"
+    owner: root
+    group: root
+    mode: "0600"
+  when: stat_result.stat.exists
+
+- name: Create SOPS secret
+  become: true
+  run_once: yes
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  shell:
+    cmd: "k3s kubectl create secret generic sops-gpg --namespace=flux-system --from-file=/tmp/sops.asc"
+  register: result
+  failed_when:
+    - "not 'already exists' in result.stderr"
+    - "not 'secret/sops-gpg created' in result.stdout"
+  changed_when: "'secret/sops-gpg created' in result.stdout"
+  when: stat_result.stat.exists
 
 - name: Join agents to cluster
   when:
