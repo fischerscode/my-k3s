@@ -1,2 +1,4 @@
 .vagrant/
-kubeconfig.yaml
+kubeconfig*.yaml
+*.key
+*.secret
