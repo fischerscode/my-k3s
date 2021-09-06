@@ -15,5 +15,12 @@ knode[4:5].test
 kube-master
 kube-node
 
+[k8s-storage]
+knode1.test storageDisk=sdb
+knode2.test storageDisk=sdb
+knode3.test storageDisk=sdb
+knode4.test storageDisk=sdb
+knode5.test storageDisk=sdb
+
 [vpn:children]
 k8s-cluster
