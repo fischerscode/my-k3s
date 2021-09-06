@@ -1,0 +1,3 @@
+[submodule "contabo-initial-setup"]
+	path = contabo-initial-setup
+	url = https://github.com/fischerscode/contabo-initial-setup.git
