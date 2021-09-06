@@ -79,7 +79,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-dns-upd
+  name: auth-dns-udp
   annotations:
     metallb.universe.tf/allow-shared-ip: "true"
 spec:
