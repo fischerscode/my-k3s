@@ -11,6 +11,7 @@ jobs:
       matrix:
         cluster:
           - vagrant
+          - contabo1
       fail-fast: false
     runs-on: ubuntu-latest
     steps:

@@ -86,6 +86,9 @@ MacOS: ```brew install velero``` -->
     2. Setup flux: `flux bootstrap github --owner=fischerscode --repository=my-k3s --path=clusters/$CLUSTER --branch master --personal`
 15. Playbook should finish now. If not check `flux get all`.
 16. Replace IP at server in `kubeconfig-$CLUSTER.yaml` with `kubernetes_api_public_address`.
+   
+### Afterwards:
+1. Add cluster to `.github/workflows/update-flux.yaml`
 
 
 ## Mozilla SOPS
