@@ -1,0 +1,6 @@
+creation_rules:
+  - path_regex: /contabo1\/.*\.yaml$
+    encrypted_regex: ^(data|stringData)$
+    pgp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE
+  - path_regex: /contabo1\/.*\.encrypted$
+    pgp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE

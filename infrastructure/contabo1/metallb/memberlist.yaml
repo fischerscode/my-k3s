@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+    secretkey: ENC[AES256_GCM,data:BL/Kv27hQ3P7BvMqGcf3aToRxgbkK/9eVswvDNsgGu0JoER4a9Lok2DSrU+Y+34pgMKUbvCPtL6kNzKP/VRX1mMS4ag2w04KPK4scPq63zjM0ouXDMCNl2iJOS/olVgTtL7f87oZPHSUXrOu3+sDsc2b4VZatpyDhXEqiqpbGZqCHAKpdhT3rnfxZk5PcZvhkm5v/Ec2/8cXO7CMqhZR8ZeBiSfGrFvrh7fzNw==,iv:tbFhRCSAUJrh4ykH4Frg4/892tvBoHM2XStfHFDfQY4=,tag:lgXnyXhv9POQNsDj+tGapg==,type:str]
+kind: Secret
+metadata:
+    creationTimestamp: null
+    name: memberlist
+    namespace: metallb-system
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2021-09-10T10:49:51Z"
+    mac: ENC[AES256_GCM,data:zUB+sA4uzskC4AXsj+66bmOLzEOyTb4YpnIa5ikbKSdim+KHORmC6PXEPK5MISLMntXITPBiYJGiBjUAfafMT44/ZMVQyq9UkUsK6yrTwMyxzToBORNImcOB3KaqAZgvfkc6vYyZgaMJD3VmPxx89pl3fts2A9hTth7abulLFuo=,iv:TB+UdadLH2k76bPlXqsTz+hRQ5ZnEouh9y2Ugr3tRKc=,tag:9qLOaq7EVt5jgZkGBzPiYg==,type:str]
+    pgp:
+        - created_at: "2021-09-10T10:49:51Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA5JSBrarPrpaARAAkn24ivMuwyChpxfGEyBgk4plvxY4EYNnVPLPGb80IK2M
+            qZGei8SLBh9hjG5bRNkvk1Iy3nRl6g/FgnJjlc6RPEi75h43B6NfPn8rnzwwFEvr
+            /3GE9abihpVZJy9PXwsK4IlLCLP0A7VyVJOdI6DBJ+IrCphuja5lkTVzv+PjFa+W
+            sSF+yqwS2FpuT3aTSM/mqGECGW6AzCGnmWHyWpP9drxd6OA2nGRF4feUSpQPf1xC
+            d5R9ouwrczsjRcOGc3mZFXc4wkfBYucf2dUsk84OL6ra9ow0Fcy3ZpIYrKkCtSgK
+            jRQlXx1XzteUbqAkJMoiKbN26LMXMShTrfgv4CyxjD0dlDamsqRDtzOakJvyhXCZ
+            y2cBlhORHM+z39cw1y7KJygs0uhkCG1WNtZHO+1uXfpicjzbZpdyQFEmcDut78Fb
+            5Yq2cLl+WFXwnE5hRsysVWIJgdVaJkF25lsJzMw0yvjs0cA1Um4pvKEhMlF7MZXw
+            ILnoTCvf9wX9pubQEhN57fzlLZOjjWE+zv75eX/1YDlQ7HMKOqT2PVApiK3Zj2Je
+            vkoYM6+VbZl9JWqPB1dcfU9+pAfZWIFM3DeXWZQQ+U5Zl+PXi4uI9dDzLhPYwjOa
+            EkAEYjrmGc9yx7MxNjrZjb7GjBPW6+QrOlLEU3PyCGsjd7RbT3ljKPbD7CcRQQXU
+            ZgEJAhUmh4eUUvsEy1dNpp8Tc3attNxIfvASrrE4Y4c34OqRc9UAk17NI9rzrvUm
+            gyb7eEhoAFqD6XCOlDVXawUe1nGGUJfzDnnd23sunf7V+9QxOkQVekEesODWwn8F
+            a7gNR+fTWw==
+            =/SpV
+            -----END PGP MESSAGE-----
+          fp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1

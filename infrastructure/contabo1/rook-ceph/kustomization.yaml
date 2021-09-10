@@ -1,0 +1,8 @@
+---
+namespace: rook-ceph
+
+bases:
+  - ../../base/rook-ceph
+
+patchesStrategicMerge:
+  - generated/cluster-patch.yaml
