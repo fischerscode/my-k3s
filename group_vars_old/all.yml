@@ -1,8 +1,8 @@
-ansible_user: vagrant
+# ansible_user: maximilian
 
 wireguard_interface: wg0
 
-REPOSITORY: ""
+REPOSITORY: "https://github.com/fischerscode/my-k3s"
 
 users:
   - {
