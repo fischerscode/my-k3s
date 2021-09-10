@@ -49,7 +49,7 @@ all:
         kube-node:
           hosts: host[4:5]
       vars:
-        k3sToken: #The secret token used by k3s. User ansible-vault
+        k3sToken: #The secret token used by k3s. Use ansible-vault
         kubernetes_api_public_address: #The public IP of the load balanced api server
         node_network: 10.1.0.0/24 #The vpn network of the nodes
         cluster_cidr: 10.42.0.0/16 #Network CIDR to use for pod IPs
