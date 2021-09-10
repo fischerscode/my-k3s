@@ -55,6 +55,10 @@
     state: absent
   notify: restart sshd
 
+- name: Set hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
 - import_tasks: firewall.yml
 
 - import_tasks: users.yml
