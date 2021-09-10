@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: admin
-          image: fischerscode/powerdns-admin:test
+          image: fischerscode/powerdns-admin:latest
           imagePullPolicy: Always
           resources:
             limits:
