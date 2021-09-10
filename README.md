@@ -110,7 +110,7 @@ MacOS: ```brew install velero``` -->
    EOF
    ```
 3. `gpg --list-keys "${KEY_NAME}"`
-4. Store the fingerprint: `export KEY_FP=1F3D1CED2F865F5E59CA564553241F147E7C5FA4`
+4. Store the fingerprint: `export KEY_FP=`
 5. Backup private key:
    1. To file: `gpg --export-secret-keys --armor ${KEY_NAME} > $CLUSTER.key` (Ansible will search for this key and apply it as a secret if present.)
    2. To clipboard: `gpg --export-secret-keys --armor ${KEY_NAME} | pbcopy`
