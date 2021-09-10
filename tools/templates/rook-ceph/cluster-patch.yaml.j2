@@ -1,0 +1,13 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  storage:
+    nodes:
+{% for host in lookup('inventory_hostnames', 'k8s-storage', wantlist=True) %}
+      - name: {{ hostvars[host].inventory_hostname }}
+        devices:
+          - name: "{{ hostvars[host].storageDisk }}"
+{% endfor %}

@@ -1,0 +1,47 @@
+---
+- name: Update the manifests for the cluster "{{ cluster_name }}".
+  hosts: all
+  gather_facts: no
+  tasks:
+    - delegate_to: localhost
+      run_once: true
+      block:
+        # infrastructure-settings
+        - name: "Ensure clusters/{{ cluster_name }}/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/generated"
+            state: directory
+        - name: "Template generated/infrastructure-settings.yaml"
+          template:
+            src: infrastructure-settings.yaml.j2
+            dest: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/generated/infrastructure-settings.yaml"
+        - name: "Create Readme"
+          copy:
+            content: "**This directory contains generated files.**"
+            dest: "{{ playbook_dir }}/../clusters/{{ cluster_name }}/generated/Readme.md"
+        # apiserver-loadbalancer
+        - name: "Ensure infrastructure/{{ cluster_name }}/apiserver-loadbalancer/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/apiserver-loadbalancer/generated"
+            state: directory
+        - name: "Template apiserver-loadbalancer/generated/configmap.yaml"
+          template:
+            src: api-loadbalancer/configmap.yaml.j2
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/apiserver-loadbalancer/generated/configmap.yaml"
+        - name: "Create Readme"
+          copy:
+            content: "**This directory contains generated files.**"
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/apiserver-loadbalancer/generated/Readme.md"
+        # rook-ceph
+        - name: "Ensure infrastructure/{{ cluster_name }}/rook-ceph/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/rook-ceph/generated"
+            state: directory
+        - name: "Template rook-ceph/generated/cluster-patch.yaml"
+          template:
+            src: rook-ceph/cluster-patch.yaml.j2
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/rook-ceph/generated/cluster-patch.yaml"
+        - name: "Create Readme"
+          copy:
+            content: "**This directory contains generated files.**"
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/rook-ceph/generated/Readme.md"
