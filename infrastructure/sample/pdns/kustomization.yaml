@@ -1,0 +1,27 @@
+namespace: powerdns
+
+bases:
+  - ../../base/pdns
+
+configMapGenerator:
+  - name: mariadb-auth-config
+    literals:
+      - DATABASE=powerdns
+      - USER=pdns
+  - name: mariadb-admin-config
+    literals:
+      - DATABASE=powerdnsAdmin
+      - USER=pdns-admin
+
+secretGenerator:
+  - name: mariadb-auth-config
+    files:
+      - ROOT_PASSWORD=mariadb-auth-root.encrypted
+      - USER_PASSWORD=mariadb-auth-user.encrypted
+  - name: mariadb-admin-config
+    files:
+      - ROOT_PASSWORD=mariadb-admin-root.encrypted
+      - USER_PASSWORD=mariadb-admin-user.encrypted
+  - name: pdns-config
+    files:
+      - API_KEY=pdns-api-key.encrypted
