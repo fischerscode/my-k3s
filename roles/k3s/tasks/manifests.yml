@@ -55,37 +55,3 @@
     mode: "0600"
     owner: root
     group: root
-# - name: Create the manifests for rook
-#   become: true
-#   copy:
-#     src: "rook/{{ item }}"
-#     dest: "/var/lib/rancher/k3s/server/manifests/rook/{{ item }}"
-#     mode: "0600"
-#     owner: root
-#     group: root
-#   loop:
-#     - block-storageclass.yaml
-#     - cluster.yaml
-#     - common.yaml
-#     - crds.yaml
-#     - fs-storageclass.yaml
-#     - operator.yaml
-#     - toolbox.yaml
-
-# - name: Create the manifests for cert manager
-#   become: true
-#   copy:
-#     src: cert-manager.yaml
-#     dest: /var/lib/rancher/k3s/server/manifests/cert-manager.yaml
-#     mode: "0600"
-#     owner: root
-#     group: root
-
-# - name: Create the manifests for rancher
-#   become: true
-#   template:
-#     src: manifests/rancher.yaml.j2
-#     dest: /var/lib/rancher/k3s/server/manifests/rancher.yaml
-#     mode: "0600"
-#     owner: root
-#     group: root
