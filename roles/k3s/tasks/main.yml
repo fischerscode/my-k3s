@@ -14,10 +14,6 @@
 - name: Allow nodes in firewall
   import_tasks: firewall.yml
 
-# - name: Copy manifests to masters
-#   when: inventory_hostname in groups['kube-master']
-#   import_tasks: manifests.yml
-
 - name: Init cluster
   run_once: yes
   delegate_to: "{{ groups['kube-master'][0] }}"
