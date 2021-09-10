@@ -125,6 +125,6 @@ MacOS: ```brew install velero``` -->
    EOF
    ```
 
-### Optional:   
+### Optional:
 9.  Remove private key: `gpg --delete-secret-keys ${KEY_NAME}`
 10. Import secret key: `gpg --import $CLUSTER.key`
