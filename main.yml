@@ -1,5 +1,5 @@
 - name: Prepare the servers.
-  hosts: vpn
+  hosts: all
   become: true
   gather_facts: false
   roles:
