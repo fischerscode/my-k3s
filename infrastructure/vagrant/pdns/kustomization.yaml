@@ -3,6 +3,9 @@ namespace: powerdns
 bases:
   - ../../base/pdns
 
+patchesStrategicMerge:
+  - generated/external-dns-patch.yaml
+
 configMapGenerator:
   - name: mariadb-auth-config
     literals:
