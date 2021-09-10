@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-external
+spec:
+  externalIPs:
+    - "93.104.211.224"
+    - "79.143.180.91"
+    - "178.238.224.202"

@@ -4,6 +4,7 @@ resources:
   - mariadb-auth.yaml
   - pdns-auth.yaml
   - pdns-admin.yaml
+  - external-dns.yaml
   # - pdns-admin-frontend.yaml
 
 namePrefix: powerdns-

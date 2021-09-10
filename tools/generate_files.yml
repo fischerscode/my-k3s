@@ -45,3 +45,16 @@
           copy:
             content: "**This directory contains generated files.**"
             dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/rook-ceph/generated/Readme.md"
+        # pdns
+        - name: "Ensure infrastructure/{{ cluster_name }}/pdns/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/pdns/generated"
+            state: directory
+        - name: "Template pdns/generated/external-dns-patch.yaml"
+          template:
+            src: external-dns-patch.yaml.j2
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/pdns/generated/external-dns-patch.yaml"
+        - name: "Create Readme"
+          copy:
+            content: "**This directory contains generated files.**"
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/pdns/generated/Readme.md"
