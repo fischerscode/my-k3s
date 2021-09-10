@@ -4,3 +4,8 @@ creation_rules:
     pgp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE
   - path_regex: /contabo1\/.*\.encrypted$
     pgp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE
+  - path_regex: /vagrant\/.*\.yaml$
+    encrypted_regex: ^(data|stringData)$
+    pgp: 34461D8808A76061B6DF01FCE4BDAAFB057F6DEA
+  - path_regex: /vagrant\/.*\.encrypted$
+    pgp: 34461D8808A76061B6DF01FCE4BDAAFB057F6DEA

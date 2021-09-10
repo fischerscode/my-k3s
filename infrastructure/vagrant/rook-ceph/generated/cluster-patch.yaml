@@ -6,18 +6,18 @@ metadata:
 spec:
   storage:
     nodes:
-      - name: knode1
+      - name: knode1.test
         devices:
           - name: "sdb"
-      - name: knode2
+      - name: knode2.test
         devices:
           - name: "sdb"
-      - name: knode3
+      - name: knode3.test
         devices:
           - name: "sdb"
-      - name: knode4
+      - name: knode4.test
         devices:
           - name: "sdb"
-      - name: knode5
+      - name: knode5.test
         devices:
           - name: "sdb"

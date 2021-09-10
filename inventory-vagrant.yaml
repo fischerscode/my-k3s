@@ -1,0 +1,79 @@
+all:
+  vars:
+    wireguard_interface: wg0
+    users: # All (new) sudoers users
+      - name: "maximilian"
+        sshkeys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAJdTjFQ1rW9QYb1Vx9YYSTF/NNgcDX9dIM9hs86xQejyQ1Zz2KhDh2dBquVowHfjGWR1ENoawHR5X1oqBv4KlMBJKsg2oIU4SQ3DSojhPPf5yn+VmmN2zkVqHvP6hWi3xKk5wa+Lu70d4nvo56z2hxvmQZBp3y/UE0WLQLjmDHCLE7BfPsru8k6t4pN1wH9J5en+hsIUgmMH+ffhOORb95GYgxkREXGAancbSEFQmmIIhlJ0lPkBh85PQu7lBiRTMXf5pvZ5WxV19dre1b6QK5bbgC7iwOZdKYSHDO8lI9JRc0mWXiscdgLJGaDkFFsPMcVHOHNttnfzbk8OUdEmyubcEUfYBWixuQCgNpTlZoja29sk1LZ706cdrYz3WCiD6scNBT3CNV2HjGgRCi8e4S1TB6fAW5eUD82cRT7GnIENKfpknVtAyeqwklmEENCb/sB3wizeQgNUUTGdSZJ3/CHIYIVTWsssCb6LBIMz2flhLPb2G+2Lh7grc3G9GInMJEi5mHNaCqI8xGVO6FQ09E8CqI0p+Amg35DHKAHyrEBVMW8kFWwYOpd7GczYVjBtarQ8112nhiQm3Oz1t1yklLaGmUfi821WCfTyoYFPdXT06mSVwiREEkbvNaymDzc8/WPz08WOirraQwwWCp3cQabFm1PXjSdW0IRZdcTXTyQ== maximilian"
+    REPOSITORY: "https://github.com/fischerscode/my-k3s"
+  hosts:
+    knode1.test:
+      ansible_host: 172.16.17.101
+      externalIPv4: 172.16.17.101 # Might be the same as ansible_host
+      internalIPv4: 10.1.0.1
+      externalIPv6: fd34:fe56:7891:2f3b::1
+      internalIPv6: fd4c:2bfb:09a3:9eb4::1
+      root_password: # Use ansible-vault
+    knode2.test:
+      ansible_host: 172.16.17.102
+      externalIPv4: 172.16.17.102 # Might be the same as ansible_host
+      internalIPv4: 10.1.0.2
+      externalIPv6: fd34:fe56:7891:2f3b::2
+      internalIPv6: fd4c:2bfb:09a3:9eb4::2
+      root_password: # Use ansible-vault
+    knode3.test:
+      ansible_host: 172.16.17.103
+      externalIPv4: 172.16.17.103 # Might be the same as ansible_host
+      internalIPv4: 10.1.0.3
+      externalIPv6: fd34:fe56:7891:2f3b::3
+      internalIPv6: fd4c:2bfb:09a3:9eb4::3
+      root_password: # Use ansible-vault
+    knode4.test:
+      ansible_host: 172.16.17.104
+      externalIPv4: 172.16.17.104 # Might be the same as ansible_host
+      internalIPv4: 10.1.0.4
+      externalIPv6: fd34:fe56:7891:2f3b::4
+      internalIPv6: fd4c:2bfb:09a3:9eb4::4
+      root_password: # Use ansible-vault
+    knode5.test:
+      ansible_host: 172.16.17.105
+      externalIPv4: 172.16.17.105 # Might be the same as ansible_host
+      internalIPv4: 10.1.0.5
+      externalIPv6: fd34:fe56:7891:2f3b::5
+      internalIPv6: fd4c:2bfb:09a3:9eb4::5
+      root_password: # Use ansible-vault
+  children:
+    k8s-cluster:
+      children:
+        kube-master:
+          hosts: knode[1:3].test
+        kube-node:
+          hosts: knode[4:5].test
+      vars:
+        k3sToken: secret #The secret token used by k3s. Use ansible-vault
+        kubernetes_api_public_address: 172.16.17.100 #The public IP of the load balanced api server
+        node_network: 10.1.0.0/24 #The vpn network of the nodes
+        cluster_cidr: 10.42.0.0/16 #Network CIDR to use for pod IPs
+        service_cidr: 10.43.0.0/16 #Network CIDR to use for services IPs
+        cluster_dns: 10.43.0.10 #Cluster IP for coredns service. Should be in your service_cidr range
+        cluster_domain: "cluster.local" #Cluster Domain
+    k8s-storage:
+      hosts:
+        knode1.test:
+          storageDisk: sdb # The device/partition to use for metallb
+        knode2.test:
+          storageDisk: sdb # The device/partition to use for metallb
+        knode3.test:
+          storageDisk: sdb # The device/partition to use for metallb
+        knode4.test:
+          storageDisk: sdb # The device/partition to use for metallb
+        knode5.test:
+          storageDisk: sdb # The device/partition to use for metallb
+    vpn:
+      children:
+        k8s-cluster:
+      vars:
+        wireguard_address_ipv4: "{{ internalIPv4 }}/32"
+        wireguard_address_ipv6: "{{ internalIPv6 }}/128"
+        wireguard_endpoint: "{{ externalIPv4 }}"
+        wireguard_port: 51820
+        wireguard_persistent_keepalive: "30"

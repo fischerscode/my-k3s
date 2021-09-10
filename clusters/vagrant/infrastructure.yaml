@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./infrastructure/vagrant
+  path: ./infrastructure/vagrant # cluster name here
   prune: true
   sourceRef:
     kind: GitRepository
