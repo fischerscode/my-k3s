@@ -26,6 +26,7 @@ jobs:
       - name: Latest traefik release
         run: |
           echo ${{ steps.latestrelease.outputs.releasetag }}
+          echo ${{ steps.latestrelease.outputs.body }}
       - name: checkout traefik
         uses: actions/checkout@v2
         with:
