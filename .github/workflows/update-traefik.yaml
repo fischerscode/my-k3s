@@ -1,0 +1,55 @@
+name: update-flux
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  components:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: repo
+
+      - name: get latest traefik release
+        id: latestrelease
+        run: |
+          echo "::set-output name=releasetag::$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.tag_name' | sed 's/\"//g')"
+          echo "::set-output name=body::$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.body' | sed 's/\"//g')"
+      - name: Latest traefik release
+        run: |
+          echo ${{ steps.latestrelease.outputs.releasetag }}
+      - name: checkout traefik
+        uses: actions/checkout@v2
+        with:
+          repository: traefik/traefik
+          ref: ${{ steps.latestrelease.outputs.releasetag }}
+          path: traefik
+
+      - name: Copy traefik config
+        run: |
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressroutes.yaml       repo/infrastructure/base/crds/ingressroutes.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressroutetcps.yaml    repo/infrastructure/base/crds/ingressroutetcps.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressrouteudps.yaml    repo/infrastructure/base/crds/ingressrouteudps.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_middlewares.yaml         repo/infrastructure/base/crds/middlewares.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_middlewaretcps.yaml      repo/infrastructure/base/crds/middlewaretcps.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_serverstransports.yaml   repo/infrastructure/base/crds/serverstransports.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsoptions.yaml          repo/infrastructure/base/crds/tlsoptions.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_traefikservices.yaml     repo/infrastructure/base/crds/traefikservices.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yaml                     repo/infrastructure/base/crds/rbac.yaml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-traefik
+          commit-message: Update Traefik to ${{ steps.latestrelease.outputs.releasetag }}
+          title: Update Traefik to ${{ steps.latestrelease.outputs.releasetag }}
+          body: |
+            ${{ steps.latestrelease.outputs.body }}
+          assignees: fischerscode
+          reviewers: fischerscode
+          delete-branch: true

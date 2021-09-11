@@ -1,0 +1,12 @@
+resources:
+  - resources/ingressroutes.yaml
+  - resources/ingressroutetcps.yaml
+  - resources/ingressrouteudps.yaml
+  - resources/middlewares.yaml
+  - resources/middlewaretcps.yaml
+  - resources/serverstransports.yaml
+  - resources/tlsoptions.yaml
+  - resources/traefikservices.yaml
+  - resources/rbac.yaml
+patchesStrategicMerge:
+  - clusterrole_patch.yaml
