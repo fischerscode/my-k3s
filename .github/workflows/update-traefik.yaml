@@ -19,9 +19,9 @@ jobs:
         run: |
           echo "::set-output name=releasetag::$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.tag_name' | sed 's/\"//g')"
           BODY=$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq -r '.body' | sed "s/\"/'/g")
-          BODY="${MY_STRING//'%'/'%25'}"
-          BODY="${MY_STRING//$'\n'/'%0A'}"
-          BODY="${MY_STRING//$'\r'/'%0D'}"
+          BODY="${BODY//'%'/'%25'}"
+          BODY="${BODY//$'\n'/'%0A'}"
+          BODY="${BODY//$'\r'/'%0D'}"
           echo "::set-output name=body::$BODY"
       - name: Latest traefik release
         run: |
