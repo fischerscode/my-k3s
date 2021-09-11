@@ -1,4 +1,4 @@
-name: update-flux
+name: update-traefik
 
 on:
   workflow_dispatch:
