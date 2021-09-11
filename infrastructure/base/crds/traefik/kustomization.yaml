@@ -9,4 +9,4 @@ resources:
   - resources/traefikservices.yaml
   - resources/rbac.yaml
 patchesStrategicMerge:
-  - clusterrole_patch.yaml
+  - clusterrole.patch.yaml
