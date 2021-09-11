@@ -18,7 +18,7 @@ jobs:
         id: latestrelease
         run: |
           echo "::set-output name=releasetag::$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.tag_name' | sed 's/\"//g')"
-          echo "::set-output name=body::$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.body' | sed 's/\"//g')"
+          echo "::set-output name=body::$(echo $(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq '.body'))"
       - name: Latest traefik release
         run: |
           echo ${{ steps.latestrelease.outputs.releasetag }}
