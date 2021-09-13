@@ -42,6 +42,7 @@ jobs:
           cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_middlewaretcps.yaml      repo/infrastructure/base/crds/traefik/resources/middlewaretcps.yaml
           cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_serverstransports.yaml   repo/infrastructure/base/crds/traefik/resources/serverstransports.yaml
           cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsoptions.yaml          repo/infrastructure/base/crds/traefik/resources/tlsoptions.yaml
+          cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsstores.yaml           repo/infrastructure/base/crds/traefik/resources/tlsstores.yaml
           cp traefik/docs/content/reference/dynamic-configuration/traefik.containo.us_traefikservices.yaml     repo/infrastructure/base/crds/traefik/resources/traefikservices.yaml
           cp traefik/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml                      repo/infrastructure/base/crds/traefik/resources/rbac.yaml
 
