@@ -5,6 +5,7 @@ all:
       - name: ""
         sshkeys: "ssh-rsa KEX COMMENT"
     REPOSITORY: "https://github.com/fischerscode/my-k3s"
+    base_domain: cluster.test # The default domain that is used to publish websites.
   hosts:
     host1:
       ansible_host:
