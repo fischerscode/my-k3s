@@ -1,0 +1,13 @@
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - serviceaccount.yaml
+  - service.yaml
+  # - dashboard-route.yaml
+
+namespace: traefik-system
+
+configMapGenerator:
+  - name: traefik-config-static
+    files:
+      - config/traefik.yaml

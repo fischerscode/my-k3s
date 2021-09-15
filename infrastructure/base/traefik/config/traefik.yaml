@@ -1,0 +1,41 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+entryPoints:
+  http:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+          permanent: false
+          priority: 1
+  https:
+    address: :443
+    http:
+      tls: {}
+  kubeapi:
+    address: :6443
+  dns:
+    address: :53
+
+providers:
+  kubernetesCRD: {}
+api:
+  dashboard: true
+  # insecure: true
+ping:
+  entryPoint: http
+log:
+  level: INFO
+# certificatesResolvers:
+#   default:
+#     acme:
+#       email: <your-email-address@email-provider.com>
+#       storage: /acme/acme.json
+#       tlsChallenge: {}
+#       httpChallenge:
+#         entryPoint: http
+#       # dnsChallenge:
+#       #   provider:
