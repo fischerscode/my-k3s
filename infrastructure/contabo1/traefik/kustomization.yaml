@@ -1,8 +1,6 @@
 bases:
   - ../../base/traefik
 
-namespace: traefik-system
-
 replicas:
   - name: traefik
     count: 6
