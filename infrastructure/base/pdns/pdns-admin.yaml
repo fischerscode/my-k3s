@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           env:
             - name: PDNS_ADMIN_SQLA_DB_HOST
-              value: "$(MARIADB_ADMIN_NAME)"
+              value: "$(PDNS_MARIADB_ADMIN_NAME)"
             - name: PDNS_ADMIN_SQLA_DB_PORT
               value: "3306"
             - name: PDNS_ADMIN_SQLA_DB_NAME

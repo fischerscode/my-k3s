@@ -9,6 +9,6 @@ spec:
   routes:
     - match: HostSNI(`*`)
       services:
-        - name: "$(SERVICE_DNS)"
-          namespace: "$(NAMESPACE)"
+        - name: "$(PDNS_SERVICE_DNS)"
+          namespace: "$(PDNS_NAMESPACE)"
           port: 53

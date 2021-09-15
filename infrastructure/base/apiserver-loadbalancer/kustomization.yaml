@@ -6,12 +6,12 @@ resources:
 namespace: kube-system
 
 vars:
-  - name: SERVICE
+  - name: APILOADBALANCER_SERVICE
     objref:
       kind: Service
       name: api-server-ha
       apiVersion: v1
-  - name: NAMESPACE2
+  - name: APILOADBALANCER_NAMESPACE
     objref:
       kind: Service
       name: api-server-ha

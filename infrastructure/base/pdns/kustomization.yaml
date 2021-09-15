@@ -12,12 +12,12 @@ namePrefix: powerdns-
 namespace: powerdns
 
 vars:
-  - name: MARIADB_AUTH_NAME
+  - name: PDNS_MARIADB_AUTH_NAME
     objref:
       kind: Service
       name: mariadb-auth
       apiVersion: v1
-  - name: MARIADB_ADMIN_NAME
+  - name: PDNS_MARIADB_ADMIN_NAME
     objref:
       kind: Service
       name: mariadb-admin
@@ -27,12 +27,12 @@ vars:
       kind: Service
       name: auth-api
       apiVersion: v1
-  - name: SERVICE_DNS
+  - name: PDNS_SERVICE_DNS
     objref:
       kind: Service
       name: dns
       apiVersion: v1
-  - name: NAMESPACE
+  - name: PDNS_NAMESPACE
     objref:
       kind: Namespace
       name: powerdns
