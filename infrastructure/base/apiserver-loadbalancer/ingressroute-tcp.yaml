@@ -5,7 +5,7 @@ metadata:
   name: apiserver
 spec:
   entryPoints:
-    - dns
+    - kubeapi
   routes:
     - match: HostSNI(`*`)
       services:
