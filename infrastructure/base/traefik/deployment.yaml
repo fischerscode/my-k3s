@@ -9,8 +9,7 @@ spec:
   selector:
     matchLabels:
       app: traefik
-  updateStrategy:
-    type: RollingUpdate
+  strategy:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 100%
