@@ -7,19 +7,7 @@ resources:
 
 namespace: traefik-system
 
-commonLabels:
-  config: "$(TRAEFIK_CONFIG)"
-
 configMapGenerator:
   - name: traefik-config-static
     files:
       - config/traefik.yaml
-
-vars:
-  - name: TRAEFIK_CONFIG
-    objref:
-      name: traefik
-      kind: Deployment
-      apiVersion: apps/v1
-    fieldref:
-      fieldpath: spec.template.spec.volumes.[name=config-static].configMap.name
