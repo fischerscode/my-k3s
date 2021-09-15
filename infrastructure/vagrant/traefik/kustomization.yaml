@@ -1,0 +1,6 @@
+bases:
+  - ../../base/traefik
+
+replicas:
+  - name: traefik
+    count: 6
