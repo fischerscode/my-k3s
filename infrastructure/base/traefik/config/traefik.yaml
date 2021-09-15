@@ -24,6 +24,7 @@ entryPoints:
 
 providers:
   kubernetesCRD: {}
+  kubernetesIngress: {}
 api:
   dashboard: true
   insecure: true
