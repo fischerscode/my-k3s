@@ -15,3 +15,31 @@ spec:
       port: 53
       targetPort: 53
       protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-tcp
+spec:
+  selector:
+    app: auth
+  type: ClusterIP
+  ports:
+    - name: dns-tcp
+      port: 53
+      targetPort: 53
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-udp
+spec:
+  selector:
+    app: auth
+  type: ClusterIP
+  ports:
+    - name: dns-udp
+      port: 53
+      targetPort: 53
+      protocol: UDP
