@@ -17,8 +17,10 @@ entryPoints:
       tls: {}
   kubeapi:
     address: :6443
-  dns:
+  dns-tcp:
     address: :53
+  dns-udp:
+    address: :53/udp
 
 providers:
   kubernetesCRD: {}

@@ -5,7 +5,7 @@ metadata:
   name: dns
 spec:
   entryPoints:
-    - dns
+    - dns-udp
   routes:
     - services:
         - name: "service"
