@@ -2,7 +2,7 @@ installCRDs: true
 
 prometheus:
   servicemonitor:
-    enabled: true
+    enabled: false
 
 webhook:
   url:
