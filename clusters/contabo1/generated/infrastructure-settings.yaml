@@ -11,3 +11,4 @@ data:
   NETWORK_K8S_CLUSTER_DOMAIN: "cluster.local"
 
   SVC_KUBERNETES_API_PUBLIC: "79.143.176.58"
+  BASE_DOMAIN: "fischerscode.com"
