@@ -8,3 +8,6 @@ configMapGenerator:
   - name: cert-manager-values
     files:
       - config/values.yaml
+
+configurations:
+  - kustomizeconfig/nameReference.yaml
