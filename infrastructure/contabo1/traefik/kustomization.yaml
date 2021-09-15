@@ -1,0 +1,4 @@
+bases:
+  - ../../base/traefik
+
+namespace: traefik-system
