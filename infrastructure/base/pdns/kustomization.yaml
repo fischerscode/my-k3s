@@ -58,12 +58,12 @@ replacements:
           kind: IngressRouteTCP
           name: dns
         fieldPaths:
-          - spec.routes.[match=HostSNI(`*`)].services.[port=53].name
+          - spec.routes.0.services.[port=53].name
       - select:
           kind: IngressRouteUDP
           name: dns
         fieldPaths:
-          - spec.routes.[services.port=53].services.[port=53].name
+          - spec.routes.0.services.[port=53].name
   - source:
       kind: Service
       name: dns
@@ -73,12 +73,12 @@ replacements:
           kind: IngressRouteTCP
           name: dns
         fieldPaths:
-          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
+          - spec.routes.0.services.[port=53].namespace
       - select:
           kind: IngressRouteUDP
           name: dns
         fieldPaths:
-          - spec.routes.[services.port=53].services.[port=53].namespace
+          - spec.routes.0.services.[port=53].namespace
 # vars:
 #   - name: PDNS_SERVICE_DNS
 #     objref:
