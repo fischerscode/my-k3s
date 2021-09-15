@@ -11,4 +11,4 @@ spec:
       services:
         - name: "service"
           namespace: "namespace"
-          port: 53
+          port: 6443
