@@ -10,5 +10,5 @@ spec:
     - match: HostSNI(`*`)
       services:
         - name: "$(SERVICE)"
-          namespace: "$(NAMESPACE)"
+          namespace: "$(NAMESPACE2)"
           port: 53

@@ -11,7 +11,7 @@ vars:
       kind: Service
       name: api-server-ha
       apiVersion: v1
-  - name: NAMESPACE
+  - name: NAMESPACE2
     objref:
       kind: Service
       name: api-server-ha
