@@ -3,6 +3,7 @@ resources:
   - deployment.yaml
   - serviceaccount.yaml
   - service.yaml
+  - ingressclass.yaml
   # - dashboard-route.yaml
 
 namespace: traefik-system
