@@ -4,10 +4,10 @@ namespace: cert-manager
 #   - namespace.yaml
 #   - helm-release.yaml
 
-configMapGenerator:
-  - name: cert-manager-values
-    files:
-      - config/values.yaml
+# configMapGenerator:
+#   - name: cert-manager-values
+#     files:
+#       - config/values.yaml
 
 configurations:
   - kustomizeconfig/nameReference.yaml
