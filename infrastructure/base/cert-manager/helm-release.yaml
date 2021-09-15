@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: jetstack
         namespace: flux-system
-      version: ">1.6.0"
+      version: "<1.6.0"
   install: {}
   interval: 10m0s
   valuesFrom:
