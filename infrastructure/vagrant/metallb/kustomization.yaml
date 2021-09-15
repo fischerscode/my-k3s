@@ -5,3 +5,5 @@ bases:
 resources:
   - configmap.yaml
   - memberlist.yaml
+
+namespace: metallb-system

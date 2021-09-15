@@ -1,6 +1,8 @@
 bases:
   - ../../base/pdns
 
+namespace: powerdns
+
 patchesStrategicMerge:
   - generated/external-dns-patch.yaml
 
