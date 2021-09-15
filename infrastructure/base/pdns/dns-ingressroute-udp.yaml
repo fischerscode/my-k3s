@@ -8,6 +8,6 @@ spec:
     - dns
   routes:
     - services:
-        - name: "$(PDNS_SERVICE_DNS)"
-          namespace: "$(PDNS_NAMESPACE)"
+        - name: "service"
+          namespace: "namespace"
           port: 53

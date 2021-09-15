@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           env:
             - name: PDNS_ADMIN_SQLA_DB_HOST
-              value: "$(PDNS_MARIADB_ADMIN_NAME)"
+              value: "service"
             - name: PDNS_ADMIN_SQLA_DB_PORT
               value: "3306"
             - name: PDNS_ADMIN_SQLA_DB_NAME
@@ -43,7 +43,7 @@ spec:
                   key: USER_PASSWORD
                   name: mariadb-admin-config
             - name: PDNS_ENV_PDNS_webserver_host
-              value: "$(PDNS_API_HOST)"
+              value: "service"
             - name: PDNS_API_KEY
               valueFrom:
                 secretKeyRef:

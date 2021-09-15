@@ -27,7 +27,7 @@ spec:
               protocol: TCP
           env:
             - name: PDNS_gmysql_host
-              value: "$(PDNS_MARIADB_AUTH_NAME)"
+              value: "service"
             - name: PDNS_gmysql_dbname
               valueFrom:
                 configMapKeyRef:

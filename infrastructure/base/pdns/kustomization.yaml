@@ -13,34 +13,85 @@ namePrefix: powerdns-
 
 namespace: powerdns
 
-vars:
-  - name: PDNS_MARIADB_AUTH_NAME
-    objref:
+replacements:
+  - source:
       kind: Service
       name: mariadb-auth
-      apiVersion: v1
-  - name: PDNS_MARIADB_ADMIN_NAME
-    objref:
+    targets:
+      - select:
+          kind: Deployment
+          name: auth
+        fieldPaths:
+          - spec.template.spec.containers.[name=auth].env.[name=PDNS_gmysql_host].value
+  - source:
       kind: Service
       name: mariadb-admin
-      apiVersion: v1
-  - name: PDNS_API_HOST
-    objref:
+    targets:
+      - select:
+          kind: Deployment
+          name: admin
+        fieldPaths:
+          - spec.template.spec.containers.[name=admin].env.[name=PDNS_ADMIN_SQLA_DB_HOST].value
+  - source:
+      kind: Service
+      name: mariadb-admin
+    targets:
+      - select:
+          kind: Deployment
+          name: admin
+        fieldPaths:
+          - spec.template.spec.containers.[name=admin].env.[name=PDNS_ADMIN_SQLA_DB_HOST].value
+  - source:
       kind: Service
       name: auth-api
-      apiVersion: v1
-  - name: PDNS_SERVICE_DNS
-    objref:
+    targets:
+      - select:
+          kind: Deployment
+          name: admin
+        fieldPaths:
+          - spec.template.spec.containers.[name=admin].env.[name=PDNS_ENV_PDNS_webserver_host].value
+  - source:
       kind: Service
       name: dns
-      apiVersion: v1
-  - name: PDNS_NAMESPACE
-    objref:
-      kind: Namespace
-      name: powerdns
-      apiVersion: v1
-  # - name: PDNS_ADMIN_HOST
-  #   objref:
-  #     kind: Service
-  #     name: admin
-  #     apiVersion: v1
+    targets:
+      - select:
+          kind: IngressRouteTCP
+          name: dns
+        fieldPaths:
+          - spec.routes.[match=HostSNI(`*`)].services.[port=53].name
+      - select:
+          kind: IngressRouteUDP
+          name: dns
+        fieldPaths:
+          - spec.routes.[services.port=53].services.[port=53].name
+  - source:
+      kind: Service
+      name: dns
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          kind: IngressRouteTCP
+          name: dns
+        fieldPaths:
+          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
+      - select:
+          kind: IngressRouteUDP
+          name: dns
+        fieldPaths:
+          - spec.routes.[services.port=53].services.[port=53].namespace
+# vars:
+#   - name: PDNS_SERVICE_DNS
+#     objref:
+#       kind: Service
+#       name: dns
+#       apiVersion: v1
+#   - name: PDNS_NAMESPACE
+#     objref:
+#       kind: Namespace
+#       name: powerdns
+#       apiVersion: v1
+# - name: PDNS_ADMIN_HOST
+#   objref:
+#     kind: Service
+#     name: admin
+#     apiVersion: v1

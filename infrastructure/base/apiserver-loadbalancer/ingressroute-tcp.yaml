@@ -9,6 +9,6 @@ spec:
   routes:
     - match: HostSNI(`*`)
       services:
-        - name: "$(APILOADBALANCER_SERVICE)"
-          namespace: "$(APILOADBALANCER_NAMESPACE)"
+        - name: "service"
+          namespace: "namespace"
           port: 53

@@ -6,16 +6,23 @@ resources:
 
 namespace: kube-system
 
-vars:
-  - name: APILOADBALANCER_SERVICE
-    objref:
+replacements:
+  - source:
       kind: Service
       name: api-server-ha
-      apiVersion: v1
-  - name: APILOADBALANCER_NAMESPACE
-    objref:
+    targets:
+      - select:
+          kind: IngressRouteTCP
+          name: apiserver
+        fieldPaths:
+          - spec.routes.[match=HostSNI(`*`)].services.[port=53].name
+  - source:
       kind: Service
       name: api-server-ha
-      apiVersion: v1
-    fieldref:
-      fieldpath: metadata.namespace
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          kind: IngressRouteTCP
+          name: apiserver
+        fieldPaths:
+          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
