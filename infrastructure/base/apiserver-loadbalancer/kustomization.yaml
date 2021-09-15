@@ -2,6 +2,7 @@
 resources:
   - daemonset.yaml
   - service.yaml
+  - ingressroute-tcp.yaml
 
 namespace: kube-system
 

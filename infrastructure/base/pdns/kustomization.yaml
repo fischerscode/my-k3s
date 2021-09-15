@@ -5,6 +5,8 @@ resources:
   - pdns-auth.yaml
   - pdns-admin.yaml
   - pdns-auth-service.yaml
+  - dns-ingressroute-tcp.yaml
+  - dns-ingressroute-udp.yaml
   # - pdns-admin-frontend.yaml
 
 namePrefix: powerdns-
