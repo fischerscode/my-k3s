@@ -1,14 +1,14 @@
 resources:
-  - resources/ingressroutes.yaml
-  - resources/ingressroutetcps.yaml
-  - resources/ingressrouteudps.yaml
-  - resources/middlewares.yaml
-  - resources/middlewaretcps.yaml
-  - resources/serverstransports.yaml
-  - resources/tlsoptions.yaml
-  - resources/tlsstores.yaml
-  - resources/traefikservices.yaml
-  - resources/rbac.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressroutes.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressroutetcps.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_ingressrouteudps.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_middlewares.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_middlewaretcps.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_serverstransports.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsoptions.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsstores.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/traefik.containo.us_traefikservices.yaml
+  - https://raw.githubusercontent.com/traefik/traefik/v2.5.2/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
 patchesStrategicMerge:
   - clusterrole.patch.yaml
 
