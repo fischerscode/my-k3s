@@ -15,7 +15,7 @@ replacements:
           kind: IngressRouteTCP
           name: apiserver
         fieldPaths:
-          - spec.routes.[match=HostSNI(`*`)].services.[port=53].name
+          - spec.routes.0.services.[port=6443].name
   - source:
       kind: Service
       name: api-server-ha
@@ -25,4 +25,4 @@ replacements:
           kind: IngressRouteTCP
           name: apiserver
         fieldPaths:
-          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
+          - spec.routes.0.services.[port=6443].namespace
