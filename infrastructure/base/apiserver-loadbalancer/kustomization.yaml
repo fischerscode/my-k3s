@@ -3,9 +3,18 @@ resources:
   - daemonset.yaml
   - service.yaml
 
+namespace: kube-system
+
 vars:
   - name: SERVICE
     objref:
       kind: Service
-      name: dns
+      name: api-server-ha
       apiVersion: v1
+  - name: NAMESPACE
+    objref:
+      kind: Service
+      name: api-server-ha
+      apiVersion: v1
+    fieldref:
+      fieldpath: metadata.namespace
