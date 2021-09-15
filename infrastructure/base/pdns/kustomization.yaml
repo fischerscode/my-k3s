@@ -35,7 +35,7 @@ vars:
   - name: NAMESPACE
     objref:
       kind: Namespace
-      name: dns
+      name: powerdns
       apiVersion: v1
   # - name: PDNS_ADMIN_HOST
   #   objref:
