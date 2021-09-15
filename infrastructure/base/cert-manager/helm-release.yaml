@@ -1,0 +1,20 @@
+---
+# flux create helmrelease cert-manager --source=HelmRepository/jetstack --export --chart=cert-manager --chart-version=">1.6.0" --values-from=ConfigMap/cert-manager-values --interval=10m --namespace cert-manager > helm-release.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack
+      version: ">1.6.0"
+  install: {}
+  interval: 10m0s
+  valuesFrom:
+    - kind: ConfigMap
+      name: cert-manager-values

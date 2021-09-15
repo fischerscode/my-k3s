@@ -1,0 +1,9 @@
+installCRDs: true
+
+prometheus:
+  servicemonitor:
+    enabled: true
+
+webhook:
+  url:
+    host: "${BASE_DOMAIN}"
