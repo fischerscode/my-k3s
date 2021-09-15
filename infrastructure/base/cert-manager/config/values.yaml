@@ -3,7 +3,6 @@ installCRDs: true
 prometheus:
   servicemonitor:
     enabled: false
-
-webhook:
-  url:
-    host: "${BASE_DOMAIN}"
+# webhook:
+#   url:
+#     host: "${BASE_DOMAIN}"
