@@ -2,8 +2,12 @@
 namespace: rook-ceph
 
 resources:
-  - common.yaml
-  - operator.yaml
-  - cluster.yaml
-  - storageclass.yaml
-  - toolbox.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/common.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/operator.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/cluster.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/toolbox.yaml
+
+patchesStrategicMerge:
+  - storageclass-patch.yaml
+  - cluster-patch.yaml
