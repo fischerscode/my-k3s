@@ -52,27 +52,13 @@ replacements:
           - spec.template.spec.containers.[name=admin].env.[name=PDNS_ENV_PDNS_webserver_host].value
   - source:
       kind: Service
-      name: dns-tcp
+      name: dns
     targets:
       - select:
           kind: IngressRouteTCP
           name: dns
         fieldPaths:
           - spec.routes.[match=HostSNI(`*`)].services.[port=53].name
-  - source:
-      kind: Service
-      name: dns-tcp
-      fieldPath: metadata.namespace
-    targets:
-      - select:
-          kind: IngressRouteTCP
-          name: dns
-        fieldPaths:
-          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
-  - source:
-      kind: Service
-      name: dns-udp
-    targets:
       - select:
           kind: IngressRouteUDP
           name: dns
@@ -80,9 +66,14 @@ replacements:
           - spec.routes.[services.port=53].services.[port=53].name
   - source:
       kind: Service
-      name: dns-udp
+      name: dns
       fieldPath: metadata.namespace
     targets:
+      - select:
+          kind: IngressRouteTCP
+          name: dns
+        fieldPaths:
+          - spec.routes.[match=HostSNI(`*`)].services.[port=53].namespace
       - select:
           kind: IngressRouteUDP
           name: dns
