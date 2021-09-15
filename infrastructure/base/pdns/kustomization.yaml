@@ -27,6 +27,16 @@ vars:
       kind: Service
       name: auth-api
       apiVersion: v1
+  - name: SERVICE_DNS
+    objref:
+      kind: Service
+      name: dns
+      apiVersion: v1
+  - name: NAMESPACE
+    objref:
+      kind: Namespace
+      name: dns
+      apiVersion: v1
   # - name: PDNS_ADMIN_HOST
   #   objref:
   #     kind: Service

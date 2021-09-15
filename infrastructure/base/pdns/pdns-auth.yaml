@@ -58,40 +58,40 @@ spec:
               value: "${NETWORK_K8S_CLUSTER_CIDR}"
             - name: PDNS_version_string
               value: "anonymous"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-dns
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "true"
-spec:
-  selector:
-    app: auth
-  type: LoadBalancer
-  loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
-  ports:
-    - name: dns-tcp
-      port: 53
-      targetPort: 53
-      protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-dns-udp
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "true"
-spec:
-  selector:
-    app: auth
-  type: LoadBalancer
-  loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
-  ports:
-    - name: dns-udp
-      port: 53
-      targetPort: 53
-      protocol: UDP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: auth-dns
+#   annotations:
+#     metallb.universe.tf/allow-shared-ip: "true"
+# spec:
+#   selector:
+#     app: auth
+#   type: LoadBalancer
+#   loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
+#   ports:
+#     - name: dns-tcp
+#       port: 53
+#       targetPort: 53
+#       protocol: TCP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: auth-dns-udp
+#   annotations:
+#     metallb.universe.tf/allow-shared-ip: "true"
+# spec:
+#   selector:
+#     app: auth
+#   type: LoadBalancer
+#   loadBalancerIP: "${SVC_KUBERNETES_API_PUBLIC}"
+#   ports:
+#     - name: dns-udp
+#       port: 53
+#       targetPort: 53
+#       protocol: UDP
 ---
 apiVersion: v1
 kind: Service

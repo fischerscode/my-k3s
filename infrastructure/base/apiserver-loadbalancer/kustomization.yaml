@@ -2,3 +2,10 @@
 resources:
   - daemonset.yaml
   - service.yaml
+
+vars:
+  - name: SERVICE
+    objref:
+      kind: Service
+      name: dns
+      apiVersion: v1

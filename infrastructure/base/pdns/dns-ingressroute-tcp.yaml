@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: dns
+spec:
+  entryPoints:
+    - dns
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: "$(SERVICE_DNS)"
+          namespace: "$(NAMESPACE)"
+          port: 53
