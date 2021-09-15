@@ -24,7 +24,7 @@ providers:
   kubernetesCRD: {}
 api:
   dashboard: true
-  # insecure: true
+  insecure: true
 ping:
   entryPoint: http
 log:
