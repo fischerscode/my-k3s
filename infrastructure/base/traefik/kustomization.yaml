@@ -17,3 +17,15 @@ configMapGenerator:
 
 configurations:
   - kustomizeconfig/namereference.yaml
+
+replacements:
+  - source:
+      name: traefik-dashboard-auth
+      kind: Middleware
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          name: traefik-dashboard
+          kind: IngressRoute
+        fieldPaths:
+          - spec.routes.[kind=Rule].middlewares.[name=traefik-dashboard-auth].namespace

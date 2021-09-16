@@ -9,6 +9,9 @@ spec:
   routes:
     - kind: Rule
       match: "Host(`traefik.${BASE_DOMAIN}`)"
+      middlewares:
+        - name: traefik-dashboard-auth
+          namespace: overridden
       services:
         - name: api@internal
           kind: TraefikService
