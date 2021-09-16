@@ -8,7 +8,7 @@ spec:
     - https
   routes:
     - kind: Rule
-      match: "Host(`dns.${BASE_DOMAIN}`) | Host(`pdns.${BASE_DOMAIN}`) | Host(`powerdns.${BASE_DOMAIN}`)"
+      match: "Host(`dns.${BASE_DOMAIN}`) || Host(`pdns.${BASE_DOMAIN}`) || Host(`powerdns.${BASE_DOMAIN}`)"
       services:
         - name: admin
           port: 80
