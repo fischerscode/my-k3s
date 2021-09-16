@@ -7,7 +7,8 @@ resources:
   - pdns-auth-service.yaml
   - dns-ingressroute-tcp.yaml
   - dns-ingressroute-udp.yaml
-  # - pdns-admin-frontend.yaml
+  - dashboard-route.yaml
+  - dashboard-certificate.yaml
 
 namePrefix: powerdns-
 
@@ -79,6 +80,31 @@ replacements:
           name: dns
         fieldPaths:
           - spec.routes.0.services.[port=53].namespace
+  - source:
+      kind: Certificate
+      group: cert-manager.io
+      name: dashboard
+      fieldPath: spec.secretName
+    targets:
+      - select:
+          kind: IngressRoute
+          group: traefik.containo.us
+          name: dashboard
+        fieldPaths:
+          - spec.tls.secretName
+  - source:
+      kind: Service
+      name: admin
+    targets:
+      - select:
+          kind: IngressRoute
+          group: traefik.containo.us
+          name: dashboard
+        fieldPaths:
+          - spec.routes.[kind=Rule].services.[name=admin].name
+
+configurations:
+  - kustomizeconfig.yaml
 # vars:
 #   - name: PDNS_SERVICE_DNS
 #     objref:

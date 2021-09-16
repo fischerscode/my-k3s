@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dashboard
+spec:
+  commonName: dns.${BASE_DOMAIN}
+  secretName: dashboard-certificate
+  dnsNames:
+    - dns.${BASE_DOMAIN}
+    - pdns.${BASE_DOMAIN}
+    - powerdns.${BASE_DOMAIN}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

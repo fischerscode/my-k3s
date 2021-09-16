@@ -1,0 +1,4 @@
+namePrefix:
+  - kind: Certificate
+    apiVersion: cert-manager.io/v1
+    path: spec/secretName
