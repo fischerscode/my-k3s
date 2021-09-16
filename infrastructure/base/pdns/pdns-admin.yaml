@@ -49,12 +49,12 @@ spec:
                 secretKeyRef:
                   key: API_KEY
                   name: pdns-config
-            - name: PDNS_SALT
+            - name: PDNS_ADMIN_SALT
               valueFrom:
                 secretKeyRef:
                   key: SALT
                   name: pdns-admin-config
-            - name: PDNS_SECRET_KEY
+            - name: PDNS_ADMIN_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   key: SECRET_KEY
