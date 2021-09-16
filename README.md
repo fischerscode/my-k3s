@@ -64,14 +64,16 @@ MacOS: ```brew install velero``` -->
 8. Generate files: `ansible-playbook -i inventory-$CLUSTER.yaml tools/generate_files.yml --extra-vars=cluster_name=$CLUSTER`
 9.  [Setup SOPS](#mozilla-sops)
 10. Create secrets:
-   ```bash
-   kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(tools/generate_password.sh 128)" --dry-run=client -o yaml > infrastructure/$CLUSTER/metallb/memberlist.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/metallb/memberlist.yaml
-   tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted
-   tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted
-   tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted
-   tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted
-   tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted
-   ```
+   1. Internal passwords:
+      ```bash
+      kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(tools/generate_password.sh 128)" --dry-run=client -o yaml > infrastructure/$CLUSTER/metallb/memberlist.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/metallb/memberlist.yaml
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted
+      ```
+   2. Traefik dashboard: `htpasswd -nB admin > infrastructure/$CLUSTER/traefik/traefik-dashboard-users.txt`
 11. Store known hosts: `ansible-playbook -i inventory-$CLUSTER.yaml tools/store_known_hosts.yml`
 12. Install k3s (wait until it hangs at 'Enable and check K3s service'): `ansible-playbook -i inventory-$CLUSTER.yaml main.yml --extra-vars=cluster_name=$CLUSTER --vault-password-file $CLUSTER-ansible.key`
 13. Get access to the cluster:

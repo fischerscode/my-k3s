@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: dashboard
+  name: traefik-dashboard
 spec:
   entryPoints:
     - https
@@ -12,5 +12,5 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-  # tls:
-  #   certResolver: default
+  tls:
+    secretName: traefik-dashboard-certificate

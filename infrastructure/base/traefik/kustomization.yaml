@@ -4,7 +4,9 @@ resources:
   - serviceaccount.yaml
   - service.yaml
   - ingressclass.yaml
-  # - dashboard-route.yaml
+  - dashboard-certificate.yaml
+  - dashboard-auth.yaml
+  - dashboard-route.yaml
 
 namespace: traefik-system
 
@@ -12,3 +14,6 @@ configMapGenerator:
   - name: traefik-config-static
     files:
       - config/traefik.yaml
+
+configurations:
+  - kustomizeconfig/namereference.yaml
