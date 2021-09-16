@@ -32,13 +32,3 @@ ping:
   entryPoint: http
 log:
   level: INFO
-# certificatesResolvers:
-#   default:
-#     acme:
-#       email: <your-email-address@email-provider.com>
-#       storage: /acme/acme.json
-#       tlsChallenge: {}
-#       httpChallenge:
-#         entryPoint: http
-#       # dnsChallenge:
-#       #   provider:
