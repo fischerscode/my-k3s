@@ -49,6 +49,16 @@ spec:
                 secretKeyRef:
                   key: API_KEY
                   name: pdns-config
+            - name: PDNS_SALT
+              valueFrom:
+                secretKeyRef:
+                  key: SALT
+                  name: pdns-admin-config
+            - name: PDNS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SECRET_KEY
+                  name: pdns-admin-config
             - name: PDNS_VERSION
               value: "4.5"
         - name: admin-frontend

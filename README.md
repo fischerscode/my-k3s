@@ -72,6 +72,8 @@ MacOS: ```brew install velero``` -->
       tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted
       tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted
       tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted
+      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-admin-secret-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-admin-secret-key.encrypted
+      docker run --rm -ti python /bin/bash -c "pip3 -q install bcrypt 2> /dev/null && python -c 'import bcrypt; print(bcrypt.gensalt().decode())'" > infrastructure/$CLUSTER/pdns/pdns-admin-salt.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-admin-salt.encrypted
       ```
    2. Traefik dashboard: `htpasswd -nB admin > infrastructure/$CLUSTER/traefik/traefik-dashboard-users.txt`
 11. Store known hosts: `ansible-playbook -i inventory-$CLUSTER.yaml tools/store_known_hosts.yml`
