@@ -1,0 +1,32 @@
+namespace: keycloak-operator
+
+resources:
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/namespace.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/cluster_roles/cluster_role.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/cluster_roles/cluster_role_binding.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/service_account.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/operator.yaml
+patchesJson6902:
+  - target:
+      version: v1
+      kind: ClusterRole
+      name: keycloak-operator
+    path: cluster_role.patch.yaml
+  - target:
+      version: v1
+      kind: Deployment
+      name: keycloak-operator
+    path: operator.patch.yaml
+replacements:
+  - source:
+      kind: ServiceAccount
+      name: keycloak-operator
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          kind: ClusterRoleBinding
+          name: keycloak-operator
+        fieldPaths:
+          - subjects.0.namespace
+patchesStrategicMerge:
+  - operator.patch.yaml

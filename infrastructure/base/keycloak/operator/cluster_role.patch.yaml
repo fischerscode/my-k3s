@@ -1,0 +1,4 @@
+- op: replace
+  path: /rules/5/apiGroups
+  value:
+    - networking.k8s.io

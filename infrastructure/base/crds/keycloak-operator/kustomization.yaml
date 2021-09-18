@@ -1,0 +1,6 @@
+resources:
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/crds/keycloak.org_keycloakbackups_crd.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/crds/keycloak.org_keycloakclients_crd.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/crds/keycloak.org_keycloakrealms_crd.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/crds/keycloak.org_keycloaks_crd.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/15.0.1/deploy/crds/keycloak.org_keycloakusers_crd.yaml
