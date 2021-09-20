@@ -28,5 +28,3 @@ replacements:
           name: keycloak-operator
         fieldPaths:
           - subjects.0.namespace
-patchesStrategicMerge:
-  - operator.patch.yaml
