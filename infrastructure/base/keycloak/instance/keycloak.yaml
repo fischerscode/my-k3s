@@ -1,0 +1,16 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: accounts
+  labels:
+    app: accounts
+spec:
+  instances: 1
+  externalAccess:
+    enabled: False
+  migration:
+    backups:
+      enabled: true
+  # multiAvailabilityZones:
+  #   enabled: true
+  # storageClassName: ""

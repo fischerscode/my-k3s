@@ -1,0 +1,20 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: accounts
+  labels:
+    app: accounts
+    realm: accounts
+spec:
+  realm:
+    id: "accounts"
+    realm: "accounts"
+    enabled: True
+    displayName: "Central User Login"
+    registrationAllowed: true
+    registrationEmailAsUsername: false
+    rememberMe: true
+    verifyEmail: true
+  instanceSelector:
+    matchLabels:
+      app: accounts

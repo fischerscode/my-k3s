@@ -1,0 +1,6 @@
+namespace: accounts
+
+resources:
+  - keycloak.yaml
+  - namespace.yaml
+  - realm.yaml
