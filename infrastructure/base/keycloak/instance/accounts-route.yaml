@@ -20,5 +20,8 @@ spec:
       match: "Host(`accounts.${BASE_DOMAIN}`)"
       middlewares:
         - name: accounts-redirect
+      services:
+        - name: noop@internal
+          kind: TraefikService
   tls:
     secretName: accounts-certificate
