@@ -6,6 +6,6 @@ spec:
   replacePathRegex:
     # regex: ^(?!/auth)/(.*)
     # replacement: /auth/realms/accounts/account/$1
-    # Everything not starting with /auth/
-    regex: ^(([^/].{5}|.[^a].{4}|.{2}[^u].{3}|.{3}[^t].{2}|.{4}[^h]|.{5}[^/])/.*)
-    replacement: /auth/realms/accounts/account$1
+    # Everything not starting with / but not with /auth/
+    regex: ^/(($|[^a]|a[^u]|au[^t]|aut[^h]|auth[^/]).*)$
+    replacement: /auth/realms/accounts/account/$1
