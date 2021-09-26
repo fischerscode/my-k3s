@@ -1,0 +1,17 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: accounts
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: "Host(`accounts.${BASE_DOMAIN}`)"
+      services:
+        - name: keycloak
+          scheme: https
+          serverTransport: accounts
+  tls:
+    secretName: accounts-certificate

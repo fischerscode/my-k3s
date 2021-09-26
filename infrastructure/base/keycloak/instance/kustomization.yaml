@@ -4,3 +4,6 @@ resources:
   - keycloak.yaml
   - namespace.yaml
   - realm.yaml
+  - accounts-certificate.yaml
+  - accounts-route.yaml
+  - accounts-serverTransport.yaml

@@ -1,0 +1,7 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServerTransport
+metadata:
+  name: accounts
+spec:
+  insecureSkipVerify: true
