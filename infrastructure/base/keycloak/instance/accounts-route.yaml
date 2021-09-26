@@ -8,14 +8,17 @@ spec:
     - https
   routes:
     - kind: Rule
-      match: "Host(`accounts.${BASE_DOMAIN}`)"
+      match: "Host(`accounts.${BASE_DOMAIN}`) && PathPrefix(`/auth/`)"
       middlewares:
-        - name: accounts-rewrite
         - name: accounts-rewrite-users
       services:
         - name: keycloak
           scheme: https
           serversTransport: accounts
           port: 8443
+    - kind: Rule
+      match: "Host(`accounts.${BASE_DOMAIN}`)"
+      middlewares:
+        - name: accounts-redirect
   tls:
     secretName: accounts-certificate

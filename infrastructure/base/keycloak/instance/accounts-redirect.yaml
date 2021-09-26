@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: accounts-redirect
+spec:
+  redirectRegex:
+    regex: ^(.*://[^/?]*)/?(.*)$
+    replacement: $1/auth/realms/accounts/account/$2

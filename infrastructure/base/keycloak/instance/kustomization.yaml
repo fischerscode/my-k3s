@@ -7,5 +7,5 @@ resources:
   - accounts-certificate.yaml
   - accounts-route.yaml
   - accounts-serverTransport.yaml
-  - accounts-rewrite.yaml
+  - accounts-redirect.yaml
   - accounts-rewrite-users.yaml
