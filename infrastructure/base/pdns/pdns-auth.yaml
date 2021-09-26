@@ -61,7 +61,7 @@ spec:
             - name: PDNS_version_string
               value: "anonymous"
             - name: PDNS_default_soa_content
-              value: "ns1.@ hostmaster.@ 0 10800 3600 604800 3600"
+              value: "ns1.${BASE_DOMAIN} hostmaster.@ 0 10800 3600 604800 3600"
 # ---
 # apiVersion: v1
 # kind: Service
