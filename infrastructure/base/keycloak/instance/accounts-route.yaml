@@ -10,8 +10,8 @@ spec:
     - kind: Rule
       match: "Host(`accounts.${BASE_DOMAIN}`)"
       middlewares:
-        - accounts-rewrite
-        - accounts-rewrite-users
+        - name: accounts-rewrite
+        - name: accounts-rewrite-users
       services:
         - name: keycloak
           scheme: https
