@@ -12,6 +12,6 @@ spec:
       services:
         - name: keycloak
           scheme: https
-          serverTransport: accounts
+          serversTransport: accounts
   tls:
     secretName: accounts-certificate
