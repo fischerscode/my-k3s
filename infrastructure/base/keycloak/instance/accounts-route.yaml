@@ -9,6 +9,9 @@ spec:
   routes:
     - kind: Rule
       match: "Host(`accounts.${BASE_DOMAIN}`)"
+      middlewares:
+        - accounts-rewrite
+        - accounts-rewrite-users
       services:
         - name: keycloak
           scheme: https

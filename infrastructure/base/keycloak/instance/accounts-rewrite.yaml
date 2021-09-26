@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: accounts-rewrite
+spec:
+  replacePathRegex:
+    regex: ^(?!/auth)/(.*)
+    replacement: /auth/realms/accounts/account/$1

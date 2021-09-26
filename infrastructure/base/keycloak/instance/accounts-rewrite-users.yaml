@@ -1,0 +1,9 @@
+# Rewrite realm users to realm accounts
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: accounts-rewrite-users
+spec:
+  replacePathRegex:
+    regex: ^/auth/realms/users/(.*)
+    replacement: /auth/realms/accounts/$1
