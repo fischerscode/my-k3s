@@ -1,6 +1,6 @@
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: ServerTransport
+kind: ServersTransport
 metadata:
   name: accounts
 spec:
