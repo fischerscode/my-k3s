@@ -13,5 +13,6 @@ spec:
         - name: keycloak
           scheme: https
           serversTransport: accounts
+          port: 8443
   tls:
     secretName: accounts-certificate
