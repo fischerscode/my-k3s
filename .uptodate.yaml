@@ -1,0 +1,33 @@
+dependencies:
+  - name: traefik
+    type: github
+    currentVersion: v2.5.2
+    prefix: v
+    repo: "traefik/traefik"
+  - name: metallb
+    type: github
+    currentVersion: v0.10.2
+    prefix: v
+    repo: "metallb/metallb"
+    isTag: true
+  - name: PowerDNS auth
+    type: github
+    currentVersion: auth-4.5.1
+    prefix: auth-
+    repo: "PowerDNS/pdns"
+    isTag: true
+  # - name: PowerDNS Admin
+  - name: Rook
+    type: github
+    currentVersion: v1.7.0
+    prefix: v
+    repo: "rook/rook"
+  - name: CertManager
+    type: github
+    currentVersion: v1.5.3
+    prefix: v
+    repo: "jetstack/cert-manager"
+  - name: keycloak-operator
+    type: github
+    currentVersion: "15.0.1"
+    repo: "keycloak/keycloak-operator"
