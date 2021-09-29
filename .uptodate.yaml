@@ -4,30 +4,49 @@ dependencies:
     currentVersion: v2.5.2
     prefix: v
     repo: "traefik/traefik"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [CHANGELOG](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
   - name: metallb
     type: github
     currentVersion: v0.10.2
     prefix: v
     repo: "metallb/metallb"
     isTag: true
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [release-notes](https://metallb.universe.tf/release-notes)
   - name: PowerDNS auth
     type: github
     currentVersion: auth-4.5.1
     prefix: auth-
     repo: "PowerDNS/pdns"
     isTag: true
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [CHANGELOG](https://doc.powerdns.com/authoritative/changelog/)
   # - name: PowerDNS Admin
   - name: Rook
     type: github
     currentVersion: v1.7.0
     prefix: v
     repo: "rook/rook"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [CHANGELOG](https://github.com/rook/rook/releases)
   - name: CertManager
     type: github
     currentVersion: v1.5.3
     prefix: v
     repo: "jetstack/cert-manager"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [CHANGELOG](https://github.com/jetstack/cert-manager/releases)
   - name: keycloak-operator
     type: github
     currentVersion: "15.0.1"
     repo: "keycloak/keycloak-operator"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [Tags](https://github.com/keycloak/keycloak-operator/tags)
+      [Keycloak Release Notes](https://www.keycloak.org/docs/latest/release_notes/)
