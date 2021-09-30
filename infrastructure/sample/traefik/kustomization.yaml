@@ -4,3 +4,22 @@ bases:
 replicas:
   - name: traefik
     count: 6
+
+secretGenerator:
+  - name: traefik-dashboard-users
+    namespace: overridden
+    files:
+      - users=traefik-dashboard-users.txt
+
+replacements:
+  - source:
+      name: traefik-dashboard-auth
+      kind: Middleware
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          name: traefik-dashboard-users
+          kind: Secret
+          version: v1
+        fieldPaths:
+          - metadata.namespace
