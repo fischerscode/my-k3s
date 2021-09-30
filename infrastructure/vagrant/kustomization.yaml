@@ -1,0 +1,7 @@
+bases:
+  - apiserver-loadbalancer
+  # - cert-manager
+  - metallb
+  # - pdns
+  # - rook-ceph
+  - traefik
