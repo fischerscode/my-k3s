@@ -1,5 +1,6 @@
 all:
   vars:
+    ansible_user: vagrant
     wireguard_interface: wg0
     users: # All (new) sudoers users
       - name: "maximilian"
