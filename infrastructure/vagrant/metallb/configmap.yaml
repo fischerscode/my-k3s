@@ -7,7 +7,7 @@ metadata:
 data:
   config: |
     address-pools:
-    - name: default
+    - name: routing
       protocol: layer2
       addresses:
       - ${SVC_KUBERNETES_API_PUBLIC}/32

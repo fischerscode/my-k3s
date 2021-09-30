@@ -28,3 +28,7 @@ secretGenerator:
   - name: pdns-config
     files:
       - API_KEY=pdns-api-key.encrypted
+  - name: pdns-admin-config
+    files:
+      - SALT=pdns-admin-salt.encrypted
+      - SECRET_KEY=pdns-admin-secret-key.encrypted

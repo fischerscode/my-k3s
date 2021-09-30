@@ -1,6 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dns-external
+  name: dns
 spec:
   externalIPs:
+    - "172.16.17.101"
+    - "172.16.17.102"
+    - "172.16.17.103"
