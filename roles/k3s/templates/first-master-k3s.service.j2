@@ -18,7 +18,6 @@ ExecStart=/usr/local/bin/k3s server --cluster-init \
                                     --cluster-domain {{ cluster_domain }} \
                                     --disable servicelb \
                                     --disable local-storage \
-                                    --disable metrics-server \
                                     --no-deploy traefik
 KillMode=process
 Delegate=yes
