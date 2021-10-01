@@ -1,25 +1,32 @@
 - name: Disable swap
   import_tasks: swap.yml
 
+- name: test
+  debug:
+    msg: test
+  changed_when: true
+  notify: restart k3s
+
 - name: Download executable
   become: true
   get_url:
-    url: https://github.com/k3s-io/k3s/releases/download/v1.21.4%2Bk3s1/k3s
+    url: "{{ k3s_url }}"
     dest: /usr/local/bin/k3s
     mode: 0755
     owner: root
     group: root
-    checksum: sha256:47e686ad5390670da79a467ba94399d72e472364bc064a20fecd3937a8d928b5
+    checksum: "{{ k3s_hash }}"
+  notify: restart k3s
 
 - name: Allow nodes in firewall
   import_tasks: firewall.yml
 
 - name: Init cluster
-  run_once: yes
+  run_once: true
   delegate_to: "{{ groups['kube-master'][0] }}"
   block:
     - name: Copy K3s service file
-      register: k3s_service
+      notify: restart k3s
       become: true
       template:
         src: "first-master-k3s.service.j2"
@@ -32,9 +39,15 @@
       become: true
       systemd:
         name: k3s
-        daemon_reload: yes
+        daemon_reload: true
+        enabled: true
+
+    - name: Ensure K3s service is started
+      become: true
+      service:
+        name: k3s
         state: started
-        enabled: yes
+      register: start_k3s
 
     - name: Wait for node-token
       become: true
@@ -57,7 +70,7 @@
     - inventory_hostname != groups['kube-master'][0]
   block:
     - name: Copy K3s service file
-      register: k3s_service
+      notify: restart k3s
       become: true
       template:
         src: "other-masters-k3s.service.j2"
@@ -67,40 +80,22 @@
         mode: 0644
 
     - name: Enable and check K3s service
-      throttle: 1
       become: true
       systemd:
         name: k3s
-        daemon_reload: yes
+        daemon_reload: true
+        enabled: true
+
+    - name: Ensure K3s service is started
+      become: true
+      throttle: 1
+      service:
+        name: k3s
         state: started
-        enabled: yes
-
-# - name: Create ns for metallb
-#   become: true
-#   run_once: yes
-#   delegate_to: "{{ groups['kube-master'][0] }}"
-#   shell:
-#     cmd: k3s kubectl create ns metallb-system
-#   register: result
-#   failed_when:
-#     - "not 'already exists' in result.stderr"
-#     - "not 'namespace/metallb-system created' in result.stdout"
-#   changed_when: "'namespace/metallb-system created' in result.stdout"
-
-# - name: Create memberlist secret for metallb
-#   become: true
-#   run_once: yes
-#   delegate_to: "{{ groups['kube-master'][0] }}"
-#   shell:
-#     cmd: k3s kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-#   register: result
-#   failed_when:
-#     - "not 'already exists' in result.stderr"
-#     - "not 'secret/memberlist created' in result.stdout"
-#   changed_when: "'secret/memberlist created' in result.stdout"
+      register: start_k3s
 
 - name: Check if SOPS key exists
-  run_once: yes
+  run_once: true
   delegate_to: 127.0.0.1
   stat:
     path: "{{ playbook_dir }}/{{ cluster_name }}.key"
@@ -108,10 +103,9 @@
 
 - name: Create ns for flux
   become: true
-  run_once: yes
+  run_once: true
   delegate_to: "{{ groups['kube-master'][0] }}"
-  shell:
-    cmd: k3s kubectl create ns flux-system
+  command: k3s kubectl create ns flux-system
   register: result
   failed_when:
     - "not 'already exists' in result.stderr"
@@ -121,7 +115,7 @@
 
 - name: Copy SOPS key
   become: true
-  run_once: yes
+  run_once: true
   delegate_to: "{{ groups['kube-master'][0] }}"
   copy:
     src: "{{ playbook_dir }}/{{ cluster_name }}.key"
@@ -133,10 +127,9 @@
 
 - name: Create SOPS secret
   become: true
-  run_once: yes
+  run_once: true
   delegate_to: "{{ groups['kube-master'][0] }}"
-  shell:
-    cmd: "k3s kubectl create secret generic sops-gpg --namespace=flux-system --from-file=/tmp/sops.asc"
+  command: "k3s kubectl create secret generic sops-gpg --namespace=flux-system --from-file=/tmp/sops.asc"
   register: result
   failed_when:
     - "not 'already exists' in result.stderr"
@@ -149,7 +142,7 @@
     - inventory_hostname in groups['kube-node']
   block:
     - name: Copy K3s service file
-      register: k3s_service
+      notify: restart k3s
       become: true
       template:
         src: "agents-k3s.service.j2"
@@ -165,42 +158,13 @@
       become: true
       systemd:
         name: k3s
-        daemon_reload: yes
+        daemon_reload: true
+        enabled: true
+
+    - name: Ensure K3s service is started
+      become: true
+      throttle: 1
+      service:
+        name: k3s
         state: started
-        enabled: yes
-# - debug:
-#     var: token
-
-# - name: Create directory .kube
-#   file:
-#     path: ~{{ ansible_user }}/.kube
-#     state: directory
-#     owner: "{{ ansible_user }}"
-#     mode: "u=rwx,g=rx,o="
-
-# - name: Copy config file to user home directory
-#   copy:
-#     src: /etc/rancher/k3s/k3s.yaml
-#     dest: ~{{ ansible_user }}/.kube/config
-#     remote_src: yes
-#     owner: "{{ ansible_user }}"
-#     mode: "u=rw,g=,o="
-
-# - name: Replace https://localhost:6443 by https://master-ip:6443
-#   command: >-
-#     k3s kubectl config set-cluster default
-#       --server=https://{{ master_ip }}:6443
-#       --kubeconfig ~{{ ansible_user }}/.kube/config
-#   changed_when: true
-
-# - name: Create kubectl symlink
-#   file:
-#     src: /usr/local/bin/k3s
-#     dest: /usr/local/bin/kubectl
-#     state: link
-
-# - name: Create crictl symlink
-#   file:
-#     src: /usr/local/bin/k3s
-#     dest: /usr/local/bin/crictl
-#     state: link
+      register: start_k3s

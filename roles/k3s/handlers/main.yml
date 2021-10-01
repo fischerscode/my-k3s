@@ -1,0 +1,4 @@
+- name: restart k3s
+  set_fact:
+    restart_k3s: true
+  when: not start_k3s.changed

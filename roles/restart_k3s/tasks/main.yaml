@@ -1,0 +1,50 @@
+- name: Make sure all nodes are ready
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  command: k3s kubectl get nodes | grep 'NotReady\|SchedulingDisabled'
+  register: kubectl
+  failed_when: not kubectl.failed
+  changed_when: false
+
+- name: Drain node
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  command: >
+    k3s kubectl drain
+        --timeout 5m
+        --ignore-daemonsets
+        --force
+        --delete-emptydir-data {{ inventory_hostname|lower }}
+  register: drain
+  until: not drain.failed
+  retries: 3
+  delay: 30
+  failed_when: false
+  changed_when: true
+
+- name: Restart k3s
+  systemd:
+    name: k3s.service
+    state: restarted
+
+- name: Delay 10 sec
+  wait_for:
+    timeout: 10
+
+- name: uncordon node
+  delegate_to: "{{ groups['kube-master'][0] }}"
+  command: k3s kubectl uncordon {{ inventory_hostname|lower }}
+  changed_when: true
+
+- name: Delay 5 min
+  wait_for:
+    timeout: 300
+# - name: Make sure all nodes are ready
+#   delegate_to: "{{ groups['kube-master'][0] }}"
+#   command: >
+#     k3s kubectl get pods \
+#       --all-namespaces \
+#       --field-selector spec.nodeName={{ inventory_hostname|lower }},status.phase!=Running,status.phase!=Succeeded'
+#   register: out
+#   until: out.
+#   retries: 3
+#   delay: 30
+#   changed_when: false
