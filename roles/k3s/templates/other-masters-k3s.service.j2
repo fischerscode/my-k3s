@@ -19,6 +19,7 @@ ExecStart=/usr/local/bin/k3s server --tls-san {{kubernetes_api_public_address}} 
                                     --cluster-domain {{ cluster_domain }} \
                                     --disable servicelb \
                                     --disable local-storage \
+                                    --disable metrics-server \
                                     --no-deploy traefik
 KillMode=process
 Delegate=yes
