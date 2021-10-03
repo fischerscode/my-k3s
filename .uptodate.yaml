@@ -59,3 +59,23 @@ dependencies:
       Update $name from $currentVersion to $latestVersion.
       [k3s releases](https://github.com/k3s-io/k3s/releases)
       [Kubernetes Changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md)
+  - name: grafana
+    type: helm
+    currentVersion: "6.16.10"
+    repo: https://grafana.github.io/helm-charts
+    chart: grafana
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+
+      [Readme.md](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md)
+      [Upgrading to new major version](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md#upgrading-an-existing-release-to-a-new-major-version)
+  - name: prometheus-stack
+    type: helm
+    currentVersion: "19.0.1"
+    repo: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+
+      [Readme.md](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md)
+      [Upgrading to new major version](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md#upgrading-an-existing-release-to-a-new-major-version)
