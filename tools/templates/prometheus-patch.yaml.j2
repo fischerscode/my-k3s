@@ -6,21 +6,21 @@ spec:
   values:
     kubeControllerManager:
       endpoints:
-{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+{% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}
         - "{{ hostvars[host].internalIPv4 }}"
 {% endfor %}
     kubeScheduler:
       endpoints:
-{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+{% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}
         - "{{ hostvars[host].internalIPv4 }}"
 {% endfor %}
     kubeProxy:
       endpoints:
-{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+{% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}
         - "{{ hostvars[host].internalIPv4 }}"
 {% endfor %}
     kubeEtcd:
       endpoints:
-{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+{% for host in lookup('inventory_hostnames', 'kube-master', wantlist=True) %}
         - "{{ hostvars[host].internalIPv4 }}"
 {% endfor %}
