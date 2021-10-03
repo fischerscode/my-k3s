@@ -2,3 +2,4 @@
 kubeconfig*.yaml
 *.key
 *.secret
+.DS_Store
