@@ -19,7 +19,11 @@ ExecStart=/usr/local/bin/k3s server --tls-san {{kubernetes_api_public_address}} 
                                     --cluster-domain {{ cluster_domain }} \
                                     --disable servicelb \
                                     --disable local-storage \
-                                    --no-deploy traefik
+                                    --no-deploy traefik \
+                                    --etcd-expose-metrics=true \
+                                    --kube-controller-manager-arg address={{ internalIPv4 }} bind-address={{ internalIPv4 }} \
+                                    --kube-proxy-arg metrics-bind-address={{ internalIPv4 }} \
+                                    --kube-scheduler-arg address={{ internalIPv4 }} bind-address={{ internalIPv4 }}
 KillMode=process
 Delegate=yes
 # Having non-zero Limit*s causes performance problems due to accounting overhead
