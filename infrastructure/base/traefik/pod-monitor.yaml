@@ -8,7 +8,7 @@ metadata:
 spec:
   podMetricsEndpoints:
     - path: /metrics
-      targetPort: 8080
+      port: traefik
   jobLabel: traefik
   selector:
     matchLabels:
