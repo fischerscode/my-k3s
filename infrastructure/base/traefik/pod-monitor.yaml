@@ -6,7 +6,7 @@ metadata:
   labels:
     app: traefik
 spec:
-  endpoints:
+  podMetricsEndpoints:
     - path: /metrics
       targetPort: 8080
   jobLabel: traefik
