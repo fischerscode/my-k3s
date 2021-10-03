@@ -95,7 +95,7 @@ MacOS: ```brew install velero``` -->
    
 ### Afterwards:
 1. Add cluster to `.github/workflows/update-flux.yaml`
-
+2. get grafana admin password: `kubectl get secret -n monitoring grafana-cred --template={{.data.ADMIN_PASSWORD}} | base64 -d | pbcopy`
 
 ## Mozilla SOPS
 1. `brew install gnupg sops`
