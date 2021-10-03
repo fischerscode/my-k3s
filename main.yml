@@ -20,30 +20,29 @@
     - k3s
   tags:
     - k3s
-
-- name: Restart masters
-  hosts: kube-master
-  serial: 1
-  become: true
-  tags:
-    - k3s
-  tasks:
-    - name: Restart k3s
-      import_role:
-        name: restart_k3s
-      when:
-        - restart_k3s is defined
-        - restart_k3s
-- name: Restart workers
-  hosts: kube-node
-  serial: 1
-  become: true
-  tags:
-    - k3s
-  tasks:
-    - name: Restart k3s
-      import_role:
-        name: restart_k3s
-      when:
-        - restart_k3s is defined
-        - restart_k3s
+# - name: Restart masters
+#   hosts: kube-master
+#   serial: 1
+#   become: true
+#   tags:
+#     - k3s
+#   tasks:
+#     - name: Restart k3s
+#       import_role:
+#         name: restart_k3s
+#       when:
+#         - restart_k3s is defined
+#         - restart_k3s
+# - name: Restart workers
+#   hosts: kube-node
+#   serial: 1
+#   become: true
+#   tags:
+#     - k3s
+#   tasks:
+#     - name: Restart k3s
+#       import_role:
+#         name: restart_k3s
+#       when:
+#         - restart_k3s is defined
+#         - restart_k3s
