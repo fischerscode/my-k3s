@@ -1,0 +1,23 @@
+bases:
+  - ../../base/monitoring
+
+namespace: monitoring
+
+secretGenerator:
+  - name: slack-webhook
+    namespace: monitoring
+    options:
+      disableNameSuffixHash: true
+    files:
+      - "URL=slack-webhook.encrypted"
+  - name: grafana-cred
+    namespace: monitoring
+    options:
+      disableNameSuffixHash: true
+    literals:
+      - "admin-user=admin"
+    files:
+      - "admin-password=grafana-admin-password.encrypted"
+
+patchesStrategicMerge:
+  - generated/prometheus-patch.yaml
