@@ -58,3 +58,16 @@
           copy:
             content: "**This directory contains generated files.**"
             dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/pdns/generated/Readme.md"
+        # monitoring
+        - name: "Ensure infrastructure/{{ cluster_name }}/monitoring/generated/ exists"
+          file:
+            path: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/monitoring/generated"
+            state: directory
+        - name: "Template monitoring/generated/prometheus-patch.yaml"
+          template:
+            src: prometheus-patch.yaml.j2
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/monitoring/generated/prometheus-patch.yaml"
+        - name: "Create Readme"
+          copy:
+            content: "**This directory contains generated files.**"
+            dest: "{{ playbook_dir }}/../infrastructure/{{ cluster_name }}/monitoring/generated/Readme.md"

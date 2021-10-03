@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+spec:
+  values:
+    kubeControllerManager:
+      endpoints:
+{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+        - "{{ hostvars[host].internalIPv4 }}"
+{% endfor %}
+    kubeScheduler:
+      endpoints:
+{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+        - "{{ hostvars[host].internalIPv4 }}"
+{% endfor %}
+    kubeProxy:
+      endpoints:
+{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+        - "{{ hostvars[host].internalIPv4 }}"
+{% endfor %}
+    kubeEtcd:
+      endpoints:
+{% for host in lookup('inventory_hostnames', 'k8s-cluster', wantlist=True) %}
+        - "{{ hostvars[host].internalIPv4 }}"
+{% endfor %}
