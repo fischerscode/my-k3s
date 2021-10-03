@@ -1,12 +1,6 @@
 - name: Disable swap
   import_tasks: swap.yml
 
-- name: test
-  debug:
-    msg: test
-  changed_when: true
-  notify: restart k3s
-
 - name: Download executable
   become: true
   get_url:
