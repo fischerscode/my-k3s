@@ -15,9 +15,9 @@ secretGenerator:
     options:
       disableNameSuffixHash: true
     literals:
-      - "admin-user=admin"
+      - "ADMIN_USER=admin"
     files:
-      - "admin-password=grafana-admin-password.encrypted"
+      - "ADMIN_PASSWORD=grafana-admin-password.encrypted"
 
 patchesStrategicMerge:
   - generated/prometheus-patch.yaml
