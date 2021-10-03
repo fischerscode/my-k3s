@@ -126,10 +126,8 @@ spec:
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: "replica"
-
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-
         retention: 6h
         enableAdminAPI: true
         walCompression: true
