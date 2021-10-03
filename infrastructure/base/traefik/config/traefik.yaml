@@ -32,3 +32,9 @@ ping:
   entryPoint: http
 log:
   level: INFO
+
+metrics:
+  prometheus:
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true

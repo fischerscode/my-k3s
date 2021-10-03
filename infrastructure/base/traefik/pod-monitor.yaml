@@ -1,0 +1,15 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: traefik
+  labels:
+    app: traefik
+spec:
+  endpoints:
+    - path: /metrics
+      targetPort: 8080
+  jobLabel: traefik
+  selector:
+    matchLabels:
+      app: traefik

@@ -7,6 +7,7 @@ resources:
   - dashboard-certificate.yaml
   - dashboard-auth.yaml
   - dashboard-route.yaml
+  - pod-monitor.yaml
 
 namespace: traefik-system
 

@@ -40,23 +40,3 @@ spec:
     - port: 53
       protocol: UDP
       name: dns
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: traefik2
-# spec:
-#   externalTrafficPolicy: Local
-#   selector:
-#     app: traefik
-#   ports:
-#     - port: 80
-#       protocol: TCP
-#       name: http
-#       nodePort: 30080
-#     - port: 443
-#       protocol: TCP
-#       name: https
-#       nodePort: 30443
-#   type: NodePort
-#   # loadBalancerIP: <your-cluster-public-ip>
