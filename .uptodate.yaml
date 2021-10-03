@@ -59,6 +59,28 @@ dependencies:
       Update $name from $currentVersion to $latestVersion.
       [k3s releases](https://github.com/k3s-io/k3s/releases)
       [Kubernetes Changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md)
+  - name: prometheus-stack
+    type: helm
+    currentVersion: "19.0.1"
+    repo: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      **Make sure to also update the prometheus-operator CRDs!**
+      [Readme.md](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md)
+      [Upgrading to new major version](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md#upgrading-an-existing-release-to-a-new-major-version)
+  - name: prometheus-operator CRDs
+    type: helm
+    currentVersion: 0.50.0
+    repo: "https://prometheus-community.github.io/helm-charts"
+    chart: kube-prometheus-stack
+    path: entries.kube-prometheus-stack.0.appVersion
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      Every file from [here](https://github.com/prometheus-operator/prometheus-operator/tree/v$latestVersion/example/prometheus-operator-crd) should be in [here](infrastructure/base/crds/prometheus-operator/kustomization.yaml).
+      **Make sure to also update the prometheus-stack!**
+      [CHANGELOG.md](https://github.com/prometheus-operator/prometheus-operator/blob/v$latestVersion/CHANGELOG.md)
+      [RELEASE](https://github.com/prometheus-operator/prometheus-operator/releases/tag/v$latestVersion)
   - name: grafana
     type: helm
     currentVersion: "6.16.10"
@@ -69,13 +91,3 @@ dependencies:
 
       [Readme.md](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md)
       [Upgrading to new major version](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md#upgrading-an-existing-release-to-a-new-major-version)
-  - name: prometheus-stack
-    type: helm
-    currentVersion: "19.0.1"
-    repo: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    issueBody: |
-      Update $name from $currentVersion to $latestVersion.
-
-      [Readme.md](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md)
-      [Upgrading to new major version](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md#upgrading-an-existing-release-to-a-new-major-version)
