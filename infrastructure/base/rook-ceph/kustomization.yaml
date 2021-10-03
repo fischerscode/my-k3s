@@ -1,6 +1,9 @@
 ---
 namespace: rook-ceph
 
+bases:
+  - dashboards
+
 resources:
   - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/common.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/operator.yaml

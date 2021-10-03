@@ -1,0 +1,16 @@
+commonLabels:
+  grafana-dashboard: "1"
+
+configMapGenerator:
+  - name: grafana-dashboard-ceph-cluster
+    files:
+      - ceph-cluster.json=https://grafana.com/api/dashboards/2842/revisions/14/download
+  - name: grafana-dashboard-ceph-osd
+    files:
+      - ceph-osd.json=https://grafana.com/api/dashboards/5336/revisions/5/download
+  - name: grafana-dashboard-ceph-pools
+    files:
+      - ceph-pools.json=https://grafana.com/api/dashboards/5342/revisions/5/download
+  - name: grafana-dashboard-ceph-pools
+    files:
+      - ceph-pools.json=https://grafana.com/api/dashboards/5342/revisions/5/download
