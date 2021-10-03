@@ -55,10 +55,10 @@ spec:
             - receiver: "null"
               match:
                 alertname: Watchdog
-            # - receiver: "slack"
-            #   match_re:
-            #     severity: critical
-            #   continue: true
+            - receiver: "slack"
+              match_re:
+                severity: critical
+              continue: true
         inhibit_rules:
           - source_match:
               severity: "critical"
@@ -69,8 +69,8 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              # storageClassName: "rook-ceph-block"
-              storageClassName: "standard"
+              storageClassName: "rook-ceph-block"
+              # storageClassName: "standard"
               resources:
                 requests:
                   storage: 1Gi
@@ -105,32 +105,16 @@ spec:
       enabled: true
     kubeControllerManager:
       enabled: true
-      endpoints:
-        - 192.168.49.2
-        # - 192.168.42.10
-        # - 192.168.42.11
-        # - 192.168.42.12
+      endpoints: []
     kubeScheduler:
       enabled: true
-      endpoints:
-        - 192.168.49.2
-        # - 192.168.42.10
-        # - 192.168.42.11
-        # - 192.168.42.12
+      endpoints: []
     kubeProxy:
       enabled: true
-      endpoints:
-        - 192.168.49.2
-        # - 192.168.42.10
-        # - 192.168.42.11
-        # - 192.168.42.12
+      endpoints: []
     kubeEtcd:
       enabled: true
-      endpoints:
-        - 192.168.49.2
-        # - 192.168.42.10
-        # - 192.168.42.11
-        # - 192.168.42.12
+      endpoints: []
       service:
         enabled: true
         port: 2381
