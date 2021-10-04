@@ -11,6 +11,7 @@ secretGenerator:
     files:
       - users=traefik-dashboard-users.txt
   - name: traefik-pilot-token
+    namespace: traefik-system
     options:
       disableNameSuffixHash: true
     files:
