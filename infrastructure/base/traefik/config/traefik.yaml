@@ -39,4 +39,5 @@ metrics:
     addRoutersLabels: true
     addServicesLabels: true
 
-accessLog: {}
+accessLog:
+  format: json
