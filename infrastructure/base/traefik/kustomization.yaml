@@ -9,6 +9,7 @@ resources:
   - dashboard-route.yaml
   - pod-monitor.yaml
   - prometheus-rule.yaml
+  - geoip-middleware.yaml
 
 namespace: traefik-system
 
@@ -31,3 +32,13 @@ replacements:
           kind: IngressRoute
         fieldPaths:
           - spec.routes.[kind=Rule].middlewares.[name=traefik-dashboard-auth].namespace
+  - source:
+      name: geoip2
+      kind: Middleware
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          name: traefik-dashboard
+          kind: IngressRoute
+        fieldPaths:
+          - spec.routes.[kind=Rule].middlewares.[name=geoip2].namespace

@@ -38,7 +38,7 @@ spec:
         mode: console
       auth.basic:
         disable_login_form: false
-
+sum by (sourceIP) (count_over_time({job="traefik-system/traefik",namespace="traefik-system"} |= "ClientHost" | json sourceIP="ClientHost" [5m]))
     datasources:
       datasources.yaml:
         apiVersion: 1

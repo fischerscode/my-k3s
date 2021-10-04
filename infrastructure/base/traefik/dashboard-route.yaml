@@ -12,6 +12,8 @@ spec:
       middlewares:
         - name: traefik-dashboard-auth
           namespace: overridden
+        - name: geoip2
+          namespace: overridden
       services:
         - name: api@internal
           kind: TraefikService
