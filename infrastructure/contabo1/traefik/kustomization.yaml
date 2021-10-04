@@ -10,6 +10,9 @@ secretGenerator:
     namespace: overridden
     files:
       - users=traefik-dashboard-users.txt
+  - name: traefik-pilot-token
+    files:
+      - token=pilot-token.encrypted
 
 replacements:
   - source:
