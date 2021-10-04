@@ -8,6 +8,7 @@ resources:
   - dashboard-auth.yaml
   - dashboard-route.yaml
   - pod-monitor.yaml
+  - prometheus-rule.yaml
 
 namespace: traefik-system
 
