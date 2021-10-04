@@ -48,6 +48,10 @@ spec:
             url: http://prometheus-operated:9090/
             access: proxy
             isDefault: true
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki:3100
     sidecar:
       dashboards:
         enabled: true
@@ -61,6 +65,13 @@ spec:
       existingSecret: grafana-cred
       userKey: ADMIN_USER
       passwordKey: ADMIN_PASSWORD
+    plugins:
+      - natel-discrete-panel
+      - pr0ps-trackmap-panel
+      - grafana-piechart-panel
+      - vonage-status-panel
+      - grafana-worldmap-panel
+      - grafana-clock-panel
 
     # serviceMonitor:
     #   enabled: true

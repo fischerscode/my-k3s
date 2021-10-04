@@ -2,3 +2,7 @@ resources:
   - namespace.yaml
   - prometheus-stack.yaml
   - grafana.yaml
+
+bases:
+  - loki
+  - promtail
