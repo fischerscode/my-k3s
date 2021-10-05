@@ -4,7 +4,7 @@ echo -n "Docker username: "
 read dockerUsername
 echo -n "Docker password or access token: "
 read -s dockerPassword
-kubectl create secret docker-registry docker-cred --docker-server=https://index.docker.io/v1/ --docker-username=$dockerUsername --docker-password=$dockerPassword --dry-run=client -o yaml > infrastructure/$CLUSTER/docker-cred.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/docker-cred.yaml
+kubectl create secret docker-registry docker-cred --docker-server=https://index.docker.io/v1/ --docker-username=$dockerUsername --docker-password=$dockerPassword --dry-run=client -o yaml > infrastructure/$CLUSTER/docker-cred/docker-cred.sops.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/docker-cred/docker-cred.sops.yaml
 
 echo "metallb:"
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(tools/generate_password.sh 128)" --dry-run=client -o yaml > infrastructure/$CLUSTER/metallb/memberlist.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/metallb/memberlist.yaml
