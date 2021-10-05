@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+    .dockerconfigjson: ENC[AES256_GCM,data:5hN1snqr/Tso4jV1ImfXVuAcfJBhS0UcWtk7R+FQjdbhzciSaHdS7zh94kE8xe3RTJGtxBkziwj38DgjJgViYEYJsHj7wkqfPW/hZVHbGVKbymTo2HkQHGCwfmezjOdN74f+/aqF/FbLyLEpc+IBF9Ol2AMqEJsNzgRHxiy6swmXWTLd1jIN/e2o7I12obYjo8BVqo+1d/RzB000n5PmBxae+WIuy9wzXKDHLC+QDiYljp9Pvt9OAIAQmxlLSukMobtafRvDr0uy3i+6Zoqy1/B71Qpg8Acm1WBmxQ2X+2EvUGerl+FmqTyz9EvO+DbL1YPCnpPVFuj1yF/2Tu2QVMH6xTczpncS,iv:3SjpQlaCLDFDh8ZC5bNrapJ0A4+TnskOGH71fXUVGnk=,tag:gp7l9p2MHOdtvEL/gjHdpQ==,type:str]
+kind: Secret
+metadata:
+    creationTimestamp: null
+    name: docker-cred
+type: kubernetes.io/dockerconfigjson
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2021-10-05T15:19:41Z"
+    mac: ENC[AES256_GCM,data:WtzGdrG8/XdLDIAXv2SebQcq1qpOvCn1l96uddebzLZXrIYkXD/dhnTlCpA1WL0MllnkZa0UixoOc3Y/eUdGmlABgaVXKNhD/YM/0ybYdgDbhpJXs5zrfyJBsfkrmYiQv80673YrorXesw1lUeUdgKRTq0BLrMk4CovSpBMKNqE=,iv:tDg7L8tXFNewiyC+wIAFG1Vs/N2vZ3Iu6TBl1Djg2iQ=,tag:OseKJwPB5MW6eDBg9A5eYg==,type:str]
+    pgp:
+        - created_at: "2021-10-05T15:19:41Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA5JSBrarPrpaAQ/+OxcTRlseB31ez0lOd0Jfl4/ggFBEOrrwfU6uflhgYJjT
+            uyYGaQeHrSskyymoC/h8d/CYPJ6ImpeMJytOlPKgBqUB9zLcCY6VMhHt63oec/q7
+            vS+iTHBu/TJjO426cLrgyzOSJ17GDm8yUjPY9+OG6sJmptaqgvQByakuxLZEOkcd
+            KwibmjzMX5PW/7NWnuDN3Tidf5AKJMH2zdwBgu810TRRIncM8N0C2FUgfOH0Yk6F
+            CyFO6W2Jt0lzjFqS6WrpjLEf0sdUb0npq7LIRlJ3kSoirGkoBuu75wr15gM5BOGh
+            +VBjsTdi1KkTa966HwGw4JALM1/XyloFCie+41anVBW8fTmihqrigpZzmdxyKiId
+            PjaooiPnHTEKDsGewvrzIU5hcpqCEbadlj6UFmxYchbdal5qUzNbASO6wsaLuUPr
+            /OVQthJnlZgBgJPyBEpbJyjaciCXDxeyfTTyb2Z9AsrfDjvH2YGUwukkHtZ3lzVD
+            Qh+ONiEtcWjUfN1cQUAJUo2xI49/sTeUOcBEuvkZ1LgEVX+lMYUO0SRQMtrCPa+s
+            wdxiGu3qy/pJVQVbhz21SkpWa7GpeQ5I0aJy9AXY4TZnaFjJzE40nIY/Il674Tqz
+            WNlZgmbvRrVb98SfaGsTr0u44O9Ao+Ao4ovhfWMT7XdvSnfxG+DUqi6Ac6m/BKjU
+            aAEJAhUg9oZMamqQ1WYWyCKn58noHPrhaSuf1HFT8v0A4ZBhBwIdqfxQ5CjVHVDy
+            5Rc1gQPFSslR4UpRepIk76Rqj02Jmy+1DSmfso/pJl8SpVme7sQ4ZH74G0gH7dyn
+            +znARQlJpWY0
+            =5RuL
+            -----END PGP MESSAGE-----
+          fp: 69A1EBA51966811FFC0EF0D816BC706475C0C0FE
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
