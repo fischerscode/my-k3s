@@ -41,9 +41,4 @@ metrics:
 
 accessLog:
   format: json
-
-experimental:
-  plugins:
-    geoip2:
-      modulename: github.com/GiGInnovationLabs/traefikgeoip2
-      version: v0.1.2
+  filePath: "/var/log/access.log"

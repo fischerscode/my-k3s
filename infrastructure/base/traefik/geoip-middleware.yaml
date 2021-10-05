@@ -1,8 +1,0 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: geoip2
-spec:
-  plugin:
-    geoip2:
-      dbPath: "/var/lib/geoip2/GeoLite2-City.mmdb"

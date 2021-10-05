@@ -29,7 +29,7 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       containers:
-        - image: fischerscode/traefik-geoip:2.5.2
+        - image: traefik:2.5.2
           imagePullPolicy: IfNotPresent
           name: traefik
           readinessProbe:
@@ -78,9 +78,19 @@ spec:
             - mountPath: /etc/traefik/traefik.yml
               name: config-static
               subPath: traefik.yaml
+            - mountPath: /var/log
+              name: logs
+        - image: fischerscode/traefik-geologger-city:test
+          imagePullPolicy: Always
+          name: geologger
+          volumeMounts:
+            - mountPath: /var/log
+              name: logs
       imagePullSecrets:
         - name: docker-cred
       volumes:
         - name: config-static
           configMap:
             name: traefik-config-static
+        - name: logs
+          emptyDir: {}
