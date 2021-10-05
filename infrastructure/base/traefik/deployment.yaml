@@ -80,7 +80,7 @@ spec:
               subPath: traefik.yaml
             - mountPath: /var/log
               name: logs
-        - image: fischerscode/traefik-geologger-city:test
+        - image: fischerscode/traefik-geologger-city:test2
           imagePullPolicy: Always
           name: geologger
           volumeMounts:
