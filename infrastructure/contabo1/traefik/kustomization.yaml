@@ -1,5 +1,8 @@
 bases:
   - ../../base/traefik
+  - ../docker-cred
+
+namespace: traefik-system
 
 replicas:
   - name: traefik
