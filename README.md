@@ -63,22 +63,7 @@ MacOS: ```brew install velero``` -->
 7. Copy infrastructure: `cp -r infrastructure/sample infrastructure/$CLUSTER`
 8. Generate files: `ansible-playbook -i inventory-$CLUSTER.yaml tools/generate_files.yml --extra-vars=cluster_name=$CLUSTER`
 9.  [Setup SOPS](#mozilla-sops)
-10. Create secrets:
-   1. Internal passwords:
-      ```bash
-      kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(tools/generate_password.sh 128)" --dry-run=client -o yaml > infrastructure/$CLUSTER/metallb/memberlist.yaml; sops --encrypt --in-place infrastructure/$CLUSTER/metallb/memberlist.yaml \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-root.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-auth-user.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-root.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/mariadb-admin-user.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-api-key.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/pdns/pdns-admin-secret-key.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-admin-secret-key.encrypted \
-      docker run --rm -ti python /bin/bash -c "pip3 -q install bcrypt 2> /dev/null && python -c 'import bcrypt; print(bcrypt.gensalt().decode(), end = \"\")'" > infrastructure/$CLUSTER/pdns/pdns-admin-salt.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/pdns/pdns-admin-salt.encrypted \
-      echo "Slack webhook for monitoring:"; read webHook; printf $webHook > infrastructure/$CLUSTER/monitoring/slack-webhook.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/monitoring/slack-webhook.encrypted \
-      tools/generate_password.sh 128 > infrastructure/$CLUSTER/monitoring/grafana-admin-password.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/monitoring/grafana-admin-password.encrypted \
-      echo "Traefik pilot token"; read token; printf $token > infrastructure/$CLUSTER/traefik/pilot-token.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/traefik/pilot-token.encrypted
-      ```
-   2. Traefik dashboard: `htpasswd -nB admin > infrastructure/$CLUSTER/traefik/traefik-dashboard-users.txt`
+10. Create secrets: `./generate-secrets.sh`
 11. Store known hosts: `ansible-playbook -i inventory-$CLUSTER.yaml tools/store_known_hosts.yml`
 12. Install k3s (wait until it hangs at 'Enable and check K3s service'): `ansible-playbook -i inventory-$CLUSTER.yaml main.yml --extra-vars=cluster_name=$CLUSTER --vault-password-file $CLUSTER-ansible.key`
 13. Get access to the cluster:
