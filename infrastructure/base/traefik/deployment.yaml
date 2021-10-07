@@ -74,12 +74,20 @@ spec:
               subPath: traefik.yaml
             - mountPath: /var/log
               name: logs
-        - image: fischerscode/traefik-geologger-city:v1.3.0_20211005
+        - image: fischerscode/traefik-geologger-city:v1.3.1_20211005
           imagePullPolicy: Always
           name: geologger
+          env:
+            - name: ENABLE_METRICS
+              value: "true"
+            - name: METRICS_PORT
+              value: "8081"
           volumeMounts:
             - mountPath: /var/log
               name: logs
+          ports:
+            - name: metrics
+              containerPort: 8081
       imagePullSecrets:
         - name: docker-cred
       volumes:
