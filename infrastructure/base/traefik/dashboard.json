@@ -1,0 +1,768 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "description": "",
+    "editable": false,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "id": 31,
+    "iteration": 1633612784263,
+    "links": [],
+    "panels": [
+        {
+            "datasource": "Loki",
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 3,
+                "x": 0,
+                "y": 0
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sum by (requesthost) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__range]))",
+                    "hide": false,
+                    "legendFormat": "{{requesthost}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Requests",
+            "type": "piechart"
+        },
+        {
+            "datasource": "Loki",
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
+                    },
+                    "mappings": [],
+                    "unit": "reqps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 3,
+                "x": 3,
+                "y": 0
+            },
+            "id": 13,
+            "options": {
+                "legend": {
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sum by (requesthost) (rate({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__range]))",
+                    "hide": false,
+                    "legendFormat": "{{requesthost}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Requests per second",
+            "type": "piechart"
+        },
+        {
+            "datasource": "Loki",
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 10,
+                "x": 6,
+                "y": 0
+            },
+            "id": 11,
+            "interval": null,
+            "maxDataPoints": null,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "sum"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right"
+                },
+                "tooltip": {
+                    "mode": "multi"
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sum by (requesthost) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__interval]))",
+                    "hide": false,
+                    "legendFormat": "{{requesthost}}",
+                    "refId": "A"
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Requests",
+            "type": "timeseries"
+        },
+        {
+            "datasource": null,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "dateTimeFromNow"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 5,
+                "x": 16,
+                "y": 0
+            },
+            "id": 15,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "min(traefik_tls_certs_not_after{}) by (cn) * 1000",
+                    "interval": "",
+                    "legendFormat": "{{cn}}",
+                    "refId": "A"
+                },
+                {
+                    "exemplar": true,
+                    "expr": "time() * 1000",
+                    "hide": false,
+                    "interval": "",
+                    "legendFormat": "now",
+                    "refId": "B"
+                }
+            ],
+            "title": "Certificate expire data",
+            "type": "timeseries"
+        },
+        {
+            "datasource": null,
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "dateTimeFromNow"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 3,
+                "x": 21,
+                "y": 0
+            },
+            "id": 17,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "text": {
+                    "valueSize": 15
+                },
+                "textMode": "value_and_name"
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "(min(traefik_tls_certs_not_after{}) by (cn) < time() + 1209600) * 1000",
+                    "format": "time_series",
+                    "instant": false,
+                    "interval": "",
+                    "legendFormat": "{{cn}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Certificate that expire soon.",
+            "type": "stat"
+        },
+        {
+            "datasource": "Loki",
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-RdYlGr"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "rgba(245, 54, 54, 0.9)",
+                                "value": null
+                            },
+                            {
+                                "color": "rgba(237, 129, 40, 0.89)",
+                                "value": 0
+                            },
+                            {
+                                "color": "rgba(50, 172, 45, 0.97)",
+                                "value": 10
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 0,
+                "y": 7
+            },
+            "id": 5,
+            "maxDataPoints": 1,
+            "options": {
+                "basemap": {
+                    "config": {},
+                    "type": "default"
+                },
+                "controls": {
+                    "mouseWheelZoom": true,
+                    "showAttribution": false,
+                    "showDebug": false,
+                    "showScale": false,
+                    "showZoom": false
+                },
+                "layers": [
+                    {
+                        "config": {
+                            "color": {
+                                "field": "Value #A",
+                                "fixed": "dark-green"
+                            },
+                            "fillOpacity": 0.4,
+                            "shape": "circle",
+                            "showLegend": true,
+                            "size": {
+                                "field": "Value #A",
+                                "fixed": 5,
+                                "max": 15,
+                                "min": 2
+                            }
+                        },
+                        "location": {
+                            "geohash": "geohash",
+                            "mode": "geohash"
+                        },
+                        "type": "markers"
+                    }
+                ],
+                "view": {
+                    "id": "europe",
+                    "lat": 46,
+                    "lon": 14,
+                    "shared": true,
+                    "zoom": 2
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sum by (geohash, position) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"}\n  | json geohash=\"geolocation.location.geohash\", \n         longitude=\"geolocation.location.longitude\", \n         latitude=\"geolocation.location.latitude\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | geohash!=\"\" \n  | label_format position=\"{{.latitude}}, {{.longitude}}\" [$__interval]))",
+                    "instant": true,
+                    "legendFormat": "",
+                    "range": false,
+                    "refId": "A"
+                }
+            ],
+            "title": "traffic from geohash",
+            "transformations": [],
+            "type": "geomap"
+        },
+        {
+            "datasource": "Loki",
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-RdYlGr"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "rgba(245, 54, 54, 0.9)",
+                                "value": null
+                            },
+                            {
+                                "color": "rgba(237, 129, 40, 0.89)",
+                                "value": 0
+                            },
+                            {
+                                "color": "rgba(50, 172, 45, 0.97)",
+                                "value": 10
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 12,
+                "y": 7
+            },
+            "id": 9,
+            "maxDataPoints": 1,
+            "options": {
+                "basemap": {
+                    "config": {},
+                    "type": "default"
+                },
+                "controls": {
+                    "mouseWheelZoom": true,
+                    "showAttribution": false,
+                    "showDebug": false,
+                    "showScale": true,
+                    "showZoom": false
+                },
+                "layers": [
+                    {
+                        "config": {
+                            "blur": 13,
+                            "radius": 5,
+                            "weight": {
+                                "field": "Value #A",
+                                "fixed": 1,
+                                "max": 1,
+                                "min": 0
+                            }
+                        },
+                        "location": {
+                            "geohash": "geohash",
+                            "mode": "geohash"
+                        },
+                        "type": "heatmap"
+                    }
+                ],
+                "view": {
+                    "id": "europe",
+                    "lat": 46,
+                    "lon": 14,
+                    "shared": true,
+                    "zoom": 2
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sum by (geohash, position) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"}\n  | json geohash=\"geolocation.location.geohash\", \n         longitude=\"geolocation.location.longitude\", \n         latitude=\"geolocation.location.latitude\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | geohash!=\"\" \n  | label_format position=\"{{.latitude}}, {{.longitude}}\" [$__interval]))",
+                    "instant": true,
+                    "legendFormat": "",
+                    "range": false,
+                    "refId": "A"
+                }
+            ],
+            "title": "traffic from geohash - Heatmap",
+            "transformations": [],
+            "type": "geomap"
+        },
+        {
+            "collapsed": true,
+            "datasource": null,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 16
+            },
+            "id": 19,
+            "panels": [
+                {
+                    "circleMaxSize": "30",
+                    "circleMinSize": 2,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "datasource": "Loki",
+                    "decimals": 0,
+                    "description": "",
+                    "esLocationName": "",
+                    "esMetric": "Count",
+                    "gridPos": {
+                        "h": 9,
+                        "w": 12,
+                        "x": 0,
+                        "y": 17
+                    },
+                    "hideEmpty": false,
+                    "hideZero": false,
+                    "id": 2,
+                    "initialZoom": 1,
+                    "locationData": "countries",
+                    "mapCenter": "Europe",
+                    "mapCenterLatitude": 46,
+                    "mapCenterLongitude": 14,
+                    "maxDataPoints": 1,
+                    "mouseWheelZoom": false,
+                    "showLegend": true,
+                    "stickyLabels": false,
+                    "tableQueryOptions": {
+                        "geohashField": "geohash",
+                        "latitudeField": "latitude",
+                        "longitudeField": "longitude",
+                        "metricField": "metric",
+                        "queryType": "geohash"
+                    },
+                    "targets": [
+                        {
+                            "expr": "sum by (iso_code) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json iso_code=\"geolocation.country.iso_code\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | iso_code!=\"\" [$__interval]))",
+                            "instant": false,
+                            "legendFormat": "{{iso_code}}",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": "0,10",
+                    "title": "traffic from countries",
+                    "type": "grafana-worldmap-panel",
+                    "unitPlural": "",
+                    "unitSingle": "",
+                    "unitSingular": "",
+                    "valueName": "total"
+                },
+                {
+                    "circleMaxSize": "30",
+                    "circleMinSize": 2,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "datasource": "Loki",
+                    "decimals": 0,
+                    "description": "",
+                    "esGeoPoint": "geohash",
+                    "esLocationName": "position",
+                    "esMetric": "Value #A",
+                    "gridPos": {
+                        "h": 9,
+                        "w": 12,
+                        "x": 12,
+                        "y": 17
+                    },
+                    "hideEmpty": false,
+                    "hideZero": false,
+                    "id": 4,
+                    "initialZoom": 1,
+                    "jsonUrl": "",
+                    "locationData": "geohash",
+                    "mapCenter": "Europe",
+                    "mapCenterLatitude": 46,
+                    "mapCenterLongitude": 14,
+                    "maxDataPoints": 1,
+                    "mouseWheelZoom": true,
+                    "showLegend": true,
+                    "stickyLabels": false,
+                    "tableQueryOptions": {
+                        "geohashField": "geolocation_location_geohash",
+                        "labelField": "",
+                        "latitudeField": "latitude",
+                        "longitudeField": "longitude",
+                        "metricField": "metric",
+                        "queryType": "geohash"
+                    },
+                    "targets": [
+                        {
+                            "expr": "sum by (geohash, position) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"}\n  | json geohash=\"geolocation.location.geohash\", \n         longitude=\"geolocation.location.longitude\", \n         latitude=\"geolocation.location.latitude\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | geohash!=\"\" \n  | label_format position=\"{{.latitude}}, {{.longitude}}\" [$__interval]))",
+                            "hide": false,
+                            "instant": true,
+                            "range": false,
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": "0,10",
+                    "title": "Traffic from geohash",
+                    "type": "grafana-worldmap-panel",
+                    "unitPlural": "",
+                    "unitSingle": "",
+                    "unitSingular": "",
+                    "valueName": "total"
+                }
+            ],
+            "title": "World Map",
+            "type": "row"
+        }
+    ],
+    "refresh": "5m",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "selected": true,
+                    "text": ".*",
+                    "value": ".*"
+                },
+                "description": null,
+                "error": null,
+                "hide": 0,
+                "label": null,
+                "name": "requesthost",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": ".*",
+                        "value": ".*"
+                    }
+                ],
+                "query": ".*",
+                "skipUrlSync": false,
+                "type": "textbox"
+            },
+            {
+                "allValue": null,
+                "current": {
+                    "selected": true,
+                    "text": "All",
+                    "value": "$__all"
+                },
+                "description": null,
+                "error": null,
+                "hide": 0,
+                "includeAll": true,
+                "label": "trafik",
+                "multi": false,
+                "name": "internalTrafik",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": "All",
+                        "value": "$__all"
+                    },
+                    {
+                        "selected": false,
+                        "text": "internal",
+                        "value": "true"
+                    },
+                    {
+                        "selected": false,
+                        "text": "external",
+                        "value": "false"
+                    }
+                ],
+                "query": "internal : true, external : false",
+                "queryValue": "",
+                "skipUrlSync": false,
+                "type": "custom"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Traefik",
+    "uid": "uuEDz5v7z2",
+    "version": 12
+}

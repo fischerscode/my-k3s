@@ -16,6 +16,12 @@ configMapGenerator:
   - name: traefik-config-static
     files:
       - config/traefik.yaml
+  - name: grafana-dashboard
+    options:
+      labels:
+        grafana-dashboard: "1"
+    files:
+      - traefik.json=dashboard.json
 
 configurations:
   - kustomizeconfig/namereference.yaml
