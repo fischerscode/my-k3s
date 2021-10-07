@@ -72,8 +72,8 @@ spec:
       - grafana-worldmap-panel
       - grafana-clock-panel
 
-    # serviceMonitor:
-    #   enabled: true
+    serviceMonitor:
+      enabled: true
 
     # persistence:
     #   enabled: false
