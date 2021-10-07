@@ -9,8 +9,6 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: traefik
-    - path: /
-      port: metrics
   jobLabel: traefik
   selector:
     matchLabels:
