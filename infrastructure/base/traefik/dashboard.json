@@ -22,8 +22,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 1,
-    "id": 31,
-    "iteration": 1633654118343,
+    "iteration": 1633718623894,
     "links": [],
     "panels": [
         {
@@ -133,7 +132,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "rate(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__rate_interval])",
+                    "expr": "rate(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__range])",
                     "hide": false,
                     "instant": true,
                     "interval": "",
@@ -632,7 +631,7 @@
             },
             "gridPos": {
                 "h": 7,
-                "w": 11,
+                "w": 12,
                 "x": 0,
                 "y": 13
             },
@@ -738,7 +737,7 @@
             "gridPos": {
                 "h": 7,
                 "w": 12,
-                "x": 11,
+                "x": 12,
                 "y": 13
             },
             "id": 31,
@@ -1182,5 +1181,5 @@
     "timezone": "",
     "title": "Traefik",
     "uid": "uuEDz5v7z2",
-    "version": 12
+    "version": 1
 }
