@@ -19,15 +19,15 @@
         ]
     },
     "description": "",
-    "editable": false,
+    "editable": true,
     "gnetId": null,
     "graphTooltip": 1,
     "id": 31,
-    "iteration": 1633612784263,
+    "iteration": 1633654118343,
     "links": [],
     "panels": [
         {
-            "datasource": "Loki",
+            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -41,7 +41,8 @@
                             "viz": false
                         }
                     },
-                    "mappings": []
+                    "mappings": [],
+                    "unit": "none"
                 },
                 "overrides": []
             },
@@ -51,8 +52,9 @@
                 "x": 0,
                 "y": 0
             },
-            "id": 12,
+            "id": 23,
             "options": {
+                "displayLabels": [],
                 "legend": {
                     "displayMode": "hidden",
                     "placement": "bottom"
@@ -71,9 +73,13 @@
             },
             "targets": [
                 {
-                    "expr": "sum by (requesthost) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__range]))",
+                    "exemplar": true,
+                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"} [$__range])) by (request_host) > 0",
+                    "format": "time_series",
                     "hide": false,
-                    "legendFormat": "{{requesthost}}",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{request_host}}",
                     "refId": "A"
                 }
             ],
@@ -81,7 +87,7 @@
             "type": "piechart"
         },
         {
-            "datasource": "Loki",
+            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -126,17 +132,20 @@
             },
             "targets": [
                 {
-                    "expr": "sum by (requesthost) (rate({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__range]))",
+                    "exemplar": true,
+                    "expr": "rate(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__rate_interval])",
                     "hide": false,
-                    "legendFormat": "{{requesthost}}",
-                    "refId": "A"
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "{{request_host}}",
+                    "refId": "B"
                 }
             ],
             "title": "Requests per second",
             "type": "piechart"
         },
         {
-            "datasource": "Loki",
+            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -212,9 +221,10 @@
             },
             "targets": [
                 {
-                    "expr": "sum by (requesthost) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"} \n  | json requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=~\"$internalTrafik\"\n  | requesthost=~\"$requesthost\" [$__interval]))",
-                    "hide": false,
-                    "legendFormat": "{{requesthost}}",
+                    "exemplar": true,
+                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"} [$__range])) by (request_host) > 0",
+                    "interval": "",
+                    "legendFormat": "{{request_host}}",
                     "refId": "A"
                 }
             ],
@@ -375,12 +385,394 @@
                     "refId": "A"
                 }
             ],
-            "title": "Certificate that expire soon.",
+            "title": "Certificates that expire soon.",
             "type": "stat"
         },
         {
-            "datasource": "Loki",
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "bars",
+                        "fillOpacity": 100,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 0,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": true,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "links": [],
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 12,
+                "x": 0,
+                "y": 7
+            },
+            "id": 27,
+            "links": [],
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "lastNotNull",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\",code=\"200\"}[5m])",
+                    "format": "time_series",
+                    "interval": "",
+                    "intervalFactor": 2,
+                    "legendFormat": "{{method}} : {{code}}",
+                    "refId": "A"
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Status code 200 over 5min",
+            "type": "timeseries"
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "bars",
+                        "fillOpacity": 100,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 0,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": true,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "links": [],
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 12,
+                "x": 12,
+                "y": 7
+            },
+            "id": 29,
+            "links": [],
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "lastNotNull",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "expr": "rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\",code!=\"200\"}[5m])",
+                    "format": "time_series",
+                    "intervalFactor": 2,
+                    "legendFormat": "{{ method }} : {{code}}",
+                    "refId": "A"
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Others status code over 5min",
+            "type": "timeseries"
+        },
+        {
+            "datasource": "Prometheus",
             "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": true,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "links": [],
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 11,
+                "x": 0,
+                "y": 13
+            },
+            "id": 33,
+            "links": [],
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "sum(rate(traefik_service_requests_total{}[5m])) by (service)",
+                    "format": "time_series",
+                    "interval": "",
+                    "intervalFactor": 2,
+                    "legendFormat": "Total requests {{service}}",
+                    "refId": "A"
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total requests over 5min",
+            "type": "timeseries"
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 4,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": true,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "links": [],
+                    "mappings": [],
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0.3
+                            },
+                            {
+                                "color": "orange",
+                                "value": 0.6
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "s"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 12,
+                "x": 11,
+                "y": 13
+            },
+            "id": 31,
+            "links": [],
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "right"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "exemplar": true,
+                    "expr": "sum(traefik_service_request_duration_seconds_sum{}) by (service) / sum(traefik_service_request_duration_seconds_count{}) by (service)",
+                    "format": "time_series",
+                    "interval": "",
+                    "intervalFactor": 1,
+                    "legendFormat": " {{service}}",
+                    "refId": "A",
+                    "step": 240
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Average response time by service",
+            "type": "timeseries"
+        },
+        {
+            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -391,16 +783,12 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(245, 54, 54, 0.9)",
+                                "color": "green",
                                 "value": null
                             },
                             {
-                                "color": "rgba(237, 129, 40, 0.89)",
-                                "value": 0
-                            },
-                            {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": 10
+                                "color": "red",
+                                "value": 80
                             }
                         ]
                     }
@@ -411,10 +799,9 @@
                 "h": 9,
                 "w": 12,
                 "x": 0,
-                "y": 7
+                "y": 20
             },
-            "id": 5,
-            "maxDataPoints": 1,
+            "id": 21,
             "options": {
                 "basemap": {
                     "config": {},
@@ -431,14 +818,14 @@
                     {
                         "config": {
                             "color": {
-                                "field": "Value #A",
+                                "field": "Value",
                                 "fixed": "dark-green"
                             },
                             "fillOpacity": 0.4,
                             "shape": "circle",
                             "showLegend": true,
                             "size": {
-                                "field": "Value #A",
+                                "field": "Value",
                                 "fixed": 5,
                                 "max": 15,
                                 "min": 2
@@ -461,20 +848,22 @@
             },
             "targets": [
                 {
-                    "expr": "sum by (geohash, position) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"}\n  | json geohash=\"geolocation.location.geohash\", \n         longitude=\"geolocation.location.longitude\", \n         latitude=\"geolocation.location.latitude\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | geohash!=\"\" \n  | label_format position=\"{{.latitude}}, {{.longitude}}\" [$__interval]))",
+                    "exemplar": true,
+                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\", request_host=~\"$requesthost\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\",request_host=~\"$requesthost\"} [$__range])) by (geohash, latitude, longitude) > 0",
+                    "format": "table",
+                    "hide": false,
                     "instant": true,
+                    "interval": "",
+                    "intervalFactor": 1,
                     "legendFormat": "",
-                    "range": false,
                     "refId": "A"
                 }
             ],
-            "title": "traffic from geohash",
-            "transformations": [],
+            "title": "Panel Title",
             "type": "geomap"
         },
         {
-            "datasource": "Loki",
-            "description": "",
+            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -485,16 +874,12 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(245, 54, 54, 0.9)",
+                                "color": "green",
                                 "value": null
                             },
                             {
-                                "color": "rgba(237, 129, 40, 0.89)",
-                                "value": 0
-                            },
-                            {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": 10
+                                "color": "red",
+                                "value": 80
                             }
                         ]
                     }
@@ -505,10 +890,9 @@
                 "h": 9,
                 "w": 12,
                 "x": 12,
-                "y": 7
+                "y": 20
             },
-            "id": 9,
-            "maxDataPoints": 1,
+            "id": 22,
             "options": {
                 "basemap": {
                     "config": {},
@@ -518,16 +902,16 @@
                     "mouseWheelZoom": true,
                     "showAttribution": false,
                     "showDebug": false,
-                    "showScale": true,
+                    "showScale": false,
                     "showZoom": false
                 },
                 "layers": [
                     {
                         "config": {
-                            "blur": 13,
-                            "radius": 5,
+                            "blur": 20,
+                            "radius": 10,
                             "weight": {
-                                "field": "Value #A",
+                                "field": "Value",
                                 "fixed": 1,
                                 "max": 1,
                                 "min": 0
@@ -550,15 +934,18 @@
             },
             "targets": [
                 {
-                    "expr": "sum by (geohash, position) (count_over_time({container=\"geologger\",namespace=\"traefik-system\",stream=\"stdout\"}\n  | json geohash=\"geolocation.location.geohash\", \n         longitude=\"geolocation.location.longitude\", \n         latitude=\"geolocation.location.latitude\", \n         requesthost=\"RequestHost\", \n         privateClientAddress=\"privateClientAddress\" \n  | privateClientAddress=\"false\" \n  | requesthost=~\"$requesthost\" \n  | geohash!=\"\" \n  | label_format position=\"{{.latitude}}, {{.longitude}}\" [$__interval]))",
+                    "exemplar": true,
+                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\", request_host=~\"$requesthost\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\",request_host=~\"$requesthost\"} [$__range])) by (geohash, latitude, longitude) > 0",
+                    "format": "table",
+                    "hide": false,
                     "instant": true,
+                    "interval": "",
+                    "intervalFactor": 1,
                     "legendFormat": "",
-                    "range": false,
                     "refId": "A"
                 }
             ],
-            "title": "traffic from geohash - Heatmap",
-            "transformations": [],
+            "title": "Panel Title",
             "type": "geomap"
         },
         {
@@ -568,7 +955,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 16
+                "y": 29
             },
             "id": 19,
             "panels": [
@@ -690,7 +1077,7 @@
             "type": "row"
         }
     ],
-    "refresh": "5m",
+    "refresh": "1m",
     "schemaVersion": 30,
     "style": "dark",
     "tags": [],
@@ -753,6 +1140,37 @@
                 "queryValue": "",
                 "skipUrlSync": false,
                 "type": "custom"
+            },
+            {
+                "allValue": null,
+                "current": {
+                    "selected": true,
+                    "text": [
+                        "All"
+                    ],
+                    "value": [
+                        "$__all"
+                    ]
+                },
+                "datasource": null,
+                "definition": "label_values(entrypoint)",
+                "description": null,
+                "error": null,
+                "hide": 0,
+                "includeAll": true,
+                "label": null,
+                "multi": true,
+                "name": "entrypoint",
+                "options": [],
+                "query": {
+                    "query": "label_values(entrypoint)",
+                    "refId": "StandardVariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
             }
         ]
     },
