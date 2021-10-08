@@ -22,7 +22,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 1,
-    "iteration": 1633718623894,
+    "iteration": 1633732035264,
     "links": [],
     "panels": [
         {
@@ -221,7 +221,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"} [$__range])) by (request_host) > 0",
+                    "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__rate_interval]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"} [$__rate_interval])) by (request_host) > 0",
                     "interval": "",
                     "legendFormat": "{{request_host}}",
                     "refId": "A"
