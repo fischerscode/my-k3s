@@ -2,6 +2,8 @@ resources:
   - namespace.yaml
   - prometheus-stack.yaml
   - grafana.yaml
+  - grafana-route.yaml
+  - grafana-dashboard-certificate.yaml
 
 bases:
   - loki

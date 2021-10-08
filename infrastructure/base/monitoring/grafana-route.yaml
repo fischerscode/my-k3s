@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: "Host(`grafana.${BASE_DOMAIN}`) || Host(`monitoring.${BASE_DOMAIN}`))"
+      services:
+        - name: grafana
+          port: 80
+  tls:
+    secretName: grafana-dashboard-certificate
