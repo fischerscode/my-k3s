@@ -124,11 +124,11 @@ spec:
       configReloaderCpu: 0
     prometheus:
       prometheusSpec:
-        replicas: 1
+        replicas: 2
         replicaExternalLabelName: "replica"
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        retention: 6h
+        retention: 2160h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
