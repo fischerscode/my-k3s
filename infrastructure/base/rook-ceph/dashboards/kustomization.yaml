@@ -11,3 +11,6 @@ configMapGenerator:
   - name: grafana-dashboard-ceph-pools
     files:
       - ceph-pools.json=https://grafana.com/api/dashboards/5342/revisions/5/download
+  - name: grafana-dashboard-storage
+    files:
+      - storage.json
