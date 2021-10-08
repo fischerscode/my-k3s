@@ -124,7 +124,7 @@ spec:
       configReloaderCpu: 0
     prometheus:
       prometheusSpec:
-        replicas: 2
+        replicas: 1
         replicaExternalLabelName: "replica"
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
