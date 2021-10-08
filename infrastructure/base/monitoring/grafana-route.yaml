@@ -8,7 +8,7 @@ spec:
     - https
   routes:
     - kind: Rule
-      match: "Host(`grafana.${BASE_DOMAIN}`) || Host(`monitoring.${BASE_DOMAIN}`))"
+      match: "Host(`grafana.${BASE_DOMAIN}`) || Host(`monitoring.${BASE_DOMAIN}`)"
       services:
         - name: grafana
           port: 80
