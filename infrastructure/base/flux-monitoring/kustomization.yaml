@@ -1,0 +1,11 @@
+namespace: flux-system
+resources:
+  - https://raw.githubusercontent.com/fluxcd/flux2/v0.17.2/manifests/monitoring/monitoring-config/podmonitor.yaml
+configMapGenerator:
+  - name: flux-grafana-dashboards
+    files:
+      - flux-control-plane.json=https://raw.githubusercontent.com/fluxcd/flux2/v0.17.2/manifests/monitoring/grafana/dashboards/control-plane.json
+      - flux-cluster.json=https://raw.githubusercontent.com/fluxcd/flux2/v0.17.2/manifests/monitoring/grafana/dashboards/cluster.json
+    options:
+      labels:
+        grafana-dashboard: "1"
