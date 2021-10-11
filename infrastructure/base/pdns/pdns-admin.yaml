@@ -16,9 +16,12 @@ spec:
           image: fischerscode/powerdns-admin:apikey-fix
           imagePullPolicy: Always
           resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
             limits:
-              memory: "150Mi"
-              cpu: "150m"
+              memory: "175Mi"
+              cpu: "200m"
           ports:
             - containerPort: 9494
               protocol: TCP
@@ -69,6 +72,9 @@ spec:
         - name: admin-frontend
           image: fischerscode/powerdns-admin-frontend:latest
           resources:
+            requests:
+              memory: "11Mi"
+              cpu: "5m"
             limits:
               memory: "16Mi"
               cpu: "20m"
