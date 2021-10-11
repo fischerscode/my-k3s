@@ -17,7 +17,7 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "128Mi"
+              memory: "150Mi"
               cpu: "150m"
           ports:
             - containerPort: 9494
@@ -70,8 +70,8 @@ spec:
           image: fischerscode/powerdns-admin-frontend:latest
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "100m"
+              memory: "16Mi"
+              cpu: "20m"
           ports:
             - containerPort: 80
               protocol: TCP
