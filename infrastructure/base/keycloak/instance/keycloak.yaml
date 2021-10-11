@@ -18,7 +18,7 @@ spec:
         cpu: "300m"
       limits:
         memory: "1Gi"
-        cpu: "200m"
+        cpu: "500m"
   postgresDeploymentSpec:
     resources:
       requests:
