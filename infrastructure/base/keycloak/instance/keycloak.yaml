@@ -11,6 +11,22 @@ spec:
   migration:
     backups:
       enabled: true
+  keycloakDeploymentSpec:
+    resources:
+      requests:
+        memory: "600Mi"
+        cpu: "75m"
+      limits:
+        memory: "1Gi"
+        cpu: "100m"
+  postgresDeploymentSpec:
+    resources:
+      requests:
+        memory: "600Mi"
+        cpu: "20m"
+      limits:
+        memory: "1Gi"
+        cpu: "100m"
   # multiAvailabilityZones:
   #   enabled: true
   # storageClassName: ""
