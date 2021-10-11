@@ -11,14 +11,14 @@ spec:
   migration:
     backups:
       enabled: true
-  keycloakDeploymentSpec:
-    resources:
-      requests:
-        memory: "600Mi"
-        cpu: "300m"
-      limits:
-        memory: "1Gi"
-        cpu: "500m"
+  # keycloakDeploymentSpec:
+  #   resources:
+  #     requests:
+  #       memory: "600Mi"
+  #       cpu: "300m"
+  #     limits:
+  #       memory: "1Gi"
+  #       cpu: "500m"
   postgresDeploymentSpec:
     resources:
       requests:
