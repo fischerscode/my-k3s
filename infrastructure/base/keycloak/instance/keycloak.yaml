@@ -5,7 +5,7 @@ metadata:
   labels:
     app: accounts
 spec:
-  instances: 2
+  instances: 1
   externalAccess:
     enabled: False
   migration:
@@ -16,9 +16,9 @@ spec:
       requests:
         memory: "600Mi"
         cpu: "300m"
-      # limits:
-      #   memory: "1Gi"
-      #   cpu: "800m"
+      limits:
+        memory: "800Mi"
+        cpu: "2"
   postgresDeploymentSpec:
     resources:
       requests:
