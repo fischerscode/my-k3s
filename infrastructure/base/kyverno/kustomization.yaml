@@ -1,0 +1,2 @@
+resources:
+  - github.com/ArchiveFork/flux2-multi-tenancy/infrastructure/kyverno?ref=c805ff03011c91793e101af4b2703a70e14d5d4d

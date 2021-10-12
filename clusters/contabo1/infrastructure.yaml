@@ -5,6 +5,10 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: crds
+    - name: kyverno
+    - name: kyverno-policies
   interval: 10m0s
   path: ./infrastructure/contabo1
   prune: true

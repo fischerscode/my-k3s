@@ -1,0 +1,36 @@
+- op: replace
+  path: /spec/rules/0/exclude/resources/namespaces
+  value:
+    - accounts
+    - cert-manager
+    - flux-system
+    - keycloak-operator
+    - kube-system
+    - monitoring
+    - powerdns
+    - rook-ceph
+    - traefik-system
+- op: replace
+  path: /spec/rules/1/exclude/resources/namespaces
+  value:
+    - accounts
+    - cert-manager
+    - flux-system
+    - keycloak-operator
+    - kube-system
+    - monitoring
+    - powerdns
+    - rook-ceph
+    - traefik-system
+- op: replace
+  path: /spec/rules/2/exclude/resources/namespaces
+  value:
+    - accounts
+    - cert-manager
+    - flux-system
+    - keycloak-operator
+    - kube-system
+    - monitoring
+    - powerdns
+    - rook-ceph
+    - traefik-system
