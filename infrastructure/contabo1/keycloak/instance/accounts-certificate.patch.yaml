@@ -1,0 +1,3 @@
+- op: add
+  path: /spec/dnsNames/1
+  value: ${SECRET_KEYCLOAK_DOMAIN}
