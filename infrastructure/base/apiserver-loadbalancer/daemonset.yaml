@@ -33,6 +33,13 @@ spec:
             - name: conf
               mountPath: /usr/local/etc/haproxy/haproxy.cfg
               readOnly: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 150Mi
+            limits:
+              cpu: 200m
+              memory: 300Mi
       volumes:
         - name: conf
           configMap:
