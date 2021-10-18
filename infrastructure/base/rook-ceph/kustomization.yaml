@@ -12,6 +12,8 @@ resources:
   - https://raw.githubusercontent.com/rook/rook/v1.7.0/cluster/examples/kubernetes/ceph/toolbox.yaml
   - service-monitors/csi-metrics.yaml
   - service-monitors/rook-ceph-mgr.yaml
+  - filesystem.yaml
+  - fs-storageclass.yaml
 
 patchesStrategicMerge:
   - storageclass-patch.yaml
