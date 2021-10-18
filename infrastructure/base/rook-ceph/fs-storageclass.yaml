@@ -8,6 +8,7 @@ metadata:
   name: rook-cephfs
 provisioner: rook-ceph.cephfs.csi.ceph.com
 parameters:
+  clusterID: rook-ceph
   fsName: filesystem
 
   # Ceph pool into which the volume shall be created
