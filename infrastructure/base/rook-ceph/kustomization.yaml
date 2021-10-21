@@ -14,6 +14,7 @@ resources:
   - service-monitors/rook-ceph-mgr.yaml
   - filesystem.yaml
   - fs-storageclass.yaml
+  - prometheus-rules.yaml
 
 patchesStrategicMerge:
   - storageclass-patch.yaml

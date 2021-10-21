@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rook-ceph.rules
+spec:
+  groups:
+    - name: rook-ceph.rules
+      rules:
+        - alert: PVC-UsageHigh
+          annotations:
+            summary: "A PVC has little space left."
+            description: "A PVC uses more then 70% of its capacity."
+          expr: |
+            max(kubelet_volume_stats_used_bytes) by (persistentvolumeclaim, exported_namespace) / max(kubelet_volume_stats_capacity_bytes) by (persistentvolumeclaim, exported_namespace) > 0.7
+          for: 0m
+          labels:
+            severity: critical
