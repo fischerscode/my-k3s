@@ -1,2 +1,15 @@
 bases:
   - ../../../base/keycloak/instance
+patches:
+  - path: accounts-route.patch.yaml
+    target:
+      group: traefik.containo.us
+      version: v1alpha1
+      kind: IngressRoute
+      name: accounts
+  - path: accounts-certificate.patch.yaml
+    target:
+      group: cert-manager.io
+      version: v1
+      kind: Certificate
+      name: accounts
