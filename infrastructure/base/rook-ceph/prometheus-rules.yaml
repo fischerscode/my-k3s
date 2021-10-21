@@ -9,10 +9,10 @@ spec:
       rules:
         - alert: PVC-UsageHigh
           annotations:
-            summary: "A PVC has little space left."
-            description: "A PVC uses more then 70% of its capacity."
+            summary: "PVC '{{ $labels.persistentvolumeclaim }}' has little space left."
+            description: "PVC '{{ $labels.persistentvolumeclaim }}' uses more then 80% of its capacity."
           expr: |
-            max(kubelet_volume_stats_used_bytes) by (persistentvolumeclaim, exported_namespace) / max(kubelet_volume_stats_capacity_bytes) by (persistentvolumeclaim, exported_namespace) > 0.7
+            max(kubelet_volume_stats_used_bytes{exported_namespace!=""}) by (persistentvolumeclaim, exported_namespace) / max(kubelet_volume_stats_capacity_bytes{exported_namespace!=""}) by (persistentvolumeclaim, exported_namespace) > 0.8
           for: 0m
           labels:
             severity: critical
