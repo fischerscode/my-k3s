@@ -7,9 +7,9 @@ patches:
       version: v1alpha1
       kind: IngressRoute
       name: accounts
-  - path: accounts-certificate.patch.yaml
-    target:
-      group: cert-manager.io
-      version: v1
-      kind: Certificate
-      name: accounts
+  # - path: accounts-certificate.patch.yaml
+  #   target:
+  #     group: cert-manager.io
+  #     version: v1
+  #     kind: Certificate
+  #     name: accounts
