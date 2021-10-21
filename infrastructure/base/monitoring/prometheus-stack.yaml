@@ -128,7 +128,7 @@ spec:
         replicaExternalLabelName: "replica"
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        retention: 2160h
+        retention: 300h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
