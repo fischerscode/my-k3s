@@ -1,0 +1,32 @@
+bases:
+  - ../../base/traefik
+  - ../../base/crds/traefik
+
+replicas:
+  - name: traefik
+    count: 1
+
+secretGenerator:
+  - name: traefik-dashboard-users
+    namespace: overridden
+    files:
+      - users=traefik-dashboard-users.txt
+
+replacements:
+  - source:
+      name: traefik-dashboard-auth
+      kind: Middleware
+      fieldPath: metadata.namespace
+    targets:
+      - select:
+          name: traefik-dashboard-users
+          kind: Secret
+          version: v1
+        fieldPaths:
+          - metadata.namespace
+
+patches:
+  - target:
+      kind: Deployment
+      name: traefik
+    path: deployment-patch.yaml

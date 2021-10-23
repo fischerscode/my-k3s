@@ -1,0 +1,7 @@
+bases:
+  - ../../base/cert-manager
+  - ../../base/crds/cert-manager
+
+resources:
+  - letsencrypt-prod.yaml
+  - letsencrypt-staging.yaml

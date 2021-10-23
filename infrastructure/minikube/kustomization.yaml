@@ -1,0 +1,7 @@
+bases:
+  - cert-manager
+  - keycloak
+  - traefik
+
+resources:
+  - sc.yaml

@@ -1,0 +1,7 @@
+---
+- op: replace
+  path: /spec/routes/0/match
+  value: "(Host(`accounts.${BASE_DOMAIN}`) || Host(`${SECRET_KEYCLOAK_DOMAIN}`)) && PathPrefix(`/auth/`)"
+- op: replace
+  path: /spec/routes/1/match
+  value: "Host(`accounts.${BASE_DOMAIN}`) || Host(`${SECRET_KEYCLOAK_DOMAIN}`)"
