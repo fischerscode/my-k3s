@@ -1,3 +1,4 @@
 resources:
   - prometheus-community.yaml
   - grafana.yaml
+  - k8s-at-home.yaml
