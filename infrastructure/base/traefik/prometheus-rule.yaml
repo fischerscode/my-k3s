@@ -15,7 +15,7 @@ spec:
             summary: "Traefik has disappeared from Prometheus service discovery."
             description: "Ingresses will be down until the Traefik reverse proxy is back up."
           expr: |
-            absent(up{job="traefik"})
+            absent(up{job="traefik-system/traefik"})
           for: 5m
           labels:
             severity: critical
