@@ -12,4 +12,4 @@ spec:
   endpoints:
     - port: csi-http-metrics
       path: /metrics
-      interval: 5s
+      interval: 60s
