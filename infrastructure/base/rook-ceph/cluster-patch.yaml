@@ -5,6 +5,8 @@ metadata:
   name: rook-ceph
   namespace: rook-ceph
 spec:
+  monitoring:
+    enabled: true
   storage:
     useAllNodes: false
     useAllDevices: false
