@@ -2,6 +2,7 @@ bases:
   - cert-manager
   - keycloak
   - traefik
+  - rook-ceph
 
 resources:
   - sc.yaml

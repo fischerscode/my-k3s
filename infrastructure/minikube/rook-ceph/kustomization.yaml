@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base/rook-ceph
+  - ../../base/crds/rook-ceph
+
+namePrefix: test-
+
+patchesStrategicMerge:
+  - storageclass-patch.yaml
