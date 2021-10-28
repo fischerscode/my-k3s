@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+spec:
+  values:
+    kubeControllerManager:
+      endpoints:
+        - "10.1.0.1"
+        - "10.1.0.2"
+        - "10.1.0.3"
+    kubeScheduler:
+      endpoints:
+        - "10.1.0.1"
+        - "10.1.0.2"
+        - "10.1.0.3"
+    kubeProxy:
+      endpoints:
+        - "10.1.0.1"
+        - "10.1.0.2"
+        - "10.1.0.3"
+    kubeEtcd:
+      endpoints:
+        - "10.1.0.1"
+        - "10.1.0.2"
+        - "10.1.0.3"

@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: ENC[AES256_GCM,data:Nzo3a6S6slLeE2So84V4l3jIvx2QjKF3SyZODZUkq+Sl6mJGlIISNrPFxNYAEKKz2RUoXCVBZR0yWggTWzIYkOoumH/WFA9BfU37S1M7mbuTPhRLgVjDx/n9o93kIqLBnL30h4+N/obVbhZCbDkVh5ylX9tbl05jLdBAu6ayo3bMlTi2ZLyC2GgcljeEp4DQayIBVzBRRotdUfaBlxE9hI2dlB3AFcGVW+IO54DeN9t58EJI59mcviFnkBpKEY3moylG7p3QGRPA7ZfsWwlzUBh8wE0JUw9UzYj+ngELfP0OHphWmu7z/zzn7JROi8UjXgjfRhJ+wl7BzEa5p0DNnXtbDuCsYsNm,iv:YJyQTZMGrLisJS2HlfX1p/o2FaT9ba/sc3tqF2ubzDI=,tag:c1MVZIdhHDFM/sGXEEQxcA==,type:str]
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: docker-cred
+type: kubernetes.io/dockerconfigjson
+sops:
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age: []
+  lastmodified: "2021-10-28T18:43:01Z"
+  mac: ENC[AES256_GCM,data:AiyE8Sn1+U+nQED345Vv+a6NzD2NJbgGP1FpX5M1NElOzUnY4Ar+TAGpjk7Vckd7CuEU3dGl0BUGCKsnUOObypZgkOAc2vB/L3zjemr5+qw2uz+OZhsTf2iwdsW6cM5l0jSOGG6j8edMNQYfPxIpYOApm6raGclbwhR+DlhoAYY=,iv:oEvP4GwIe102D+WPKl1n9ia2/D2ewa5Zw6WeoM4jTt4=,tag:QhatFJ4E+lwHiVPR1utrSA==,type:str]
+  pgp:
+    - created_at: "2021-10-28T18:43:00Z"
+      enc: |
+        -----BEGIN PGP MESSAGE-----
+
+        hQIMA3gUiB/FqGgjAQ/+LbsqLWYZXiLtqV5M56ukkAvvZ8hNqn4wFQ6mt7XDoc7L
+        h4H4gjwWD7rpoex4fwpEKUL3yQQqJx/JscVQ7YBVYh+WcAYcuFqHmgMxwMeG7p7i
+        jLPXG1xZTF7URjjHBpH/mKBduPaAqXmIwAQtaSbgkM05SEAYdAQ8imFcQu3zma+2
+        +mS9CR4SOOWqRp3pXGnSKGUhAmaurt8vFd/vna13tnZ3rWtNOmO59GIkQ+ePYX/0
+        0gdVnobReox5m91Fu9FNYuczM+tAaIQfirLTgzLOdxa9mP6S1FJG+vjQ9fS7Upnw
+        z4alqF3FpEbP96btEWAljGgKFITqlgw+IMzIUVxl48HJ4GgpyvmP8L4EWMRHEarZ
+        mgMWJKjtushPBazkUkjJkhKnCBC5ho1QJSR6WEr/3pk45vMhkRD0YfRXc7E2Tcty
+        bjgx+RR3uxjYRnXChUPscw9SsQkDRxj945GuXrsCIadPEs792des/0BoEWyTyG6j
+        pT4cMkVHWRxs8sbtmZsSzK9Jnz6O8bBeLfEOhFMV5kGcO3E677kbqmFtuImmQpFb
+        SvzXu1GtUZ3zvBAXMGTflDBx6hhFqfPwFUfpM7+b6/+oFsMDYIPzZLu6K7GhvETT
+        7G8rhzgI7CYA5THz4hYpaj0tvWlbFQ02667OYOCjnv/TVBfNxqsh18UUskqKwUXU
+        aAEJAhAHVOw6O426td/DTOrWYWE/FIHsUxZuXowT78fzGR0JApsjFAwm6/zUe7QJ
+        8oRMEBKewgGeTUIOnRF1bTI2JgJCE2bqEgGLGbuA91M20nX7eGk0+V9T/eY/LGAT
+        XdjLYnt9o8rJ
+        =4Qk5
+        -----END PGP MESSAGE-----
+      fp: 34461D8808A76061B6DF01FCE4BDAAFB057F6DEA
+  encrypted_regex: ^(data|stringData)$
+  version: 3.7.1
