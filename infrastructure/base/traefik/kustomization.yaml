@@ -9,6 +9,9 @@ resources:
   - dashboard-route.yaml
   - pod-monitor.yaml
   - prometheus-rule.yaml
+  - geologger-automation.yaml
+  - geologger-policy.yaml
+  - geologger-registry.yaml
 
 namespace: traefik-system
 

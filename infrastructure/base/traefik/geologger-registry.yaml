@@ -1,0 +1,10 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: traefik-geologger-city
+spec:
+  image: fischerscode/traefik-geologger-city
+  interval: 30m0s
+  secretRef:
+    name: docker-cred
