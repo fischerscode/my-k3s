@@ -21,7 +21,3 @@ docker run --rm -ti python /bin/bash -c "pip3 -q install bcrypt 2> /dev/null && 
 echo "Monitoring:"
 echo -n "Slack webhook for monitoring: "; read webHook; printf $webHook > infrastructure/$CLUSTER/monitoring/slack-webhook.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/monitoring/slack-webhook.encrypted
 tools/generate_password.sh 128 > infrastructure/$CLUSTER/monitoring/grafana-admin-password.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/monitoring/grafana-admin-password.encrypted
-
-echo "Traefik:"
-echo -n "Traefik pilot token: "; read token; printf $token > infrastructure/$CLUSTER/traefik/pilot-token.encrypted; sops --encrypt --in-place infrastructure/$CLUSTER/traefik/pilot-token.encrypted
-echo "Traefik dashboard admin password:"; htpasswd -nB admin > infrastructure/$CLUSTER/traefik/traefik-dashboard-users.txt
