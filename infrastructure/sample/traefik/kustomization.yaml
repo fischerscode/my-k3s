@@ -1,5 +1,7 @@
 bases:
   - ../../base/traefik
+resources:
+  - docker-cred.sops.yaml
 
 replicas:
   - name: traefik

@@ -1,6 +1,7 @@
 bases:
   - ../../base/traefik
-  - ../docker-cred
+resources:
+  - docker-cred.sops.yaml
 
 namespace: traefik-system
 
