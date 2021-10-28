@@ -7,6 +7,10 @@ dependencies:
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - traefik
   - name: metallb
     type: github
     currentVersion: v0.10.2
@@ -16,6 +20,10 @@ dependencies:
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [release-notes](https://metallb.universe.tf/release-notes)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - metallb
   - name: PowerDNS auth
     type: github
     currentVersion: auth-4.5.1
@@ -25,6 +33,10 @@ dependencies:
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://doc.powerdns.com/authoritative/changelog/)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - powerdns
   # - name: PowerDNS Admin
   - name: Rook
     type: github
@@ -34,6 +46,10 @@ dependencies:
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://github.com/rook/rook/releases)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - rook
   - name: CertManager
     type: github
     currentVersion: v1.5.3
@@ -42,6 +58,10 @@ dependencies:
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://github.com/jetstack/cert-manager/releases)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - certmanager
   - name: keycloak-operator
     type: github
     currentVersion: "15.0.1"
@@ -50,6 +70,10 @@ dependencies:
       Update $name from $currentVersion to $latestVersion.
       [Tags](https://github.com/keycloak/keycloak-operator/tags)
       [Keycloak Release Notes](https://www.keycloak.org/docs/latest/release_notes/)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - keycloak
   - name: k3s
     type: github
     currentVersion: "v1.21.4+k3s1"
@@ -59,6 +83,10 @@ dependencies:
       Update $name from $currentVersion to $latestVersion.
       [k3s releases](https://github.com/k3s-io/k3s/releases)
       [Kubernetes Changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - k3s
   - name: prometheus-stack
     type: helm
     currentVersion: "19.0.1"
@@ -69,6 +97,10 @@ dependencies:
       **Make sure to also update the prometheus-operator CRDs!**
       [Readme.md](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md)
       [Upgrading to new major version](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md#upgrading-an-existing-release-to-a-new-major-version)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - monitoring
   - name: prometheus-operator CRDs
     type: helm
     currentVersion: 0.50.0
@@ -81,6 +113,10 @@ dependencies:
       **Make sure to also update the prometheus-stack!**
       [CHANGELOG.md](https://github.com/prometheus-operator/prometheus-operator/blob/v$latestVersion/CHANGELOG.md)
       [RELEASE](https://github.com/prometheus-operator/prometheus-operator/releases/tag/v$latestVersion)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - monitoring
   - name: grafana
     type: helm
     currentVersion: "6.16.10"
@@ -91,3 +127,7 @@ dependencies:
 
       [Readme.md](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md)
       [Upgrading to new major version](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md#upgrading-an-existing-release-to-a-new-major-version)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - monitoring
