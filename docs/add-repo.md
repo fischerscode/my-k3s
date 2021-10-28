@@ -2,4 +2,4 @@
 2. get public key `yq eval '.stringData."identity.pub"' [filename.yaml]`
 3. `sops --encrypt --in-place [filename.yaml]`
 4. add deploy key to repo
-5. 
+5. `flux create tenant [name] --with-namespace=[namespace] --export > rbac.yaml`
