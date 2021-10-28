@@ -52,7 +52,7 @@ dependencies:
       - rook
   - name: CertManager
     type: github
-    currentVersion: v1.5.3
+    currentVersion: v1.6.0
     prefix: v
     repo: "jetstack/cert-manager"
     issueBody: |
