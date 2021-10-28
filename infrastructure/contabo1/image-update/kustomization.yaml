@@ -1,0 +1,7 @@
+bases:
+  - ../../base/image-update
+
+resources:
+  - fischerscode-docker-cred.yaml
+
+namespace: flux-system

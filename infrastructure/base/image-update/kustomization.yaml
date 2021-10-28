@@ -1,0 +1,6 @@
+namespace: flux-system
+
+resources:
+  - geologger-automation.yaml
+  - geologger-policy.yaml
+  - geologger-registry.yaml

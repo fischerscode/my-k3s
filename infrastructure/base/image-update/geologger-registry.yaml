@@ -7,4 +7,4 @@ spec:
   image: fischerscode/traefik-geologger-city
   interval: 30m0s
   secretRef:
-    name: docker-cred
+    name: fischerscode-docker-cred
