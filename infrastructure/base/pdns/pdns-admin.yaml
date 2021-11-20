@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: admin
-          image: fischerscode/powerdns-admin:apikey-fix
+          image: fischerscode/powerdns-admin:v0.2.4
           imagePullPolicy: Always
           resources:
             requests:
@@ -70,7 +70,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
         - name: admin-frontend
-          image: fischerscode/powerdns-admin-frontend:latest
+          image: fischerscode/powerdns-admin-frontend:v0.2.4
           resources:
             requests:
               memory: "11Mi"

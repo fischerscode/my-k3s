@@ -26,13 +26,26 @@ dependencies:
       - metallb
   - name: PowerDNS auth
     type: github
-    currentVersion: auth-4.5.1
+    currentVersion: auth-4.5.2
     prefix: auth-
-    repo: "PowerDNS/pdns"
+    repo: "fischerscode/docker-PowerDNS"
     isTag: true
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://doc.powerdns.com/authoritative/changelog/)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - powerdns
+  - name: PowerDNS-Admin
+    type: github
+    currentVersion: admin-0.2.4
+    prefix: admin-
+    repo: "fischerscode/docker-PowerDNS"
+    isTag: true
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [CHANGELOG](https://github.com/ngoduykhanh/PowerDNS-Admin/releases)
     issueLabels:
       - dependencies
       - uptodate

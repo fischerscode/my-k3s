@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: fischerscode/powerdns-auth:4.5.1
+          image: fischerscode/powerdns-auth:4.5.2
           resources:
             limits:
               memory: "128Mi"
