@@ -1,2 +1,2 @@
 resources:
-  - https://raw.githubusercontent.com/fischerscode/cert-manager-deploy-files/master/v1.6.0/cert-manager.crds.yaml
+  - https://raw.githubusercontent.com/fischerscode/cert-manager-deploy-files/master/v1.6.1/cert-manager.crds.yaml
