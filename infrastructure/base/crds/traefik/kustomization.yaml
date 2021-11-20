@@ -9,14 +9,13 @@ resources:
   - https://raw.githubusercontent.com/traefik/traefik/v2.5.4/docs/content/reference/dynamic-configuration/traefik.containo.us_tlsstores.yaml
   - https://raw.githubusercontent.com/traefik/traefik/v2.5.4/docs/content/reference/dynamic-configuration/traefik.containo.us_traefikservices.yaml
   - https://raw.githubusercontent.com/traefik/traefik/v2.5.4/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
-patchesStrategicMerge:
-  - clusterrole.patch.yaml
 
 patches:
   - patch: |-
       - op: replace
-        path: "/apiVersion"
-        value: rbac.authorization.k8s.io/v1
+        path: "/subjects/0/namespace"
+        value: traefik-system
     target:
-      group: rbac.authorization.k8s.io
-      version: v1beta1
+      kind: ClusterRoleBinding
+      version: v1
+      name: traefik-ingress-controller
