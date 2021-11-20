@@ -119,7 +119,7 @@ dependencies:
       - monitoring
   - name: grafana
     type: helm
-    currentVersion: "6.17.4"
+    currentVersion: "6.17.6"
     repo: https://grafana.github.io/helm-charts
     chart: grafana
     issueBody: |
