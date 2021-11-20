@@ -40,7 +40,7 @@ dependencies:
   # - name: PowerDNS Admin
   - name: Rook
     type: github
-    currentVersion: v1.7.6
+    currentVersion: v1.7.8
     prefix: v
     repo: "rook/rook"
     issueBody: |
