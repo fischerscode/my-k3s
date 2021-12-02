@@ -9,7 +9,7 @@ spec:
     spec:
       # registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 20.0.1
+      version: 21.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -120,8 +120,8 @@ spec:
         port: 2381
         targetPort: 2381
     # Setting this option to 0 disabled CPU limits
-    prometheusOperator:
-      configReloaderCpu: 0
+    # prometheusOperator:
+    #   configReloaderCpu: 0
     prometheus:
       prometheusSpec:
         scrapeInterval: 60s
