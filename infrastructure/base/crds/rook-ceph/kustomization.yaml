@@ -1,2 +1,2 @@
 resources:
-  - https://raw.githubusercontent.com/rook/rook/v1.7.8/cluster/examples/kubernetes/ceph/crds.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.7.9/cluster/examples/kubernetes/ceph/crds.yaml
