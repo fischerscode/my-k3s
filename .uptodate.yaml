@@ -102,12 +102,12 @@ dependencies:
       - k3s
   - name: prometheus-stack
     type: helm
-    currentVersion: "21.0.2"
+    currentVersion: "21.0.3"
     repo: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
-      **Make sure to also update the prometheus-operator CRDs!**
+      **Make sure to also update the prometheus-operator CRDs!** (if needed)
       [Readme.md](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md)
       [Upgrading to new major version](https://github.com/prometheus-community/helm-charts/blob/kube-prometheus-stack-$latestVersion/charts/kube-prometheus-stack/README.md#upgrading-an-existing-release-to-a-new-major-version)
     issueLabels:
