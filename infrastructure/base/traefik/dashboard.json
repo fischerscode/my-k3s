@@ -20,13 +20,13 @@
     },
     "description": "",
     "editable": true,
-    "gnetId": null,
+    "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "iteration": 1633732035264,
+    "iteration": 1638721162448,
     "links": [],
+    "liveNow": false,
     "panels": [
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -86,7 +86,6 @@
             "type": "piechart"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -144,7 +143,6 @@
             "type": "piechart"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -203,8 +201,6 @@
                 "y": 0
             },
             "id": 11,
-            "interval": null,
-            "maxDataPoints": null,
             "options": {
                 "legend": {
                     "calcs": [
@@ -227,13 +223,10 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Requests",
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -323,7 +316,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -372,7 +364,7 @@
                 },
                 "textMode": "value_and_name"
             },
-            "pluginVersion": "8.1.5",
+            "pluginVersion": "8.3.0",
             "targets": [
                 {
                     "exemplar": true,
@@ -388,7 +380,10 @@
             "type": "stat"
         },
         {
-            "datasource": "Prometheus",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -475,13 +470,14 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Status code 200 over 5min",
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -566,13 +562,14 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Others status code over 5min",
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -663,13 +660,14 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Total requests over 5min",
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -765,13 +763,10 @@
                     "step": 240
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Average response time by service",
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -795,15 +790,16 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 9,
+                "h": 8,
                 "w": 12,
                 "x": 0,
                 "y": 20
             },
-            "id": 21,
+            "id": 35,
             "options": {
                 "basemap": {
                     "config": {},
+                    "name": "Layer 0",
                     "type": "default"
                 },
                 "controls": {
@@ -811,29 +807,53 @@
                     "showAttribution": false,
                     "showDebug": false,
                     "showScale": false,
-                    "showZoom": false
+                    "showZoom": true
                 },
                 "layers": [
                     {
                         "config": {
-                            "color": {
-                                "field": "Value",
-                                "fixed": "dark-green"
-                            },
-                            "fillOpacity": 0.4,
-                            "shape": "circle",
                             "showLegend": true,
-                            "size": {
-                                "field": "Value",
-                                "fixed": 5,
-                                "max": 15,
-                                "min": 2
+                            "style": {
+                                "color": {
+                                    "field": "Value #A",
+                                    "fixed": "dark-green"
+                                },
+                                "opacity": 0.4,
+                                "rotation": {
+                                    "fixed": 0,
+                                    "max": 360,
+                                    "min": -360,
+                                    "mode": "mod"
+                                },
+                                "size": {
+                                    "field": "Value #A",
+                                    "fixed": 5,
+                                    "max": 15,
+                                    "min": 2
+                                },
+                                "symbol": {
+                                    "fixed": "img/icons/marker/circle.svg",
+                                    "mode": "fixed"
+                                },
+                                "text": {
+                                    "field": "Value #A",
+                                    "fixed": "",
+                                    "mode": "field"
+                                },
+                                "textConfig": {
+                                    "fontSize": 10,
+                                    "offsetX": 0,
+                                    "offsetY": 0,
+                                    "textAlign": "center",
+                                    "textBaseline": "middle"
+                                }
                             }
                         },
                         "location": {
                             "geohash": "geohash",
                             "mode": "geohash"
                         },
+                        "name": "Layer 1",
                         "type": "markers"
                     }
                 ],
@@ -845,15 +865,18 @@
                     "zoom": 2
                 }
             },
+            "pluginVersion": "8.3.0",
             "targets": [
                 {
-                    "exemplar": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "exemplar": false,
                     "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\", request_host=~\"$requesthost\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\",request_host=~\"$requesthost\"} [$__range])) by (geohash, latitude, longitude) > 0",
                     "format": "table",
-                    "hide": false,
                     "instant": true,
                     "interval": "",
-                    "intervalFactor": 1,
                     "legendFormat": "",
                     "refId": "A"
                 }
@@ -862,7 +885,6 @@
             "type": "geomap"
         },
         {
-            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -886,15 +908,16 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 9,
+                "h": 8,
                 "w": 12,
                 "x": 12,
                 "y": 20
             },
-            "id": 22,
+            "id": 36,
             "options": {
                 "basemap": {
                     "config": {},
+                    "name": "Layer 0",
                     "type": "default"
                 },
                 "controls": {
@@ -902,7 +925,7 @@
                     "showAttribution": false,
                     "showDebug": false,
                     "showScale": false,
-                    "showZoom": false
+                    "showZoom": true
                 },
                 "layers": [
                     {
@@ -910,7 +933,7 @@
                             "blur": 20,
                             "radius": 10,
                             "weight": {
-                                "field": "Value",
+                                "field": "Value #A",
                                 "fixed": 1,
                                 "max": 1,
                                 "min": 0
@@ -920,6 +943,7 @@
                             "geohash": "geohash",
                             "mode": "geohash"
                         },
+                        "name": "Layer 2",
                         "type": "heatmap"
                     }
                 ],
@@ -931,15 +955,18 @@
                     "zoom": 2
                 }
             },
+            "pluginVersion": "8.3.0",
             "targets": [
                 {
-                    "exemplar": true,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "exemplar": false,
                     "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\", request_host=~\"$requesthost\"}[$__range]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",private_client_address=\"false\",geohash!=\"\",request_host=~\"$requesthost\"} [$__range])) by (geohash, latitude, longitude) > 0",
                     "format": "table",
-                    "hide": false,
                     "instant": true,
                     "interval": "",
-                    "intervalFactor": 1,
                     "legendFormat": "",
                     "refId": "A"
                 }
@@ -949,12 +976,11 @@
         },
         {
             "collapsed": true,
-            "datasource": null,
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 29
+                "y": 28
             },
             "id": 19,
             "panels": [
@@ -966,7 +992,10 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(50, 172, 45, 0.97)"
                     ],
-                    "datasource": "Loki",
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
                     "decimals": 0,
                     "description": "",
                     "esLocationName": "",
@@ -1021,7 +1050,10 @@
                         "rgba(237, 129, 40, 0.89)",
                         "rgba(50, 172, 45, 0.97)"
                     ],
-                    "datasource": "Loki",
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
                     "decimals": 0,
                     "description": "",
                     "esGeoPoint": "geohash",
@@ -1077,7 +1109,7 @@
         }
     ],
     "refresh": "1m",
-    "schemaVersion": 30,
+    "schemaVersion": 33,
     "style": "dark",
     "tags": [],
     "templating": {
@@ -1088,10 +1120,7 @@
                     "text": ".*",
                     "value": ".*"
                 },
-                "description": null,
-                "error": null,
                 "hide": 0,
-                "label": null,
                 "name": "requesthost",
                 "options": [
                     {
@@ -1105,14 +1134,11 @@
                 "type": "textbox"
             },
             {
-                "allValue": null,
                 "current": {
                     "selected": true,
                     "text": "All",
                     "value": "$__all"
                 },
-                "description": null,
-                "error": null,
                 "hide": 0,
                 "includeAll": true,
                 "label": "trafik",
@@ -1141,7 +1167,6 @@
                 "type": "custom"
             },
             {
-                "allValue": null,
                 "current": {
                     "selected": true,
                     "text": [
@@ -1151,13 +1176,9 @@
                         "$__all"
                     ]
                 },
-                "datasource": null,
                 "definition": "label_values(entrypoint)",
-                "description": null,
-                "error": null,
                 "hide": 0,
                 "includeAll": true,
-                "label": null,
                 "multi": true,
                 "name": "entrypoint",
                 "options": [],
@@ -1181,5 +1202,6 @@
     "timezone": "",
     "title": "Traefik",
     "uid": "uuEDz5v7z2",
-    "version": 1
+    "version": 1,
+    "weekStart": ""
 }
