@@ -85,6 +85,8 @@ spec:
               value: "8081"
             - name: TRAEFIK_PROCESS_NAME
               value: "traefik"
+            - name: LOG_ACCESS
+              value: "false"
           volumeMounts:
             - mountPath: /var/log
               name: logs
