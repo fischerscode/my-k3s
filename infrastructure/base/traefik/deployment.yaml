@@ -83,6 +83,8 @@ spec:
               value: "true"
             - name: METRICS_PORT
               value: "8081"
+            - name: TRAEFIK_PROCESS_NAME
+              value: "traefik"
           volumeMounts:
             - mountPath: /var/log
               name: logs
