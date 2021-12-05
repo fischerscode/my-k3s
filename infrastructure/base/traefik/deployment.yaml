@@ -18,6 +18,7 @@ spec:
       labels:
         app: traefik
     spec:
+      shareProcessNamespace: true
       serviceAccountName: traefik-ingress-controller
       topologySpreadConstraints:
         - maxSkew: 1
@@ -88,6 +89,10 @@ spec:
           ports:
             - name: metrics
               containerPort: 8081
+          securityContext:
+            capabilities:
+              add:
+                - SYS_PTRACE
       imagePullSecrets:
         - name: docker-cred
       volumes:
