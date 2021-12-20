@@ -134,11 +134,11 @@ dependencies:
       - prometeus
   - name: grafana
     type: helm
-    currentVersion: "6.19.0"
+    currentVersion: "6.20.3"
     repo: https://grafana.github.io/helm-charts
     chart: grafana
     issueBody: |
-      Update $name from $currentVersion to $latestVersion.
+      Update used $name chart version from $currentVersion to $latestVersion.
 
       [Readme.md](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md)
       [Upgrading to new major version](https://github.com/grafana/helm-charts/blob/grafana-$latestVersion/charts/grafana/README.md#upgrading-an-existing-release-to-a-new-major-version)
