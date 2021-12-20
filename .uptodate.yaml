@@ -53,12 +53,13 @@ dependencies:
   # - name: PowerDNS Admin
   - name: Rook
     type: github
-    currentVersion: v1.8.0
+    currentVersion: v1.8.1
     prefix: v
     repo: "rook/rook"
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
       [CHANGELOG](https://github.com/rook/rook/releases)
+      [Compare](https://github.com/rook/rook/compare/$currentVersion...$latestVersion)
     issueLabels:
       - dependencies
       - uptodate

@@ -1,2 +1,2 @@
 resources:
-  - https://raw.githubusercontent.com/rook/rook/v1.8.0/deploy/examples/crds.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.1/deploy/examples/crds.yaml
