@@ -114,6 +114,7 @@ dependencies:
       - dependencies
       - uptodate
       - monitoring
+      - prometeus
   - name: prometheus-operator CRDs
     type: helm
     currentVersion: 0.52.0
@@ -130,6 +131,7 @@ dependencies:
       - dependencies
       - uptodate
       - monitoring
+      - prometeus
   - name: grafana
     type: helm
     currentVersion: "6.19.0"
@@ -144,3 +146,4 @@ dependencies:
       - dependencies
       - uptodate
       - monitoring
+      - grafana
