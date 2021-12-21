@@ -1,5 +1,5 @@
 resources:
-  - github.com/ArchiveFork/flux2-multi-tenancy/infrastructure/kyverno-policies?ref=c805ff03011c91793e101af4b2703a70e14d5d4d
+  - github.com/ArchiveFork/flux2-multi-tenancy/infrastructure/kyverno-policies?ref=b616f8b51aeb598da99cc05933085cf2b76999b0
 patches:
   - path: excludes.patch.yaml
     target:
