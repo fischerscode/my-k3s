@@ -57,7 +57,7 @@ replacements:
           kind: IngressRoute
           name: api
         fieldPaths:
-          - spec.routes.0.services.[port=53].name
+          - spec.routes.0.services.[port=8081].name
   - source:
       kind: Service
       name: dns
