@@ -100,6 +100,18 @@ replacements:
         fieldPaths:
           - spec.tls.secretName
   - source:
+      kind: Certificate
+      group: cert-manager.io
+      name: api
+      fieldPath: spec.secretName
+    targets:
+      - select:
+          kind: IngressRoute
+          group: traefik.containo.us
+          name: api
+        fieldPaths:
+          - spec.tls.secretName
+  - source:
       kind: Service
       name: admin
     targets:
