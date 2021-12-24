@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api
+spec:
+  commonName: pdns-api.${BASE_DOMAIN}
+  secretName: api-certificate
+  dnsNames:
+    - pdns-api.${BASE_DOMAIN}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

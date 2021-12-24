@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: api
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: "Host(`pdns-api.${BASE_DOMAIN}`)"
+      services:
+        - name: service
+          port: 8081
+  tls:
+    secretName: api-certificate

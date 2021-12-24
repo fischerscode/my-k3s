@@ -9,6 +9,8 @@ resources:
   - dns-ingressroute-udp.yaml
   - dashboard-route.yaml
   - dashboard-certificate.yaml
+  - api-certificate.yaml
+  - api-route.yaml
 
 namePrefix: powerdns-
 
@@ -51,6 +53,11 @@ replacements:
           name: admin
         fieldPaths:
           - spec.template.spec.containers.[name=admin].env.[name=PDNS_ENV_PDNS_webserver_host].value
+      - select:
+          kind: IngressRoute
+          name: api
+        fieldPaths:
+          - spec.routes.0.services.[port=53].name
   - source:
       kind: Service
       name: dns
