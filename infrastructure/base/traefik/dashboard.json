@@ -22,7 +22,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "iteration": 1638875344573,
+    "iteration": 1641054094638,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -455,7 +455,7 @@
                 },
                 "textMode": "value_and_name"
             },
-            "pluginVersion": "8.3.0",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "exemplar": true,
@@ -719,7 +719,7 @@
             },
             "gridPos": {
                 "h": 7,
-                "w": 12,
+                "w": 8,
                 "x": 0,
                 "y": 13
             },
@@ -755,10 +755,7 @@
             "type": "timeseries"
         },
         {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-            },
+            "description": "",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -825,8 +822,8 @@
             },
             "gridPos": {
                 "h": 7,
-                "w": 12,
-                "x": 12,
+                "w": 8,
+                "x": 8,
                 "y": 13
             },
             "id": 31,
@@ -844,8 +841,12 @@
             "pluginVersion": "8.1.5",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
                     "exemplar": true,
-                    "expr": "sum(traefik_service_request_duration_seconds_sum{}) by (service) / sum(traefik_service_request_duration_seconds_count{}) by (service)",
+                    "expr": "sum(traefik_service_request_duration_seconds_sum{protocol!=\"websocket\"}) by (service) / sum(traefik_service_request_duration_seconds_count{protocol!=\"websocket\"}) by (service)",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -855,6 +856,110 @@
                 }
             ],
             "title": "Average response time by service",
+            "type": "timeseries"
+        },
+        {
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 4,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": true,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "links": [],
+                    "mappings": [],
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 0.3
+                            },
+                            {
+                                "color": "orange",
+                                "value": 0.6
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "s"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 8,
+                "x": 16,
+                "y": 13
+            },
+            "id": 37,
+            "links": [],
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "right"
+                },
+                "tooltip": {
+                    "mode": "single"
+                }
+            },
+            "pluginVersion": "8.1.5",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "exemplar": true,
+                    "expr": "sum(traefik_service_request_duration_seconds_sum{protocol=\"websocket\"}) by (service) / sum(traefik_service_request_duration_seconds_count{protocol=\"websocket\"}) by (service)",
+                    "format": "time_series",
+                    "interval": "",
+                    "intervalFactor": 1,
+                    "legendFormat": " {{service}}",
+                    "refId": "A",
+                    "step": 240
+                }
+            ],
+            "title": "Average websocket lifetime by service",
             "type": "timeseries"
         },
         {
@@ -956,7 +1061,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.0",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "datasource": {
@@ -1046,7 +1151,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.0",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "datasource": {
@@ -1200,7 +1305,7 @@
         }
     ],
     "refresh": "1m",
-    "schemaVersion": 33,
+    "schemaVersion": 34,
     "style": "dark",
     "tags": [],
     "templating": {
