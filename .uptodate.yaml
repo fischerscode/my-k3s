@@ -103,7 +103,7 @@ dependencies:
       - k3s
   - name: prometheus-stack
     type: helm
-    currentVersion: "25.0.0"
+    currentVersion: "27.1.0"
     repo: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     issueBody: |
