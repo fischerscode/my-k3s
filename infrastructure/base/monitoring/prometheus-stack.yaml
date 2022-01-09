@@ -137,7 +137,7 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         ruleSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 720h
+        retention: 672h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
