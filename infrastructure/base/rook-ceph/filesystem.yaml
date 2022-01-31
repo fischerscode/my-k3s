@@ -1,4 +1,4 @@
-# See https://raw.githubusercontent.com/rook/rook/v1.8.2/deploy/examples/filesystem.yaml
+# See https://raw.githubusercontent.com/rook/rook/v1.8.3/deploy/examples/filesystem.yaml
 # and https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md
 # for further information
 
