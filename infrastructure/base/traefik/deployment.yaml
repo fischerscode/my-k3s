@@ -30,7 +30,7 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       containers:
-        - image: traefik:2.5.6
+        - image: traefik:2.6.0
           imagePullPolicy: IfNotPresent
           name: traefik
           readinessProbe:
