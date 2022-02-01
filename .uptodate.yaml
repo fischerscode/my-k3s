@@ -26,7 +26,7 @@ dependencies:
       - metallb
   - name: PowerDNS auth
     type: github
-    currentVersion: auth-4.5.2
+    currentVersion: auth-4.6.0
     prefix: auth-
     repo: "fischerscode/docker-PowerDNS"
     isTag: true
