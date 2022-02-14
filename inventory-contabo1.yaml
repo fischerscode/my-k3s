@@ -109,8 +109,8 @@ all:
           storageDisk: sda4
         knode4:
           storageDisk: sda4
-        knode5:
-          storageDisk: sda4
+        # knode5:
+        #   storageDisk: sda4
     vpn:
       children:
         k8s-cluster:

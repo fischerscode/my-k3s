@@ -18,6 +18,3 @@ spec:
       - name: knode4
         devices:
           - name: "sda4"
-      - name: knode5
-        devices:
-          - name: "sda4"
