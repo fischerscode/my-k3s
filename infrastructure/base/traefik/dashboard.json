@@ -22,7 +22,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "iteration": 1641054094638,
+    "iteration": 1645473808988,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -455,7 +455,7 @@
                 },
                 "textMode": "value_and_name"
             },
-            "pluginVersion": "8.3.3",
+            "pluginVersion": "8.3.6",
             "targets": [
                 {
                     "exemplar": true,
@@ -1011,7 +1011,7 @@
                             "showLegend": true,
                             "style": {
                                 "color": {
-                                    "field": "Value #A",
+                                    "field": "Value",
                                     "fixed": "dark-green"
                                 },
                                 "opacity": 0.4,
@@ -1022,7 +1022,7 @@
                                     "mode": "mod"
                                 },
                                 "size": {
-                                    "field": "Value #A",
+                                    "field": "Value",
                                     "fixed": 5,
                                     "max": 15,
                                     "min": 2
@@ -1032,9 +1032,9 @@
                                     "mode": "fixed"
                                 },
                                 "text": {
-                                    "field": "Value #A",
+                                    "field": "Value",
                                     "fixed": "",
-                                    "mode": "field"
+                                    "mode": "fixed"
                                 },
                                 "textConfig": {
                                     "fontSize": 10,
@@ -1061,7 +1061,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.3",
+            "pluginVersion": "8.3.6",
             "targets": [
                 {
                     "datasource": {
@@ -1127,7 +1127,7 @@
                     {
                         "config": {
                             "blur": 20,
-                            "radius": 10,
+                            "radius": 6,
                             "weight": {
                                 "field": "Value #A",
                                 "fixed": 1,
@@ -1151,7 +1151,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.3",
+            "pluginVersion": "8.3.6",
             "targets": [
                 {
                     "datasource": {
