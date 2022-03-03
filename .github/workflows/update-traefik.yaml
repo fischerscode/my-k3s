@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: repo
 
@@ -27,7 +27,7 @@ jobs:
         run: |
           echo ${{ steps.latestrelease.outputs.releasetag }}
       - name: checkout traefik
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: traefik/traefik
           ref: ${{ steps.latestrelease.outputs.releasetag }}
