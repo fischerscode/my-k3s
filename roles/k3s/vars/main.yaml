@@ -1,2 +1,2 @@
-k3s_url: https://github.com/k3s-io/k3s/releases/download/v1.21.4%2Bk3s1/k3s
-k3s_hash: sha256:47e686ad5390670da79a467ba94399d72e472364bc064a20fecd3937a8d928b5
+k3s_url: https://github.com/k3s-io/k3s/releases/download/v1.21.10%2Bk3s1/k3s
+k3s_hash: sha256:7a9cf9a0f2318b09f8b449f96440fdd3d877fcfd5e25b275a0e705400641ce3d

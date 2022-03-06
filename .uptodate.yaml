@@ -90,7 +90,7 @@ dependencies:
       - keycloak
   - name: k3s
     type: github
-    currentVersion: "v1.21.4+k3s1"
+    currentVersion: "v1.21.10+k3s1"
     prefix: v
     repo: "k3s-io/k3s"
     issueBody: |
