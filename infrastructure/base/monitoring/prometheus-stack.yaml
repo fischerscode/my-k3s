@@ -103,6 +103,23 @@ spec:
             targetLabel: instance
     kubeApiServer:
       enabled: true
+      metricRelabelings:
+        - action: drop
+          regex: apiserver_request_duration_seconds_bucket
+          sourceLabels:
+            - __name__
+        - action: drop
+          regex: apiserver_response_sizes_bucket
+          sourceLabels:
+            - __name__
+        - action: drop
+          regex: apiserver_watch_events_sizes_bucket
+          sourceLabels:
+            - __name__
+        - action: drop
+          regex: apiserver_request_duration_seconds_sum
+          sourceLabels:
+            - __name__
     kubeControllerManager:
       enabled: true
       endpoints: []
