@@ -147,14 +147,14 @@ spec:
     #   configReloaderCpu: 0
     prometheus:
       prometheusSpec:
-        scrapeInterval: 60s
+        scrapeInterval: 30s
         replicas: 1
         replicaExternalLabelName: "replica"
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         ruleSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 672h
+        retention: 168h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
