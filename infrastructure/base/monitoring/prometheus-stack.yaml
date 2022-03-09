@@ -147,7 +147,7 @@ spec:
     #   configReloaderCpu: 0
     prometheus:
       prometheusSpec:
-        scrapeInterval: 30s
+        scrapeInterval: 90s
         replicas: 1
         replicaExternalLabelName: "replica"
         podMonitorSelectorNilUsesHelmValues: false
