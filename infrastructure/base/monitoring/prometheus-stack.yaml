@@ -103,21 +103,45 @@ spec:
             targetLabel: instance
     kubeApiServer:
       enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: keep
+            regex: ""
+            sourceLabels:
+              - __name__
     kubeControllerManager:
       enabled: true
       endpoints: []
       service:
         port: 10252
         targetPort: 10252
+      serviceMonitor:
+        metricRelabelings:
+          - action: keep
+            regex: ""
+            sourceLabels:
+              - __name__
     kubeScheduler:
       enabled: true
       endpoints: []
       service:
         port: 10251
         targetPort: 10251
+      serviceMonitor:
+        metricRelabelings:
+          - action: keep
+            regex: ""
+            sourceLabels:
+              - __name__
     kubeProxy:
       enabled: true
       endpoints: []
+      serviceMonitor:
+        metricRelabelings:
+          - action: keep
+            regex: ""
+            sourceLabels:
+              - __name__
     kubeEtcd:
       enabled: true
       endpoints: []
@@ -125,6 +149,12 @@ spec:
         enabled: true
         port: 2381
         targetPort: 2381
+      serviceMonitor:
+        metricRelabelings:
+          - action: keep
+            regex: ""
+            sourceLabels:
+              - __name__
     # Setting this option to 0 disabled CPU limits
     # prometheusOperator:
     #   configReloaderCpu: 0
