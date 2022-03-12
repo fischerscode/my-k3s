@@ -106,7 +106,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: keep
-            regex: ""
+            regex: "no_such_name"
             sourceLabels:
               - __name__
     kubeControllerManager:
@@ -118,7 +118,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: keep
-            regex: ""
+            regex: "no_such_name"
             sourceLabels:
               - __name__
     kubeScheduler:
@@ -130,7 +130,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: keep
-            regex: ""
+            regex: "no_such_name"
             sourceLabels:
               - __name__
     kubeProxy:
@@ -139,7 +139,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: keep
-            regex: ""
+            regex: "no_such_name"
             sourceLabels:
               - __name__
     kubeEtcd:
@@ -152,7 +152,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: keep
-            regex: ""
+            regex: "no_such_name"
             sourceLabels:
               - __name__
     # Setting this option to 0 disabled CPU limits
