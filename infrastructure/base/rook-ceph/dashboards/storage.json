@@ -19,14 +19,13 @@
         ]
     },
     "editable": true,
-    "gnetId": null,
+    "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "id": 34,
-    "iteration": 1633729812977,
+    "iteration": 1647277059422,
     "links": [],
+    "liveNow": false,
     "panels": [
         {
-            "datasource": null,
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -99,7 +98,6 @@
             "type": "piechart"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -112,8 +110,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -182,13 +179,10 @@
         {
             "aliasColors": {},
             "breakPoint": "50%",
-            "cacheTimeout": null,
             "combine": {
                 "label": "Others",
                 "threshold": 0
             },
-            "datasource": null,
-            "decimals": null,
             "fontSize": "80%",
             "format": "bytes",
             "gridPos": {
@@ -198,7 +192,6 @@
                 "y": 0
             },
             "id": 8,
-            "interval": null,
             "legend": {
                 "header": "",
                 "percentage": false,
@@ -213,7 +206,7 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_capacity_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_capacity_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "instant": true,
                     "interval": "",
@@ -226,7 +219,6 @@
             "valueName": "current"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -269,8 +261,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -302,10 +293,10 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_capacity_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_capacity_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "{{exported_namespace}}: {{persistentvolumeclaim}}",
+                    "legendFormat": "{{namespace}}: {{persistentvolumeclaim}}",
                     "refId": "A"
                 }
             ],
@@ -313,7 +304,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -383,16 +373,21 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "multi"
+                    "mode": "multi",
+                    "sort": "none"
                 }
             },
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_used_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace) / max(kubelet_volume_stats_capacity_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_used_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace) / max(kubelet_volume_stats_capacity_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "{{exported_namespace}}: {{persistentvolumeclaim}}",
+                    "legendFormat": "{{namespace}}: {{persistentvolumeclaim}}",
                     "refId": "A"
                 }
             ],
@@ -400,7 +395,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -443,8 +437,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -476,10 +469,10 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_available_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace) / max(kubelet_volume_stats_capacity_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_available_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace) / max(kubelet_volume_stats_capacity_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "{{exported_namespace}}: {{persistentvolumeclaim}}",
+                    "legendFormat": "{{namespace}}: {{persistentvolumeclaim}}",
                     "refId": "A"
                 }
             ],
@@ -487,7 +480,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -530,8 +522,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -563,10 +554,10 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_used_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_used_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "{{exported_namespace}}: {{persistentvolumeclaim}}",
+                    "legendFormat": "{{namespace}}: {{persistentvolumeclaim}}",
                     "refId": "A"
                 }
             ],
@@ -574,7 +565,6 @@
             "type": "timeseries"
         },
         {
-            "datasource": null,
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -617,8 +607,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -650,10 +639,10 @@
             "targets": [
                 {
                     "exemplar": true,
-                    "expr": "max(kubelet_volume_stats_available_bytes{exported_namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, exported_namespace)",
+                    "expr": "max(kubelet_volume_stats_available_bytes{namespace=~\"$namespace\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}) by (persistentvolumeclaim, namespace)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "{{exported_namespace}}: {{persistentvolumeclaim}}",
+                    "legendFormat": "{{namespace}}: {{persistentvolumeclaim}}",
                     "refId": "A"
                 }
             ],
@@ -661,13 +650,13 @@
             "type": "timeseries"
         }
     ],
-    "schemaVersion": 30,
+    "refresh": "",
+    "schemaVersion": 35,
     "style": "dark",
     "tags": [],
     "templating": {
         "list": [
             {
-                "allValue": null,
                 "current": {
                     "selected": true,
                     "text": [
@@ -677,13 +666,9 @@
                         "$__all"
                     ]
                 },
-                "datasource": null,
                 "definition": "label_values(kube_namespace_labels, namespace)",
-                "description": null,
-                "error": null,
                 "hide": 0,
                 "includeAll": true,
-                "label": null,
                 "multi": true,
                 "name": "namespace",
                 "options": [],
@@ -698,7 +683,6 @@
                 "type": "query"
             },
             {
-                "allValue": null,
                 "current": {
                     "selected": true,
                     "text": [
@@ -708,10 +692,7 @@
                         "$__all"
                     ]
                 },
-                "datasource": null,
-                "definition": "label_values(kubelet_volume_stats_used_bytes{exported_namespace=~\"$namespace\"},persistentvolumeclaim)",
-                "description": null,
-                "error": null,
+                "definition": "label_values(kubelet_volume_stats_used_bytes{namespace=~\"$namespace\"},persistentvolumeclaim)",
                 "hide": 0,
                 "includeAll": true,
                 "label": "claim",
@@ -719,7 +700,7 @@
                 "name": "persistentvolumeclaim",
                 "options": [],
                 "query": {
-                    "query": "label_values(kubelet_volume_stats_used_bytes{exported_namespace=~\"$namespace\"},persistentvolumeclaim)",
+                    "query": "label_values(kubelet_volume_stats_used_bytes{namespace=~\"$namespace\"},persistentvolumeclaim)",
                     "refId": "StandardVariableQuery"
                 },
                 "refresh": 1,
@@ -738,5 +719,6 @@
     "timezone": "",
     "title": "Storage",
     "uid": "0SopE-v7z",
-    "version": 2
+    "version": 1,
+    "weekStart": ""
 }
