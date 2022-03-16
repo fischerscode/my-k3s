@@ -21,6 +21,20 @@ entryPoints:
     address: :53
   dns-udp:
     address: :53/udp
+  pop3:
+    address: :110
+  pop3s:
+    address: :995
+  imap:
+    address: :143
+  imaps:
+    address: :993
+  smtp:
+    address: :25
+  smtps:
+    address: :465
+  smtpd:
+    address: :587
 
 providers:
   kubernetesCRD: {}

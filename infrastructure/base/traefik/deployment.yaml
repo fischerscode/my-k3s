@@ -62,6 +62,20 @@ spec:
               containerPort: 53
             - name: traefik
               containerPort: 8080
+            - name: pop3
+              containerPort: 110
+            - name: pop3s
+              containerPort: 995
+            - name: imap
+              containerPort: 143
+            - name: imaps
+              containerPort: 993
+            - name: smtp
+              containerPort: 25
+            - name: smtps
+              containerPort: 465
+            - name: smtpd
+              containerPort: 587
           resources:
             requests:
               memory: 50Mi

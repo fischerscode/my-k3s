@@ -23,6 +23,27 @@ spec:
     - port: 53
       protocol: TCP
       name: dns
+    - port: 110
+      protocol: TCP
+      name: pop3
+    - port: 995
+      protocol: TCP
+      name: pop3s
+    - port: 143
+      protocol: TCP
+      name: imap
+    - port: 993
+      protocol: TCP
+      name: imaps
+    - port: 25
+      protocol: TCP
+      name: smtp
+    - port: 465
+      protocol: TCP
+      name: smtps
+    - port: 587
+      protocol: TCP
+      name: smtpd
 ---
 apiVersion: v1
 kind: Service
