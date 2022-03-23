@@ -171,6 +171,9 @@ spec:
         limits:
           memory: 500Mi
           cpu: 500m
+      overrides:
+        dovecot.conf: |
+          doveadm_password = ${MAILU_DOVEADM_PASSWORD}
       # enable dovecot overrides
       # overrides:
       #   dovecot.conf: |
@@ -198,7 +201,7 @@ spec:
           memory: 100Mi
           cpu: 100m
         limits:
-          memory: 2000Mi # Set to 2000Mi for first start
+          memory: 200Mi # Set to 2000Mi for first start
           cpu: 200m
 
     clamav:
