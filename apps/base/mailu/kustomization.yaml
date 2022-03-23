@@ -11,3 +11,6 @@ resources:
   - route-smtp.yaml
   - route-smtps.yaml
   - route-smtpd.yaml
+
+configurations:
+  - kustomizeconfig/namereference.yaml
