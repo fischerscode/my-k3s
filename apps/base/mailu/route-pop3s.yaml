@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mailu-pop3s
+spec:
+  entryPoints:
+    - pop3s
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: "mailu-front"
+          namespace: "mailserver"
+          port: pop3s
+          proxyProtocol:
+            version: 2

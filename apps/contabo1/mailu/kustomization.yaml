@@ -1,0 +1,13 @@
+---
+bases:
+  - ../../base/mailu
+
+namespace: mailserver
+
+secretGenerator:
+  - name: mailu_secrets
+    files:
+      - SECRET_KEY=secret-key.encrypted
+      - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted
+      - MYSQL_MAILU_PASSWORD=mysql-mailu-password.encrypted
+      - MYSQL_ROUNDCUBE_PASSWORD=mysql-roundcube-password.encrypted

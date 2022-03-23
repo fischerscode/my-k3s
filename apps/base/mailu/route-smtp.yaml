@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mailu-smtp
+spec:
+  entryPoints:
+    - smtp
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: "mailu-front"
+          namespace: "mailserver"
+          port: smtp
+          proxyProtocol:
+            version: 2

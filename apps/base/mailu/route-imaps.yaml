@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mailu-imaps
+spec:
+  entryPoints:
+    - imaps
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: "mailu-front"
+          namespace: "mailserver"
+          port: imaps
+          proxyProtocol:
+            version: 2
