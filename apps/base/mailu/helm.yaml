@@ -43,7 +43,15 @@ spec:
     domain: ${MAILU_DOMAIN1}
 
     hostnames:
+      - mail.${MAILU_DOMAIN1}
+      - imap.${MAILU_DOMAIN1}
+      - smtp.${MAILU_DOMAIN1}
       - mail.${MAILU_DOMAIN2}
+      - imap.${MAILU_DOMAIN2}
+      - smtp.${MAILU_DOMAIN2}
+      - mail.${MAILU_DOMAIN3}
+      - imap.${MAILU_DOMAIN3}
+      - smtp.${MAILU_DOMAIN3}
 
     # Tolerations for pod assignment
     # Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -171,9 +179,9 @@ spec:
         limits:
           memory: 500Mi
           cpu: 500m
-      overrides:
-        dovecot.conf: |
-          doveadm_password = ${MAILU_DOVEADM_PASSWORD}
+      # overrides:
+      #   dovecot.conf: |
+      #     doveadm_password = ${MAILU_DOVEADM_PASSWORD}
       # enable dovecot overrides
       # overrides:
       #   dovecot.conf: |
