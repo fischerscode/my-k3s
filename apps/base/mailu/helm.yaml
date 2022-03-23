@@ -179,9 +179,9 @@ spec:
         limits:
           memory: 500Mi
           cpu: 500m
-      # overrides:
-      #   dovecot.conf: |
-      #     doveadm_password = ${MAILU_DOVEADM_PASSWORD}
+      overrides:
+        dovecot.conf: |
+          doveadm_password = ${MAILU_DOVEADM_PASSWORD}
       # enable dovecot overrides
       # overrides:
       #   dovecot.conf: |
