@@ -5,7 +5,7 @@ bases:
 namespace: mailserver
 
 secretGenerator:
-  - name: mailu_secrets
+  - name: mailu-secrets
     files:
       - SECRET_KEY=secret-key.encrypted
       - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted

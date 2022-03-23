@@ -9,29 +9,21 @@ spec:
 
   valuesFrom:
     - kind: Secret
-      name: mailu_secrets
+      name: mailu-secrets
       valuesKey: SECRET_KEY
       targetPath: secretKey
     - kind: Secret
-      name: mailu_secrets
+      name: mailu-secrets
       valuesKey: MYSQL_ROOT_PASSWORD
       targetPath: database.mysql.rootPassword
     - kind: Secret
-      name: mailu_secrets
+      name: mailu-secrets
       valuesKey: MYSQL_MAILU_PASSWORD
       targetPath: database.mysql.password
     - kind: Secret
-      name: mailu_secrets
+      name: mailu-secrets
       valuesKey: MYSQL_ROUNDCUBE_PASSWORD
       targetPath: database.mysql.roundcubePassword
-    - kind: ConfigMap
-      name: mailu_config
-      valuesKey: HOSTNAMES
-      targetPath: hostnames
-    - kind: ConfigMap
-      name: mailu_config
-      valuesKey: DOMAIN
-      targetPath: domain
 
   chart:
     spec:
