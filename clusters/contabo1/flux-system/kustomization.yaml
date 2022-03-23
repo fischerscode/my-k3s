@@ -7,4 +7,4 @@ resources:
 
 replicas:
   - name: kustomize-controller
-    count: 3
+    count: 1
