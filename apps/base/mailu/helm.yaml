@@ -24,6 +24,10 @@ spec:
       name: mailu-secrets
       valuesKey: MYSQL_ROUNDCUBE_PASSWORD
       targetPath: database.mysql.roundcubePassword
+    - kind: Secret
+      name: mailu-secrets
+      valuesKey: MESSAGE_RATELIMIT_EXEMPTION
+      targetPath: mail.messageRatelimitExemption
 
   chart:
     spec:

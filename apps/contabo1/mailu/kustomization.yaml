@@ -11,3 +11,4 @@ secretGenerator:
       - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted
       - MYSQL_MAILU_PASSWORD=mysql-mailu-password.encrypted
       - MYSQL_ROUNDCUBE_PASSWORD=mysql-roundcube-password.encrypted
+      - MESSAGE_RATELIMIT_EXEMPTION=message-ratelimit-exemption.encrypted
