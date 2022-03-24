@@ -32,7 +32,7 @@ spec:
   chart:
     spec:
       chart: mailu
-      version: 0.4.0
+      version: 0.4.1
       sourceRef:
         kind: HelmRepository
         name: mailu
@@ -139,6 +139,13 @@ spec:
         claimNameOverride: ""
         annotations:
           "helm.sh/resource-policy": keep
+      resources:
+        requests:
+          memory: 200Mi
+          cpu: 100m
+        limits:
+          memory: 400Mi
+          cpu: 250m
 
     redis:
       persistence:
@@ -148,6 +155,13 @@ spec:
         claimNameOverride: ""
         annotations:
           "helm.sh/resource-policy": keep
+      resources:
+        requests:
+          memory: 20Mi
+          cpu: 50m
+        limits:
+          memory: 100Mi
+          cpu: 100m
 
     postfix:
       # logLevel: WARNING
@@ -160,11 +174,11 @@ spec:
           "helm.sh/resource-policy": keep
       resources:
         requests:
-          memory: 2Gi
-          cpu: 500m
+          memory: 100Mi
+          cpu: 50m
         limits:
-          memory: 2Gi
-          cpu: 500m
+          memory: 400Mi
+          cpu: 200m
 
     dovecot:
       enabled: true
@@ -178,11 +192,11 @@ spec:
           "helm.sh/resource-policy": keep
       resources:
         requests:
-          memory: 500Mi
-          cpu: 500m
+          memory: 100Mi
+          cpu: 75m
         limits:
-          memory: 500Mi
-          cpu: 500m
+          memory: 250Mi
+          cpu: 200m
       overrides:
         dovecot.conf: |
           doveadm_password = ${MAILU_DOVEADM_PASSWORD}
@@ -210,11 +224,11 @@ spec:
       # logLevel: WARNING
       resources:
         requests:
-          memory: 100Mi
-          cpu: 100m
+          memory: 150Mi
+          cpu: 50m
         limits:
-          memory: 200Mi # Set to 2000Mi for first start
-          cpu: 200m
+          memory: 250Mi # Set to 2000Mi for first start
+          cpu: 100m
 
     clamav:
       enabled: false
@@ -232,11 +246,11 @@ spec:
       uri: /roundcube
       resources:
         requests:
-          memory: 100Mi
-          cpu: 100m
+          memory: 120Mi
+          cpu: 50m
         limits:
           memory: 200Mi
-          cpu: 200m
+          cpu: 150m
 
     webdav:
       enabled: false
@@ -254,11 +268,11 @@ spec:
           "helm.sh/resource-policy": keep
       resources:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 200Mi
+          cpu: 50m
         limits:
-          memory: 512Mi
-          cpu: 200m
+          memory: 400Mi
+          cpu: 150m
 
     fetchmail:
       enabled: false
@@ -286,3 +300,10 @@ spec:
       # Choose an unclaimed one, that lays in your service CIDR
       # (kubectl cluster-info dump | grep -m 1 service-cluster-ip-range).
       unboundServiceIP: 10.43.162.135
+      resources:
+        requests:
+          memory: 50Mi
+          cpu: 10m
+        limits:
+          memory: 100Mi
+          cpu: 50m
