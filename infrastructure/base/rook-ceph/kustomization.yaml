@@ -5,11 +5,11 @@ bases:
   - dashboards
 
 resources:
-  - https://raw.githubusercontent.com/rook/rook/v1.8.5/deploy/examples/common.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.8.5/deploy/examples/operator.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.8.5/deploy/examples/cluster.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.8.5/deploy/examples/csi/rbd/storageclass.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.8.5/deploy/examples/toolbox.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.7/deploy/examples/common.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.7/deploy/examples/operator.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.7/deploy/examples/cluster.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.7/deploy/examples/csi/rbd/storageclass.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.8.7/deploy/examples/toolbox.yaml
   - service-monitors/csi-metrics.yaml
   - service-monitors/rook-ceph-mgr.yaml
   - filesystem.yaml
