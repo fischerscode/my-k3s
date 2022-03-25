@@ -47,7 +47,7 @@ jobs:
           cp traefik/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml                      repo/infrastructure/base/crds/traefik/resources/rbac.yaml
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           path: repo
           token: ${{ secrets.GITHUB_TOKEN }}
