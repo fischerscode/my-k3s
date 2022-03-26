@@ -148,3 +148,30 @@ dependencies:
       - uptodate
       - monitoring
       - grafana
+  - name: Mailu
+    type: github
+    currentVersion: "1.9.21"
+    repo: "Mailu/Mailu"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+      [Release $latestVersion](https://github.com/Mailu/Mailu/releases/tag/$latestVersion)
+      [Changelog](https://github.com/Mailu/Mailu/compare/$currentVersion...$latestVersion)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - mailu
+      - mailserver
+  - name: Mailu Helm chart
+    type: helm
+    currentVersion: "0.4.1"
+    repo: https://fischerscode.github.io/mailu-helm-charts/
+    chart: mailu
+    issueBody: |
+      Update used $name version from $currentVersion to $latestVersion.
+
+      [Chart](https://fischerscode.github.io/mailu-helm-charts/)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - mailu
+      - mailu-chart
