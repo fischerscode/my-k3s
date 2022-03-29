@@ -9,9 +9,9 @@ spec:
   ports:
     - name: dns-tcp
       port: 53
-      targetPort: dns-tcp
+      targetPort: 53
       protocol: TCP
     - name: dns-udp
       port: 53
-      targetPort: dns-udp
+      targetPort: 53
       protocol: UDP
