@@ -13,16 +13,16 @@ spec:
     spec:
       containers:
         - name: auth
-          image: fischerscode/powerdns-auth:4.5.2
+          image: fischerscode/powerdns-auth:4.6.1
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
-            - containerPort: 53
+            - containerPort: 5353
               protocol: TCP
               name: dns-tcp
-            - containerPort: 53
+            - containerPort: 5353
               protocol: UDP
               name: dns-udp
             - containerPort: 8081
@@ -62,6 +62,8 @@ spec:
               value: "anonymous"
             - name: PDNS_default_soa_content
               value: "ns1.${BASE_DOMAIN} hostmaster.@ 0 10800 3600 604800 3600"
+            - name: PDNS_local_port
+              value: "5353"
 # ---
 # apiVersion: v1
 # kind: Service
