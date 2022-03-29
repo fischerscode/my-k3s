@@ -63,7 +63,7 @@ spec:
                   key: SECRET_KEY
                   name: pdns-admin-config
             - name: PDNS_VERSION
-              value: "4.5"
+              value: "4.6"
           readinessProbe:
             tcpSocket:
               port: 9494
