@@ -15,9 +15,12 @@ spec:
         - name: auth
           image: fischerscode/powerdns-auth:4.6.1
           resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
             limits:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "150m"
           ports:
             - containerPort: 5353
               protocol: TCP
