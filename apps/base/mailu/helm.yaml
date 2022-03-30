@@ -32,7 +32,7 @@ spec:
   chart:
     spec:
       chart: mailu
-      version: 0.4.1
+      version: 0.4.2
       sourceRef:
         kind: HelmRepository
         name: mailu
@@ -107,6 +107,7 @@ spec:
 
     ingress:
       externalIngress: true
+      deployIngress: false
       tlsFlavor: cert
       className: ""
       annotations:

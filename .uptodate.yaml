@@ -163,7 +163,7 @@ dependencies:
       - mailserver
   - name: Mailu Helm chart
     type: helm
-    currentVersion: "0.4.1"
+    currentVersion: "0.4.2"
     repo: https://fischerscode.github.io/mailu-helm-charts/
     chart: mailu
     issueBody: |
