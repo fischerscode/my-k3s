@@ -106,7 +106,7 @@ spec:
       apiVersion: cert-manager.io/v1
 
     ingress:
-      externalIngress: false
+      externalIngress: true
       tlsFlavor: cert
       className: ""
       annotations:
