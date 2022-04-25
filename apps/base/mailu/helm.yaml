@@ -234,8 +234,8 @@ spec:
           memory: 150Mi
           cpu: 50m
         limits:
-          memory: 2000Mi
-          cpu: 1000m
+          memory: 250Mi # Set to 2000Mi for first start
+          cpu: 100m
 
     clamav:
       enabled: false
