@@ -1,0 +1,11 @@
+resources:
+  - rbac.yaml
+  - statefulset.yaml
+  - service.yaml
+  - certificate.yaml
+  - ingress.yaml
+
+namespace: changedetection
+
+configurations:
+  - kustomizeconfig.yaml

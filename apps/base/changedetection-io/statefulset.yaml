@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: changedetection
+spec:
+  selector:
+    matchLabels:
+      app: changedetection-io
+  serviceName: changedetection
+  replicas: 1 # do not increase
+  template:
+    metadata:
+      labels:
+        app: changedetection-io
+    spec:
+      containers:
+        - name: changedetection
+          image: ghcr.io/dgtlmoon/changedetection.io:0.39.12
+          ports:
+            - containerPort: 5000
+              name: web
+          volumeMounts:
+            - name: data
+              mountPath: /datastore
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

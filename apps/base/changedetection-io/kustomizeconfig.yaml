@@ -1,0 +1,19 @@
+nameReference:
+  - kind: Namespace
+    fieldSpecs:
+      - kind: Namespace
+        path: metadata/labels/toolkit.fluxcd.io\/tenant
+      - kind: ServiceAccount
+        path: metadata/labels/toolkit.fluxcd.io\/tenant
+      - kind: RoleBinding
+        path: metadata/labels/toolkit.fluxcd.io\/tenant
+  - kind: Service
+    fieldSpecs:
+      - kind: IngressRoute
+        path: spec/routes/services/name
+
+namePrefix:
+  - kind: Certificate
+    path: spec/secretName
+  - kind: IngressRoute
+    path: spec/tls/secretName

@@ -1,0 +1,16 @@
+bases:
+  - ../../base/changedetection-io
+
+namePrefix: personal-
+namespace: personal-changedetection
+patchesJson6902:
+  - target:
+      kind: IngressRoute
+      name: changedetection
+      version: v1alpha1
+    path: ingress-patch.yaml
+  - target:
+      kind: Certificate
+      name: changedetection
+      version: v1
+    path: certificate-patch.yaml

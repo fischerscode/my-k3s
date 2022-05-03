@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/commonName
+  value: ${PERSONAL_CHANGECONNECTION_DOMAIN}

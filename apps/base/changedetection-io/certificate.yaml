@@ -1,0 +1,10 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: changedetection
+spec:
+  commonName: changedetection.${BASE_DOMAIN}
+  secretName: changedetection-certificate
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

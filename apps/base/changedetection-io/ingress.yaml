@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: changedetection
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: "Host(`changedetection.${BASE_DOMAIN}`)"
+      services:
+        - name: changedetection
+          port: 80
+  tls:
+    secretName: changedetection-certificate
