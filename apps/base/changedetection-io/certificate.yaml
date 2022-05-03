@@ -3,7 +3,8 @@ kind: Certificate
 metadata:
   name: changedetection
 spec:
-  commonName: changedetection.${BASE_DOMAIN}
+  dnsNames:
+    - changedetection.${BASE_DOMAIN}
   secretName: changedetection-certificate
   issuerRef:
     name: letsencrypt-prod
