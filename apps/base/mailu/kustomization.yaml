@@ -13,5 +13,13 @@ resources:
   - route-smtpd.yaml
   - ingress.yaml
 
+configMapGenerator:
+  - name: grafana-dashboard
+    options:
+      labels:
+        grafana-dashboard: "1"
+    files:
+      - mailu.json=dashboard.json
+
 configurations:
   - kustomizeconfig/namereference.yaml

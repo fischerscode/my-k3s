@@ -1,0 +1,481 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 30,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 8,
+            "panels": [],
+            "title": "Authentication credentials invalid (front)",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "IPs trying to login on 25 (or 465)",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "id": 9,
+            "options": {
+                "displayLabels": [
+                    "percent",
+                    "name"
+                ],
+                "legend": {
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^Value \\#A$/",
+                    "limit": 10000,
+                    "values": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "\nsum by (client) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"Authentication credentials invalid\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)",
+                    "legendFormat": "{{client}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Brute force IPs",
+            "type": "piechart"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "IPs trying to login on 25 (or 465)",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-GrYlRd"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "id": 10,
+            "options": {
+                "displayMode": "gradient",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^Value \\#A$/",
+                    "limit": 10000,
+                    "values": true
+                },
+                "showUnfilled": true
+            },
+            "pluginVersion": "8.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "sum by (client) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"Authentication credentials invalid\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)",
+                    "legendFormat": "{{client}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Brute force IPs",
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "Accounts, where login failed more then one time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-GrYlRd"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 4,
+                "x": 8,
+                "y": 1
+            },
+            "id": 11,
+            "options": {
+                "displayMode": "gradient",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "limit": 10000,
+                    "values": true
+                },
+                "showUnfilled": true
+            },
+            "pluginVersion": "8.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "sum by (account) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"Authentication credentials invalid\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)>1",
+                    "legendFormat": "{{account}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Bruteforced Accounts",
+            "type": "bargauge"
+        },
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 9
+            },
+            "id": 6,
+            "panels": [],
+            "title": "AUTH not supported (front)",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "IPs trying to login on 25 (or 465)",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
+                    },
+                    "mappings": []
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 4,
+                "x": 0,
+                "y": 10
+            },
+            "id": 2,
+            "options": {
+                "displayLabels": [
+                    "percent",
+                    "name"
+                ],
+                "legend": {
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^Value \\#A$/",
+                    "limit": 10000,
+                    "values": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "\nsum by (client) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"AUTH not supported\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)",
+                    "legendFormat": "{{client}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Brute force IPs",
+            "type": "piechart"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "IPs trying to login on 25 (or 465)",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-GrYlRd"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 4,
+                "x": 4,
+                "y": 10
+            },
+            "id": 3,
+            "options": {
+                "displayMode": "gradient",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^Value \\#A$/",
+                    "limit": 10000,
+                    "values": true
+                },
+                "showUnfilled": true
+            },
+            "pluginVersion": "8.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "sum by (client) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"AUTH not supported\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)",
+                    "legendFormat": "{{client}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Brute force IPs",
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+            },
+            "description": "Accounts, where login failed more then one time.",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "continuous-GrYlRd"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "axisSoftMin": 0,
+                        "fillOpacity": 80,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineWidth": 1,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 16,
+                "x": 8,
+                "y": 10
+            },
+            "id": 4,
+            "options": {
+                "barRadius": 0.5,
+                "barWidth": 0.8,
+                "colorByField": "Value #A",
+                "groupWidth": 0.7,
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                },
+                "orientation": "vertical",
+                "showValue": "auto",
+                "stacking": "none",
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                },
+                "xTickLabelMaxLength": 10,
+                "xTickLabelRotation": 90,
+                "xTickLabelSpacing": 0
+            },
+            "pluginVersion": "8.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "P8E80F9AEF21F6940"
+                    },
+                    "expr": "sum by (account) (count_over_time(\n  (\n    {app=\"mailu\",component=\"front\",namespace=\"mailserver\",stream=\"stderr\"}\n    |= \"client login failed\"\n    |= \"AUTH not supported\"\n    | pattern \"<_> <_> [info] <_> <_> client login failed: <cause> while in http auth state, client: <client>, server: <server>, login: <account>\"\n  )[$__range]\n  )\n)>1",
+                    "legendFormat": "{{account}}",
+                    "queryType": "instant",
+                    "refId": "A"
+                }
+            ],
+            "title": "Bruteforced Accounts",
+            "type": "barchart"
+        }
+    ],
+    "schemaVersion": 35,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-24h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Mailu",
+    "uid": "9MsVWFynz",
+    "version": 9,
+    "weekStart": ""
+}
