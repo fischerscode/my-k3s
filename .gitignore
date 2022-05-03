@@ -4,3 +4,4 @@ kubeconfig*.yaml
 *.secret
 .DS_Store
 infrastructure/base/traefik/GeoLite2-City.mmdb
+tmp/
