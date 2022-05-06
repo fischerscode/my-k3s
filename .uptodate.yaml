@@ -135,7 +135,7 @@ dependencies:
       - prometeus
   - name: grafana
     type: helm
-    currentVersion: "6.26.5"
+    currentVersion: "6.28.0"
     repo: https://grafana.github.io/helm-charts
     chart: grafana
     issueBody: |
