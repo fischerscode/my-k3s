@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ceph-dashboard
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: "Host(`${SECRET_CEPH_DASHBOARD_DOMAIN}`)"
+      services:
+        - name: rook-ceph-mgr-dashboard
+          port: 8443
+          scheme: https
+          serversTransport: ceph-dashboard
+  tls:
+    secretName: ceph-dashboard-certificate

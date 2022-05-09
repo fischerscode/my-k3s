@@ -15,6 +15,9 @@ resources:
   - filesystem.yaml
   - fs-storageclass.yaml
   - prometheus-rules.yaml
+  - ceph-dashboard-certificate.yaml
+  - ceph-dashboard-route.yaml
+  - ceph-dashboard-serverTransport.yaml
 
 patchesStrategicMerge:
   - storageclass-patch.yaml

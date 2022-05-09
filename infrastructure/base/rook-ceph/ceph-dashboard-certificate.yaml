@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ceph-dashboard
+spec:
+  commonName: ${SECRET_CEPH_DASHBOARD_DOMAIN}
+  secretName: ceph-dashboard-certificate
+  dnsNames:
+    - ${SECRET_CEPH_DASHBOARD_DOMAIN}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
