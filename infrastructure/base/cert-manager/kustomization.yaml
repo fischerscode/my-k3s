@@ -1,5 +1,5 @@
 resources:
-  - https://raw.githubusercontent.com/fischerscode/cert-manager-deploy-files/master/v1.7.2/cert-manager.nocrds.yaml
+  - https://raw.githubusercontent.com/fischerscode/cert-manager-deploy-files/master/v1.8.0/cert-manager.nocrds.yaml
   - selfsigned.yaml
 
 patchesStrategicMerge:
