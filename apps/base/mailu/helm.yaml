@@ -307,6 +307,9 @@ spec:
       # Choose an unclaimed one, that lays in your service CIDR
       # (kubectl cluster-info dump | grep -m 1 service-cluster-ip-range).
       unboundServiceIP: 10.43.162.135
+      image:
+        repository: mvance/unbound@sha256
+        tag: 4ee6b8686952e4eee3397f661fea174b000be6bf3c5e6b560a25fa61276829ed
       resources:
         requests:
           memory: 50Mi
