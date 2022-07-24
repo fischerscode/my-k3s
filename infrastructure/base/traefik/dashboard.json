@@ -3,7 +3,10 @@
         "list": [
             {
                 "builtIn": 1,
-                "datasource": "-- Grafana --",
+                "datasource": {
+                    "type": "datasource",
+                    "uid": "grafana"
+                },
                 "enable": true,
                 "hide": true,
                 "iconColor": "rgba(0, 211, 255, 1)",
@@ -22,11 +25,15 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "iteration": 1645473808988,
+    "iteration": 1658658653959,
     "links": [],
     "liveNow": false,
     "panels": [
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -67,7 +74,8 @@
                     "values": false
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "targets": [
@@ -90,6 +98,10 @@
             "type": "piechart"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -129,7 +141,8 @@
                     "values": false
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "targets": [
@@ -151,6 +164,10 @@
             "type": "piechart"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -219,11 +236,16 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "multi"
+                    "mode": "multi",
+                    "sort": "none"
                 }
             },
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
                     "exemplar": true,
                     "expr": "sum( max_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"}[$__rate_interval]) - min_over_time(traefik_geo_access_log_total{container=\"geologger\",namespace=\"traefik-system\",request_host=~\"$requesthost\",private_client_address=~\"$internalTrafik\"} [$__rate_interval])) by (request_host) > 0",
                     "interval": "",
@@ -235,6 +257,10 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -363,7 +389,8 @@
                     "placement": "bottom"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "targets": [
@@ -407,6 +434,10 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -455,7 +486,7 @@
                 },
                 "textMode": "value_and_name"
             },
-            "pluginVersion": "8.3.6",
+            "pluginVersion": "8.5.0",
             "targets": [
                 {
                     "exemplar": true,
@@ -469,6 +500,111 @@
             ],
             "title": "Certificates that expire soon.",
             "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "bars",
+                        "fillOpacity": 100,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 0,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "reqps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 15,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            },
+            "id": 39,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "sortBy": "Mean",
+                    "sortDesc": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(rate(traefik_service_requests_total{} [10m])) by (service, code, method) > 0",
+                    "legendFormat": "{{service}}: {{method}}-{{code}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Service requests rate by method and code over 10m",
+            "transformations": [
+                {
+                    "id": "renameByRegex",
+                    "options": {
+                        "regex": "^(.*?)-[^-]*@.*?(: .*)$",
+                        "renamePattern": "$1$2"
+                    }
+                }
+            ],
+            "type": "timeseries"
         },
         {
             "datasource": {
@@ -531,7 +667,7 @@
                 "h": 6,
                 "w": 12,
                 "x": 0,
-                "y": 7
+                "y": 22
             },
             "id": 27,
             "links": [],
@@ -546,7 +682,8 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "pluginVersion": "8.1.5",
@@ -625,7 +762,7 @@
                 "h": 6,
                 "w": 12,
                 "x": 12,
-                "y": 7
+                "y": 22
             },
             "id": 29,
             "links": [],
@@ -640,7 +777,8 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "pluginVersion": "8.1.5",
@@ -721,7 +859,7 @@
                 "h": 7,
                 "w": 8,
                 "x": 0,
-                "y": 13
+                "y": 28
             },
             "id": 33,
             "links": [],
@@ -736,7 +874,8 @@
                     "placement": "bottom"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "pluginVersion": "8.1.5",
@@ -755,6 +894,10 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -824,7 +967,7 @@
                 "h": 7,
                 "w": 8,
                 "x": 8,
-                "y": 13
+                "y": 28
             },
             "id": 31,
             "links": [],
@@ -835,7 +978,8 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "pluginVersion": "8.1.5",
@@ -859,6 +1003,10 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -928,7 +1076,7 @@
                 "h": 7,
                 "w": 8,
                 "x": 16,
-                "y": 13
+                "y": 28
             },
             "id": 37,
             "links": [],
@@ -939,7 +1087,8 @@
                     "placement": "right"
                 },
                 "tooltip": {
-                    "mode": "single"
+                    "mode": "single",
+                    "sort": "none"
                 }
             },
             "pluginVersion": "8.1.5",
@@ -963,10 +1112,21 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
                         "mode": "continuous-RdYlGr"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
                     },
                     "mappings": [],
                     "thresholds": {
@@ -989,7 +1149,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 20
+                "y": 35
             },
             "id": 35,
             "options": {
@@ -1061,7 +1221,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.6",
+            "pluginVersion": "8.5.0",
             "targets": [
                 {
                     "datasource": {
@@ -1081,10 +1241,21 @@
             "type": "geomap"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
                         "mode": "continuous-RdYlGr"
+                    },
+                    "custom": {
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        }
                     },
                     "mappings": [],
                     "thresholds": {
@@ -1107,7 +1278,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 20
+                "y": 35
             },
             "id": 36,
             "options": {
@@ -1151,7 +1322,7 @@
                     "zoom": 2
                 }
             },
-            "pluginVersion": "8.3.6",
+            "pluginVersion": "8.5.0",
             "targets": [
                 {
                     "datasource": {
@@ -1172,11 +1343,15 @@
         },
         {
             "collapsed": true,
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 28
+                "y": 43
             },
             "id": 19,
             "panels": [
@@ -1304,8 +1479,8 @@
             "type": "row"
         }
     ],
-    "refresh": "1m",
-    "schemaVersion": 34,
+    "refresh": "5m",
+    "schemaVersion": 36,
     "style": "dark",
     "tags": [],
     "templating": {
@@ -1372,6 +1547,10 @@
                         "$__all"
                     ]
                 },
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PBFA97CFB590B2093"
+                },
                 "definition": "label_values(entrypoint)",
                 "hide": 0,
                 "includeAll": true,
@@ -1391,7 +1570,7 @@
         ]
     },
     "time": {
-        "from": "now-30m",
+        "from": "now-12h",
         "to": "now"
     },
     "timepicker": {},
