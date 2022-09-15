@@ -8,3 +8,10 @@ spec:
   storage:
     useAllNodes: false
     useAllDevices: false
+  healthCheck:
+    startupProbe:
+      osd:
+        failureThreshold: 6
+    livenessProbe:
+      osd:
+        failureThreshold: 30
