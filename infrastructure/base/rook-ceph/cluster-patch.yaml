@@ -10,10 +10,10 @@ spec:
     useAllDevices: false
   healthCheck:
     startupProbe:
-      probe:
-        osd:
+      osd:
+        probe:
           failureThreshold: 30
     livenessProbe:
-      probe:
-        osd:
+      osd:
+        probe:
           failureThreshold: 6
