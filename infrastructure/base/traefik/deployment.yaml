@@ -28,7 +28,7 @@ spec:
             matchLabels:
               app: traefik
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        node-role.kubernetes.io/control-plane: "true"
       containers:
         - image: traefik:v2.8.5
           imagePullPolicy: IfNotPresent
