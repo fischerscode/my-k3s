@@ -4,6 +4,7 @@ bases:
 
 resources:
   - routing_pool.yaml
+  - control-plane_advertisement.yaml
   - memberlist.yaml
 
 namespace: metallb-system
