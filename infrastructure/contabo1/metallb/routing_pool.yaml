@@ -6,4 +6,4 @@ metadata:
 spec:
   addresses:
     - ${SVC_KUBERNETES_API_PUBLIC}/32
-  auto-assign: false
+  autoAssign: false
