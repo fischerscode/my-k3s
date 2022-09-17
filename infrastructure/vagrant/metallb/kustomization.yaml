@@ -3,7 +3,7 @@ bases:
   - ../../base/metallb
 
 resources:
-  - configmap.yaml
+  - routing_pool.yaml
   - memberlist.yaml
 
 namespace: metallb-system

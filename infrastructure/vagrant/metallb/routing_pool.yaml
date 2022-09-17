@@ -1,0 +1,9 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: routing
+  namespace: metallb-system
+spec:
+  addresses:
+    - ${SVC_KUBERNETES_API_PUBLIC}/32
+  auto-assign: false
