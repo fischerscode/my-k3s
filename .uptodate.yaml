@@ -103,7 +103,7 @@ dependencies:
       - k3s
   - name: prometheus-stack
     type: helm
-    currentVersion: "35.0.3"
+    currentVersion: "40.1.0"
     repo: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     issueBody: |
@@ -118,7 +118,7 @@ dependencies:
       - prometeus
   - name: prometheus-operator CRDs
     type: helm
-    currentVersion: 0.56.0
+    currentVersion: 0.59.1
     repo: "https://prometheus-community.github.io/helm-charts"
     chart: kube-prometheus-stack
     path: entries.kube-prometheus-stack.0.appVersion
