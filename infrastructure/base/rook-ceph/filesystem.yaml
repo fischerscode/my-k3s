@@ -1,4 +1,4 @@
-# See https://raw.githubusercontent.com/rook/rook/v1.9.10/deploy/examples/filesystem.yaml
+# See https://raw.githubusercontent.com/rook/rook/v1.10.1/deploy/examples/filesystem.yaml
 # and https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md
 # for further information
 
@@ -33,6 +33,19 @@ spec:
     activeStandby: true
     # The affinity rules to apply to the mds deployment
     placement:
+      #  nodeAffinity:
+      #    requiredDuringSchedulingIgnoredDuringExecution:
+      #      nodeSelectorTerms:
+      #      - matchExpressions:
+      #        - key: role
+      #          operator: In
+      #          values:
+      #          - mds-node
+      #  topologySpreadConstraints:
+      #  tolerations:
+      #  - key: mds-node
+      #    operator: Exists
+      #  podAffinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
@@ -53,3 +66,22 @@ spec:
                     values:
                       - rook-ceph-mds
               topologyKey: topology.kubernetes.io/zone
+    # A key/value list of annotations
+    # annotations:
+    #  key: value
+    # A key/value list of labels
+    # labels:
+    #  key: value
+    # resources:
+    # The requests and limits set here, allow the filesystem MDS Pod(s) to use half of one CPU core and 1 gigabyte of memory
+    #  limits:
+    #    cpu: "500m"
+    #    memory: "1024Mi"
+    #  requests:
+    #    cpu: "500m"
+    #    memory: "1024Mi"
+    priorityClassName: system-cluster-critical
+    livenessProbe:
+      disabled: false
+    startupProbe:
+      disabled: false
