@@ -21,101 +21,101 @@ spec:
       shareProcessNamespace: true
       serviceAccountName: traefik-ingress-controller
       topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: traefik
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: traefik
       nodeSelector:
         node-role.kubernetes.io/control-plane: "true"
       containers:
-        - image: traefik:v2.8.8
-          imagePullPolicy: IfNotPresent
-          name: traefik
-          readinessProbe:
-            httpGet:
-              path: /ping
-              port: 80
-            failureThreshold: 3
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 2
-          livenessProbe:
-            httpGet:
-              path: /ping
-              port: 80
-            failureThreshold: 3
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 2
-          ports:
-            - name: http
-              containerPort: 80
-            - name: https
-              containerPort: 443
-            - name: kubeapi
-              containerPort: 6443
-            - name: dns
-              containerPort: 53
-            - name: traefik
-              containerPort: 8080
-            - name: pop3
-              containerPort: 110
-            - name: pop3s
-              containerPort: 995
-            - name: imap
-              containerPort: 143
-            - name: imaps
-              containerPort: 993
-            - name: smtp
-              containerPort: 25
-            - name: smtps
-              containerPort: 465
-            - name: smtpd
-              containerPort: 587
-          resources:
-            requests:
-              memory: 55Mi
-              cpu: 100m
-            limits:
-              memory: 100Mi
-              cpu: 500m
-          volumeMounts:
-            - mountPath: /etc/traefik/traefik.yml
-              name: config-static
-              subPath: traefik.yaml
-            - mountPath: /var/log
-              name: logs
-        - image: fischerscode/traefik-geologger-city:v1.4.220220920 # {"$imagepolicy": "flux-system:traefik-geologger-city"}
-          imagePullPolicy: Always
-          name: geologger
-          env:
-            - name: ENABLE_METRICS
-              value: "true"
-            - name: METRICS_PORT
-              value: "8081"
-            - name: TRAEFIK_PROCESS_NAME
-              value: "traefik"
-            - name: LOG_ACCESS
-              value: "false"
-          volumeMounts:
-            - mountPath: /var/log
-              name: logs
-          ports:
-            - name: metrics
-              containerPort: 8081
-          securityContext:
-            capabilities:
-              add:
-                - SYS_PTRACE
+      - image: traefik:v2.8.8
+        imagePullPolicy: IfNotPresent
+        name: traefik
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 80
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 80
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        - name: kubeapi
+          containerPort: 6443
+        - name: dns
+          containerPort: 53
+        - name: traefik
+          containerPort: 8080
+        - name: pop3
+          containerPort: 110
+        - name: pop3s
+          containerPort: 995
+        - name: imap
+          containerPort: 143
+        - name: imaps
+          containerPort: 993
+        - name: smtp
+          containerPort: 25
+        - name: smtps
+          containerPort: 465
+        - name: smtpd
+          containerPort: 587
+        resources:
+          requests:
+            memory: 55Mi
+            cpu: 100m
+          limits:
+            memory: 100Mi
+            cpu: 500m
+        volumeMounts:
+        - mountPath: /etc/traefik/traefik.yml
+          name: config-static
+          subPath: traefik.yaml
+        - mountPath: /var/log
+          name: logs
+      - image: fischerscode/traefik-geologger-city:v1.4.220220930 # {"$imagepolicy": "flux-system:traefik-geologger-city"}
+        imagePullPolicy: Always
+        name: geologger
+        env:
+        - name: ENABLE_METRICS
+          value: "true"
+        - name: METRICS_PORT
+          value: "8081"
+        - name: TRAEFIK_PROCESS_NAME
+          value: "traefik"
+        - name: LOG_ACCESS
+          value: "false"
+        volumeMounts:
+        - mountPath: /var/log
+          name: logs
+        ports:
+        - name: metrics
+          containerPort: 8081
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE
       imagePullSecrets:
-        - name: docker-cred
+      - name: docker-cred
       volumes:
-        - name: config-static
-          configMap:
-            name: traefik-config-static
-        - name: logs
-          emptyDir: {}
+      - name: config-static
+        configMap:
+          name: traefik-config-static
+      - name: logs
+        emptyDir: {}
