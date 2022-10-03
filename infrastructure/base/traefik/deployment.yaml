@@ -78,10 +78,10 @@ spec:
               containerPort: 587
           resources:
             requests:
-              memory: 50Mi
+              memory: 75Mi
               cpu: 100m
             limits:
-              memory: 50Mi
+              memory: 150Mi
               cpu: 500m
           volumeMounts:
             - mountPath: /etc/traefik/traefik.yml
