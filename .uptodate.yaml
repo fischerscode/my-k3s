@@ -1,7 +1,7 @@
 dependencies:
   - name: traefik
     type: github
-    currentVersion: v2.8.5
+    currentVersion: v2.6.6
     prefix: v
     repo: "traefik/traefik"
     issueBody: |
