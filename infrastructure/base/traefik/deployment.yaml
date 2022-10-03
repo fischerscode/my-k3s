@@ -30,7 +30,7 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/control-plane: "true"
       containers:
-        - image: traefik:2.6.6
+        - image: traefik:v2.8.8
           imagePullPolicy: IfNotPresent
           name: traefik
           readinessProbe:
