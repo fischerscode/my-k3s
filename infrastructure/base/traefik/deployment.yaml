@@ -18,6 +18,7 @@ spec:
       labels:
         app: traefik
     spec:
+      priorityClassName: system-cluster-critical
       shareProcessNamespace: true
       serviceAccountName: traefik-ingress-controller
       topologySpreadConstraints:
