@@ -96,7 +96,7 @@ spec:
     logLevel: NOTSET
 
     # local part of the postmaster email address (Mailu will use @$DOMAIN as domain part)
-    postmaster: postmaster
+    postmaster: admin
 
     certmanager:
       enabled: true
