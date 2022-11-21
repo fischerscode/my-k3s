@@ -90,7 +90,7 @@ spec:
           subPath: traefik.yaml
         - mountPath: /var/log
           name: logs
-      - image: fischerscode/traefik-geologger-city:v1.4.220221118 # {"$imagepolicy": "flux-system:traefik-geologger-city"}
+      - image: fischerscode/traefik-geologger-city:v1.4.220221122 # {"$imagepolicy": "flux-system:traefik-geologger-city"}
         imagePullPolicy: Always
         name: geologger
         env:
