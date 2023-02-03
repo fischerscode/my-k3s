@@ -118,9 +118,10 @@ dependencies:
       - prometeus
   - name: prometheus-operator CRDs
     type: helm
-    currentVersion: 0.59.1
+    currentVersion: v0.59.1
     repo: "https://prometheus-community.github.io/helm-charts"
     chart: kube-prometheus-stack
+    prefix: v
     path: entries.kube-prometheus-stack.0.appVersion
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
