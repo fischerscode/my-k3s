@@ -37,7 +37,8 @@ entryPoints:
     address: :587
 
 providers:
-  kubernetesCRD: {}
+  kubernetesCRD:
+    allowExternalNameServices: true
   kubernetesIngress: {}
 api:
   dashboard: true
