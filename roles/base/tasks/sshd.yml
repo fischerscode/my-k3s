@@ -15,3 +15,12 @@
     state: present
   notify:
     - restart sshd
+
+- name: Set GatewayPorts to clientspecified # ssh -R
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^GatewayPorts"
+    line: "GatewayPorts clientspecified"
+    state: present
+  notify:
+    - restart sshd
