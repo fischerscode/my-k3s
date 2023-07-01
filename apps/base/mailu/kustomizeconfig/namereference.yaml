@@ -3,3 +3,9 @@ nameReference:
     fieldSpecs:
       - kind: HelmRelease
         path: spec/valuesFrom/name
+      - kind: HelmRelease
+        path: spec/values/existingSecret
+      - kind: HelmRelease
+        path: spec/values/global/database/roundcube/existingSecret
+      - kind: HelmRelease
+        path: spec/values/mariadb/auth/existingSecret

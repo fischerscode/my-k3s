@@ -10,41 +10,25 @@ spec:
   valuesFrom:
     - kind: Secret
       name: mailu-secrets
-      valuesKey: SECRET_KEY
-      targetPath: secretKey
-    - kind: Secret
-      name: mailu-secrets
-      valuesKey: MYSQL_ROOT_PASSWORD
-      targetPath: database.mysql.rootPassword
-    - kind: Secret
-      name: mailu-secrets
-      valuesKey: MYSQL_MAILU_PASSWORD
-      targetPath: database.mysql.password
-    - kind: Secret
-      name: mailu-secrets
-      valuesKey: MYSQL_ROUNDCUBE_PASSWORD
-      targetPath: database.mysql.roundcubePassword
-    - kind: Secret
-      name: mailu-secrets
       valuesKey: MESSAGE_RATELIMIT_EXEMPTION
-      targetPath: mail.messageRatelimitExemption
+      targetPath: limits.messageRatelimit.exemption
 
   chart:
     spec:
       chart: mailu
-      version: 0.4.3
+      version: 1.2.0
       sourceRef:
         kind: HelmRepository
         name: mailu
       interval: 5m
   values:
-    nameOverride: ""
-    fullnameOverride: ""
-    clusterDomain: ${NETWORK_K8S_CLUSTER_DOMAIN}
-
-    nodeSelector: {}
-
-    domain: ${MAILU_DOMAIN1}
+    global:
+      database:
+        roundcube:
+          database: roundcube
+          username: roundcube
+          existingSecret: mailu-secrets
+          existingSecretPasswordKey: MESSAGE_RATELIMIT_EXEMPTION
 
     hostnames:
       - mail.${MAILU_DOMAIN1}
@@ -57,263 +41,152 @@ spec:
       - imap.${MAILU_DOMAIN3}
       - smtp.${MAILU_DOMAIN3}
 
-    # Tolerations for pod assignment
-    # Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-    tolerations: {}
+    domain: ${MAILU_DOMAIN1}
 
-    # Affinity for pod assignment
-    # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-    affinity: {}
+    existingSecret: mailu-secrets
 
-    database:
-      type: mysql
-      roundcubeType: mysql
+    subnet: ${NETWORK_K8S_CLUSTER_CIDR}
+    subnet6: ""
 
-      mysql:
-        # settings for mailu (required if mailu database type is "mysql")
+    networkPolicy:
+      enabled: false
+
+    mailuVersion: "2.0.10"
+
+    logLevel: WARNING
+
+    postmaster: admin
+
+    recipientDelimiter: "+"
+
+    limits:
+      ## @param limits.messageSizeLimitInMegabytes Maximum size of an email in megabytes
+      messageSizeLimitInMegabytes: 50
+
+      authRatelimit:
+        ip: 60/hour
+        ipv4Mask: 24
+        ipv6Mask: 56
+        user: 100/day
+        exemptionLength: 86400
+        exemption: ""
+
+      messageRatelimit:
+        value: 200/day
+
+    clusterDomain: ${NETWORK_K8S_CLUSTER_DOMAIN}
+
+    ## @param letsencryptShortchain Controls whether we send the ISRG Root X1 certificate in TLS handshakes.
+    ## This is required for android handsets older than 7.1.1 but slows down the performance of modern devices.
+    letsencryptShortchain: false
+
+    customization:
+      siteName: "Mailu"
+      website: "https://mail.maaeps.de"
+      logoUrl: ""
+      logoBackground: ""
+
+    mariadb:
+      enabled: true
+      architecture: standalone
+
+      auth:
         database: mailu
-        user: mailu
+        username: mailu
+        existingSecret: mailu-secrets
 
-        roundcubeDatabase: roundcube
-        roundcubeUser: roundcube
-
-    external_relay: {}
-    #    host: "[domain.tld]:port"
-    #    username: username
-    #    password: SECRET
-    #    # username and password can also be stored as secret:
-    #    secretName: external-relay-secret
-    #    usernameKey: username
-    #    passwordKey: password
+      primary:
+        persistence:
+          enabled: true
+          size: 8Gi
 
     persistence:
       single_pvc: false
 
-    subnet: ${NETWORK_K8S_CLUSTER_CIDR}
-
-    mailuVersion: 1.9.21
-
-    logLevel: NOTSET
-
-    # local part of the postmaster email address (Mailu will use @$DOMAIN as domain part)
-    postmaster: admin
-
-    certmanager:
-      enabled: true
-      issuerType: ClusterIssuer
-      issuerName: letsencrypt-prod
-      # issuerName: selfsigned
-      apiVersion: cert-manager.io/v1
-
     ingress:
-      externalIngress: true
-      deployIngress: false
-      tlsFlavor: cert
-      className: ""
+      enabled: true
+
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      realIpHeader: X-Forwarded-For
-      realIpFrom: 0.0.0.0/0
+        cert-manager.io/cluster-issuer: letsencrypt-prod
 
-    # Frontend load balancer for non-HTTP(s) services
+      tls: true
+
+      realIpHeader: X-Forwarded-For
+      realIpFrom: ${NETWORK_K8S_CLUSTER_CIDR}
+
+      ## @param ingress.tlsFlavorOverride Overrides the value of `TLS_FLAVOR` environment variable in the `front` pod
+      ## This is normally auto-detected, only change it if you know what you are doing.
+      tlsFlavorOverride: ""
+
     front:
-      # logLevel: WARNING
-      image:
-        # repository: mailu/nginx
-        # tag defaults to mailuVersion
-        # tag: master
-        repository: fischerscode/mailu-front
-        tag: latest
-      resources:
-        requests:
-          memory: 50Mi
-          cpu: 50m
-        limits:
-          memory: 100Mi
-          cpu: 100m
       hostPort:
         enabled: false
       externalService:
         enabled: false
-        type: ClusterIP
+      replicaCount: 1
 
     admin:
-      # logLevel: WARNING
-      persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 200Mi
-          cpu: 100m
-        limits:
-          memory: 400Mi
-          cpu: 250m
+      enabled: true
 
     redis:
-      persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 20Mi
-          cpu: 50m
-        limits:
-          memory: 100Mi
-          cpu: 100m
+      enabled: true
+      architecture: standalone
 
     postfix:
-      # logLevel: WARNING
-      persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 100Mi
-          cpu: 50m
-        limits:
-          memory: 400Mi
-          cpu: 200m
 
     dovecot:
       enabled: true
-      # logLevel: WARNING
       persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 100Mi
-          cpu: 75m
-        limits:
-          memory: 250Mi
-          cpu: 200m
-      overrides:
-        dovecot.conf: |
-          doveadm_password = ${MAILU_DOVEADM_PASSWORD}
-      # enable dovecot overrides
-      # overrides:
-      #   dovecot.conf: |
-      #     # More info here: https://mailu.io/1.8/kubernetes/mailu/index.html#dovecot
-      #     mail_nfs_index = yes
-      #     mail_nfs_storage = yes
-      #     mail_fsync = always
-      #     mmap_disable = yes
-      #     mail_max_userip_connections=100
-
-    # rspamd and clamav must share their volume
-    # use affinity to schedule both pods on the same node so RWO volumes keep working
-    rspamd_clamav_persistence:
-      size: 20Gi
-      storageClass: ""
-      accessMode: ReadWriteOnce
-      claimNameOverride: ""
-      annotations:
-        "helm.sh/resource-policy": keep
+        size: 50Gi
+      # resources:
+      #   limits: {}
+      #   requests: {}
 
     rspamd:
-      # logLevel: WARNING
+      overrides: {}
+      antivirusAction: "discard"
       resources:
-        requests:
-          memory: 150Mi
-          cpu: 50m
-        limits:
-          memory: 250Mi # Set to 2000Mi for first start
-          cpu: 100m
+        limits: {}
+        requests: {}
 
+    ## @section clamav parameters
     clamav:
       enabled: false
+      resources:
+        limits: {}
+        requests: {}
 
-    roundcube:
+    ## @section webmail parameters
+    webmail:
       enabled: true
-      # logLevel: WARNING
+      uri: /webmail
+      roundcubePlugins:
+        - archive
+        - zipdownload
+        - markasjunk
+        - managesieve
+        - enigma
+        - carddav
+        - mailu
       persistence:
         size: 20Gi
         storageClass: ""
-        accessMode: ReadWriteOnce
+        accessModes: [ReadWriteOnce]
         claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      uri: /roundcube
-      resources:
-        requests:
-          memory: 120Mi
-          cpu: 50m
-        limits:
-          memory: 200Mi
-          cpu: 150m
+        annotations: {}
+      # resources:
+      #   limits: {}
+      #   requests: {}
 
     webdav:
       enabled: false
 
-    mysql:
-      image:
-        repository: library/mariadb
-        tag: 10.4.10
-      persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        annotations:
-          "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 200Mi
-          cpu: 50m
-        limits:
-          memory: 400Mi
-          cpu: 150m
-
     fetchmail:
       enabled: false
-      # logLevel: WARNING
-      persistence:
-        size: 20Gi
-        storageClass: ""
-        accessMode: ReadWriteOnce
-        claimNameOverride: ""
-        #annotations:
-        #  "helm.sh/resource-policy": keep
-      resources:
-        requests:
-          memory: 100Mi
-          cpu: 100m
-        limits:
-          memory: 200Mi
-          cpu: 200m
-      delay: 600
 
-    unbound:
+    oletools:
       enabled: true
-      clusterDNS: ${NETWORK_K8S_CLUSTER_DNS}
-      # The ClusterIP, the unbound service takes.
-      # Choose an unclaimed one, that lays in your service CIDR
-      # (kubectl cluster-info dump | grep -m 1 service-cluster-ip-range).
-      unboundServiceIP: 10.43.162.135
-      image:
-        repository: mvance/unbound@sha256
-        tag: 4ee6b8686952e4eee3397f661fea174b000be6bf3c5e6b560a25fa61276829ed
-      resources:
-        requests:
-          memory: 50Mi
-          cpu: 10m
-        limits:
-          memory: 100Mi
-          cpu: 50m
+      # resources:
+      #   limits: {}
+      #   requests: {}

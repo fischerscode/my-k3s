@@ -7,8 +7,8 @@ namespace: mailserver
 secretGenerator:
   - name: mailu-secrets
     files:
-      - SECRET_KEY=secret-key.encrypted
-      - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted
-      - MYSQL_MAILU_PASSWORD=mysql-mailu-password.encrypted
+      - secret-key=secret-key.encrypted
+      - mariadb-root-password=mysql-root-password.encrypted
+      - mariadb-password=mysql-mailu-password.encrypted
       - MYSQL_ROUNDCUBE_PASSWORD=mysql-roundcube-password.encrypted
       - MESSAGE_RATELIMIT_EXEMPTION=message-ratelimit-exemption.encrypted

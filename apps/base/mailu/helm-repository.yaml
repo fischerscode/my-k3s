@@ -5,4 +5,4 @@ metadata:
   name: mailu
 spec:
   interval: 30m
-  url: https://fischerscode.github.io/mailu-helm-charts/
+  url: https://mailu.github.io/helm-charts/

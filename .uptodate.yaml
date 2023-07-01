@@ -151,7 +151,7 @@ dependencies:
       - grafana
   - name: Mailu
     type: github
-    currentVersion: "1.9.21"
+    currentVersion: "2.0.10"
     repo: "Mailu/Mailu"
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
@@ -164,7 +164,7 @@ dependencies:
       - mailserver
   - name: Mailu Helm chart
     type: helm
-    currentVersion: "0.4.2"
+    currentVersion: "1.2.0"
     repo: https://fischerscode.github.io/mailu-helm-charts/
     chart: mailu
     issueBody: |
