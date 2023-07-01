@@ -4,13 +4,13 @@ resources:
   - helm-repository.yaml
   - helm.yaml
   - rbac.yaml
-  - route-imap.yaml
-  - route-imaps.yaml
-  - route-pop3.yaml
-  - route-pop3s.yaml
-  - route-smtp.yaml
-  - route-smtps.yaml
-  - route-smtpd.yaml
+  # - route-imap.yaml
+  # - route-imaps.yaml
+  # - route-pop3.yaml
+  # - route-pop3s.yaml
+  # - route-smtp.yaml
+  # - route-smtps.yaml
+  # - route-smtpd.yaml
   - ingress.yaml
 
 configMapGenerator:
