@@ -133,8 +133,6 @@ spec:
       enabled: true
       architecture: standalone
 
-    postfix:
-
     dovecot:
       enabled: true
       persistence:
