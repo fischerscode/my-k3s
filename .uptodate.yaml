@@ -103,7 +103,7 @@ dependencies:
       - k3s
   - name: prometheus-stack
     type: helm
-    currentVersion: "40.1.0"
+    currentVersion: "47.1.0"
     repo: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     issueBody: |
@@ -118,17 +118,17 @@ dependencies:
       - prometeus
   - name: prometheus-operator CRDs
     type: helm
-    currentVersion: v0.59.1
+    currentVersion: v0.66.0
     repo: "https://prometheus-community.github.io/helm-charts"
     chart: kube-prometheus-stack
     prefix: v
     path: entries.kube-prometheus-stack.0.appVersion
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
-      Every file from [here](https://github.com/prometheus-operator/prometheus-operator/tree/v$latestVersion/example/prometheus-operator-crd) should be in [here](infrastructure/base/crds/prometheus-operator/kustomization.yaml).
+      Every file from [here](https://github.com/prometheus-operator/prometheus-operator/tree/$latestVersion/example/prometheus-operator-crd) should be in [here](infrastructure/base/crds/prometheus-operator/kustomization.yaml).
       **Make sure to also update the prometheus-stack!**
-      [CHANGELOG.md](https://github.com/prometheus-operator/prometheus-operator/blob/v$latestVersion/CHANGELOG.md)
-      [RELEASE](https://github.com/prometheus-operator/prometheus-operator/releases/tag/v$latestVersion)
+      [CHANGELOG.md](https://github.com/prometheus-operator/prometheus-operator/blob/$latestVersion/CHANGELOG.md)
+      [RELEASE](https://github.com/prometheus-operator/prometheus-operator/releases/tag/$latestVersion)
     issueLabels:
       - dependencies
       - uptodate
