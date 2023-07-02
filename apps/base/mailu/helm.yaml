@@ -104,11 +104,14 @@ spec:
       single_pvc: false
 
     ingress:
-      enabled: false
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        traefik.ingress.kubernetes.io/router.entrypoints: https
+      tls: true
       realIpHeader: X-Forwarded-For
       realIpFrom: ${NETWORK_K8S_CLUSTER_CIDR}
-      tlsFlavorOverride: cert
-      existingSecret: mailu-certificate
 
     front:
       hostPort:
