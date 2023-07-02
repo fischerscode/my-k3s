@@ -12,6 +12,20 @@
     checksum: "{{ k3s_hash }}"
   notify: restart k3s
 
+- become: true
+  file:
+    path: /etc/rancher/k3s/resolv.conf
+    state: absent
+
+- name: Ensure resolv file
+  become: true
+  copy:
+    dest: /etc/rancher/k3s-resolv.conf
+    mode: '0644'
+    content: |
+      nameserver 8.8.8.8
+      nameserver 8.8.4.4
+
 - name: Allow nodes in firewall
   import_tasks: firewall.yml
 
