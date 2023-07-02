@@ -2,7 +2,7 @@
 namespace: metallb-system
 
 resources:
-  - "github.com/metallb/metallb/config/prometheus-native?ref=v0.13.5"
+  - "github.com/metallb/metallb/config/prometheus-native?ref=v0.13.10"
 
 configMapGenerator:
   - name: grafana-dashboard
