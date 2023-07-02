@@ -12,6 +12,7 @@ resources:
   - route-smtps.yaml
   - route-smtpd.yaml
   - ingress.yaml
+  - certificate.yaml
 
 configMapGenerator:
   - name: grafana-dashboard

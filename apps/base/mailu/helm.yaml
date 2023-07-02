@@ -104,20 +104,11 @@ spec:
       single_pvc: false
 
     ingress:
-      enabled: true
-
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-        cert-manager.io/cluster-issuer: letsencrypt-prod
-
-      tls: true
-
+      enabled: false
       realIpHeader: X-Forwarded-For
       realIpFrom: ${NETWORK_K8S_CLUSTER_CIDR}
-
-      ## @param ingress.tlsFlavorOverride Overrides the value of `TLS_FLAVOR` environment variable in the `front` pod
-      ## This is normally auto-detected, only change it if you know what you are doing.
-      tlsFlavorOverride: ""
+      tlsFlavorOverride: cert
+      existingSecret: mailu-certificate
 
     front:
       hostPort:
