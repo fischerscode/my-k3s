@@ -28,8 +28,6 @@ spec:
       GF_DATE_FORMATS_INTERVAL_DAY: "DD/MM"
       GF_DATE_FORMATS_INTERVAL_MONTH: "MM-YYYY"
       GF_DATE_FORMATS_INTERVAL_YEAR: "YYYY"
-    image:
-      repository: ghcr.io/k8s-at-home/grafana
     replicas: 1
     grafana.ini:
       analytics:
