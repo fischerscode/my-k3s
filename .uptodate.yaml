@@ -13,7 +13,7 @@ dependencies:
       - traefik
   - name: metallb
     type: github
-    currentVersion: v0.13.5
+    currentVersion: v0.13.10
     prefix: v
     repo: "metallb/metallb"
     isTag: true
