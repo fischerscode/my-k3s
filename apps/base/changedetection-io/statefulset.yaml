@@ -22,6 +22,18 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /datastore
+          env:
+            - name: WEBDRIVER_URL
+              value: "http://127.0.0.1:4444/wd/hub"
+        - name: selenium
+          image: selenium/standalone-chrome-debug:3.141.59
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+      volumes:
+        - name: dshm
+          emptyDir:
+            sizeLimit: 2Gi
   volumeClaimTemplates:
     - metadata:
         name: data
