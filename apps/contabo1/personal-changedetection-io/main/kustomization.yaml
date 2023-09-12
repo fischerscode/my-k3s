@@ -1,8 +1,8 @@
 bases:
-  - ../../base/changedetection-io
+  - ../../../base/changedetection-io
 
-namePrefix: ${PERSONAL_CHANGECONNECTION_2_PREFIX}
-namespace: ${PERSONAL_CHANGECONNECTION_2_NAMESPACE}
+namePrefix: personal-
+namespace: personal-changedetection
 patchesJson6902:
   - target:
       kind: IngressRoute
