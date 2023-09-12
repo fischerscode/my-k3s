@@ -23,10 +23,13 @@ spec:
             - name: data
               mountPath: /datastore
           env:
-            - name: WEBDRIVER_URL
-              value: "http://127.0.0.1:4444/wd/hub"
-        - name: selenium
-          image: selenium/standalone-chrome-debug:3.141.59
+            - name: PLAYWRIGHT_DRIVER_URL
+              value: "ws://127.0.0.1:3000/?stealth=1&--disable-web-security=true"
+        - name: playwright-chrome
+          image: browserless/chrome:1.53-chrome-stable
+          env:
+            - name: DEFAULT_LAUNCH_ARGS
+              value: '["--window-size=1920,1080"]'
           volumeMounts:
             - name: dshm
               mountPath: /dev/shm
