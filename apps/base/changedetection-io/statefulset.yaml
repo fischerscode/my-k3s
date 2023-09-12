@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: changedetection
-          image: ghcr.io/dgtlmoon/changedetection.io:0.39.12
+          image: ghcr.io/dgtlmoon/changedetection.io:0.45.1
           ports:
             - containerPort: 5000
               name: web
