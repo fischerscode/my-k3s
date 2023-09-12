@@ -1,0 +1,4 @@
+- op: replace
+  path: /spec/dnsNames
+  value:
+    - ${PERSONAL_CHANGECONNECTION_2_DOMAIN}
