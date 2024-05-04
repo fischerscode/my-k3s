@@ -165,12 +165,12 @@ dependencies:
   - name: Mailu Helm chart
     type: helm
     currentVersion: "1.2.0"
-    repo: https://fischerscode.github.io/mailu-helm-charts/
+    repo: https://mailu.github.io/helm-charts/
     chart: mailu
     issueBody: |
       Update used $name version from $currentVersion to $latestVersion.
 
-      [Chart](https://fischerscode.github.io/mailu-helm-charts/)
+      [Chart](https://mailu.github.io/helm-charts/)
     issueLabels:
       - dependencies
       - uptodate
