@@ -175,7 +175,9 @@ spec:
       #   requests: {}
 
     webdav:
-      enabled: false
+      enabled: true
+      persistence:
+        size: 20Gi
 
     fetchmail:
       enabled: false
