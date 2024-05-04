@@ -1,0 +1,18 @@
+---
+bases:
+  - ../../base/vaultwarden
+
+namespace: vaultwarden
+
+secretGenerator:
+  - name: vaultwarden-secrets
+    files:
+      - PUSH_INSTALLATION_ID=push-installation-id.encrypted
+      - PUSH_INSTALLATION_KEY=push-installation-key.encrypted
+      - ADMIN_TOKEN=admin-token.encrypted
+      - SMTP_PASSWORD=smtp-password.encrypted
+      - DATABASE_URL=database-url.encrypted
+  - name: mariadb-secrets
+    files:
+      - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted
+      - MYSQL_PASSWORD=mysql-password.encrypted

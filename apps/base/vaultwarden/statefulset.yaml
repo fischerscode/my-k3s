@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vaultwarden
+  labels:
+    app.kubernetes.io/name: vaultwarden
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: vaultwarden
+  template:
+    metadata:
+      name: vaultwarden
+      labels:
+        app.kubernetes.io/name: vaultwarden
+    spec:
+      containers:
+        - name: vaultwarden
+          image: vaultwarden/server:1.29.2
+          command: ["/bin/bash", "-c", "--"]
+          args: ["while true; do sleep 30; done;"]
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: vaultwarden-secrets
+          env:
+            - name: PUSH_ENABLED
+              value: "true"
+            - name: DOMAIN
+              value: https://${VAULTWARDEN_DOMAIN}
+            - name: SIGNUPS_ALLOWED
+              value: "false"
+            - name: SIGNUPS_VERIFY
+              value: "true"
+            #- name: LOG_LEVEL
+            #  value: "info"
+            - name: SMTP_HOST
+              value: mail.${MAILU_DOMAIN1}
+            - name: SMTP_FROM
+              value: bitwarden@${MAILU_DOMAIN1}
+            - name: SMTP_FROM_NAME
+              value: Bitwarden
+            - name: SMTP_USERNAME
+              value: bitwarden@${MAILU_DOMAIN1}
+          resources:
+            limits:
+              cpu: 300m
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 256Mi
+          volumeMounts:
+            - name: vaultwarden
+              mountPath: /data
+          #readinessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: http
+          #livenessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: http
+  volumeClaimTemplates:
+    - metadata:
+        name: vaultwarden
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+  serviceName: vaultwarden

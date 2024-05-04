@@ -1,0 +1,10 @@
+resources:
+  - db_service.yaml
+  - db_statefulset.yaml
+  - statefulset.yaml
+  - service.yaml
+
+namespace: vaultwarden
+
+commonLabels:
+  app.kubernetes.io/name: vaultwarden
