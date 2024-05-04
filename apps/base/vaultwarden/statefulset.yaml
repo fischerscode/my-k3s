@@ -17,8 +17,6 @@ spec:
       containers:
         - name: vaultwarden
           image: vaultwarden/server:1.29.2
-          command: ["/bin/bash", "-c", "--"]
-          args: ["while true; do sleep 30; done;"]
           ports:
             - name: http
               containerPort: 80
@@ -55,14 +53,14 @@ spec:
           volumeMounts:
             - name: vaultwarden
               mountPath: /data
-          #readinessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: http
-          #livenessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
   volumeClaimTemplates:
     - metadata:
         name: vaultwarden
