@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: mailu
-      version: 1.2.0
+      version: 1.5.0
       sourceRef:
         kind: HelmRepository
         name: mailu
@@ -51,7 +51,7 @@ spec:
     networkPolicy:
       enabled: false
 
-    mailuVersion: "2.0.10"
+    mailuVersion: "2.0.40"
 
     logLevel: WARNING
 
