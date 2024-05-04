@@ -4,6 +4,8 @@ resources:
   - db_statefulset.yaml
   - statefulset.yaml
   - service.yaml
+  - certificate.yaml
+  - ingress.yaml
 
 namespace: vaultwarden
 
