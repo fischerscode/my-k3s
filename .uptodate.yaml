@@ -176,3 +176,20 @@ dependencies:
       - uptodate
       - mailu
       - mailu-chart
+  - name: vaultwarden
+    type: github
+    currentVersion: "1.30.5"
+    repo: "dani-garcia/vaultwarden"
+    issueBody: |
+      Update $name from $currentVersion to $latestVersion.
+
+      **Vaultwarden does not use semver! There might be breaking changes.**
+
+      **Also consider updating [mariadb](https://hub.docker.com/_/mariadb)**
+
+      [Release $latestVersion](https://github.com/dani-garcia/vaultwarden/releases/tag/$latestVersion)
+      [Full Changelog](https://github.com/dani-garcia/vaultwarden/compare/$currentVersion...$latestVersion)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - vaultwarden
