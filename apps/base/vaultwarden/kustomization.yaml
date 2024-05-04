@@ -1,4 +1,5 @@
 resources:
+  - rbac.yaml
   - db_service.yaml
   - db_statefulset.yaml
   - statefulset.yaml
