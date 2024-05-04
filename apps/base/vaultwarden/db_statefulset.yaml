@@ -30,6 +30,21 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - mariadb-admin -uroot -p"${MYSQL_ROOT_PASSWORD}" status
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - mariadb-admin -uroot -p"${MYSQL_ROOT_PASSWORD}" status
+            periodSeconds: 10
+            failureThreshold: 12
   volumeClaimTemplates:
     - metadata:
         name: data
