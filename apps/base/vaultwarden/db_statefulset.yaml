@@ -35,14 +35,14 @@ spec:
               command:
                 - bash
                 - -c
-                - mariadb-admin -uroot -p"${MYSQL_ROOT_PASSWORD}" status
+                - mariadb-admin -uroot -p"$${MYSQL_ROOT_PASSWORD}" status
             periodSeconds: 10
           readinessProbe:
             exec:
               command:
                 - bash
                 - -c
-                - mariadb-admin -uroot -p"${MYSQL_ROOT_PASSWORD}" status
+                - mariadb-admin -uroot -p"$${MYSQL_ROOT_PASSWORD}" status
             periodSeconds: 10
             failureThreshold: 12
   volumeClaimTemplates:
