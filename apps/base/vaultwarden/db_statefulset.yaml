@@ -22,7 +22,7 @@ spec:
           env:
             - name: MARIADB_DATABASE
               value: vaultwarden
-            - name: MYSQL_USER
+            - name: MARIADB_USER
               value: vaultwarden
           ports:
             - containerPort: 3306
