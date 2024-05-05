@@ -14,5 +14,5 @@ secretGenerator:
       - DATABASE_URL=database-url.encrypted
   - name: mariadb-secrets
     files:
-      - MYSQL_ROOT_PASSWORD=mysql-root-password.encrypted
-      - MYSQL_PASSWORD=mysql-password.encrypted
+      - MARIADB_ROOT_PASSWORD=mariadb-root-password.encrypted
+      - MARIADB_PASSWORD=mariadb-password.encrypted

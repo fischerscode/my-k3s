@@ -20,7 +20,7 @@ spec:
             - secretRef:
                 name: mariadb-secrets
           env:
-            - name: MYSQL_DATABASE
+            - name: MARIADB_DATABASE
               value: vaultwarden
             - name: MYSQL_USER
               value: vaultwarden
@@ -35,14 +35,14 @@ spec:
               command:
                 - bash
                 - -c
-                - mariadb-admin -uroot -p"$${MYSQL_ROOT_PASSWORD}" status
+                - mariadb-admin -uroot -p"$${MARIADB_ROOT_PASSWORD}" status
             periodSeconds: 10
           readinessProbe:
             exec:
               command:
                 - bash
                 - -c
-                - mariadb-admin -uroot -p"$${MYSQL_ROOT_PASSWORD}" status
+                - mariadb-admin -uroot -p"$${MARIADB_ROOT_PASSWORD}" status
             periodSeconds: 10
             failureThreshold: 12
   volumeClaimTemplates:
