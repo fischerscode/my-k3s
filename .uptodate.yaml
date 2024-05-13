@@ -151,7 +151,7 @@ dependencies:
       - grafana
   - name: Mailu
     type: github
-    currentVersion: "2.0.40"
+    currentVersion: "2.0.41"
     repo: "Mailu/Mailu"
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
