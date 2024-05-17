@@ -11,7 +11,8 @@ entryPoints:
           scheme: https
           permanent: false
           priority: 1
-    http2: {}
+    http2:
+      maxConcurrentStreams: 250
   https:
     address: :443
     http:
