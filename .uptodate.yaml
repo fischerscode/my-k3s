@@ -149,6 +149,21 @@ dependencies:
       - uptodate
       - monitoring
       - grafana
+  - name: Loki
+    type: helm
+    currentVersion: "2.6.0"
+    repo: https://grafana.github.io/helm-charts
+    chart: loki
+    issueBody: |
+      Update used $name chart version from $currentVersion to $latestVersion.
+
+      [Readme.md](https://github.com/grafana/helm-charts/blob/loki-$latestVersion/charts/loki/README.md)
+      [Upgrading to new major version](https://github.com/grafana/helm-charts/blob/loki-$latestVersion/charts/loki/README.md#upgrading-an-existing-release-to-a-new-major-version)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - monitoring
+      - loki
   - name: Mailu
     type: github
     currentVersion: "2.0.41"
