@@ -103,7 +103,7 @@ dependencies:
       - k3s
   - name: prometheus-stack
     type: helm
-    currentVersion: "47.1.0"
+    currentVersion: "59.0.0"
     repo: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     issueBody: |
@@ -118,7 +118,7 @@ dependencies:
       - prometeus
   - name: prometheus-operator CRDs
     type: helm
-    currentVersion: v0.66.0
+    currentVersion: v0.74.0
     repo: "https://prometheus-community.github.io/helm-charts"
     chart: kube-prometheus-stack
     prefix: v
@@ -136,7 +136,7 @@ dependencies:
       - prometeus
   - name: grafana
     type: helm
-    currentVersion: "6.57.4"
+    currentVersion: "7.3.10"
     repo: https://grafana.github.io/helm-charts
     chart: grafana
     issueBody: |
