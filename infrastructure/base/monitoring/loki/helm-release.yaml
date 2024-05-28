@@ -43,3 +43,5 @@ spec:
       replicas: 0
     serviceMonitor:
       enabled: true
+    chunksCache:
+      enabled: false
