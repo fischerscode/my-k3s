@@ -164,6 +164,21 @@ dependencies:
       - uptodate
       - monitoring
       - loki
+  - name: Loki
+    type: helm
+    currentVersion: "3.8.1"
+    repo: https://grafana.github.io/helm-charts
+    chart: promtail
+    issueBody: |
+      Update used $name chart version from $currentVersion to $latestVersion.
+
+      [Readme.md](https://github.com/grafana/helm-charts/blob/promtail-$latestVersion/charts/promtail/README.md)
+      [Upgrading](https://github.com/grafana/helm-charts/blob/promtail-$latestVersion/charts/promtail/README.md#upgrading)
+    issueLabels:
+      - dependencies
+      - uptodate
+      - monitoring
+      - promtail
   - name: Mailu
     type: github
     currentVersion: "2.0.41"
