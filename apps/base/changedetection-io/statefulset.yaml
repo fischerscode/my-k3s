@@ -26,7 +26,7 @@ spec:
             - name: PLAYWRIGHT_DRIVER_URL
               value: "ws://127.0.0.1:3000/?stealth=1&--disable-web-security=true"
         - name: playwright-chrome
-          image: browserless/chrome:1.53-chrome-stable
+          image: browserless/chrome:1.61-chrome-stable
           env:
             - name: DEFAULT_LAUNCH_ARGS
               value: '["--window-size=1920,1080"]'
