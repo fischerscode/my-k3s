@@ -208,7 +208,7 @@ dependencies:
       - mailu-chart
   - name: vaultwarden
     type: github
-    currentVersion: "1.30.5"
+    currentVersion: "1.32.4"
     repo: "dani-garcia/vaultwarden"
     issueBody: |
       Update $name from $currentVersion to $latestVersion.
