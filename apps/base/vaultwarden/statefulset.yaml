@@ -28,7 +28,7 @@ spec:
             - name: PUSH_ENABLED
               value: "true"
             - name: PUSH_RELAY_URI
-              value: "https://push.bitwarden.eu"
+              value: "https://api.bitwarden.eu"
             - name: PUSH_IDENTITY_URI
               value: "https://identity.bitwarden.eu"
             - name: DOMAIN
