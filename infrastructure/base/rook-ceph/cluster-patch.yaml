@@ -5,6 +5,8 @@ metadata:
   name: rook-ceph
   namespace: rook-ceph
 spec:
+  dashboard:
+    port: 8443
   storage:
     useAllNodes: false
     useAllDevices: false
