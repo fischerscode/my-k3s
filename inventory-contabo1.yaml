@@ -10,8 +10,8 @@ all:
     base_domain: fischerscode.com
   hosts:
     knode1:
-      ansible_host: 93.104.211.224
-      externalIPv4: 93.104.211.224
+      ansible_host: 193.37.152.22
+      externalIPv4: 193.37.152.22
       internalIPv4: 10.1.0.1
       externalIPv6: 2a02:c205:3006:4151::1
       internalIPv6: fd4c:2bfb:09a3:9eb4::1
