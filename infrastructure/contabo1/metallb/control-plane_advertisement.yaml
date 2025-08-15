@@ -3,6 +3,8 @@ kind: L2Advertisement
 metadata:
   name: control-plane
 spec:
+  interfaces:
+    - eth0
   ipAddressPools:
     - routing
   nodeSelectors:
