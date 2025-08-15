@@ -9,4 +9,5 @@ spec:
     - routing
   nodeSelectors:
     - matchLabels:
-        node-role.kubernetes.io/control-plane: "true"
+        # node-role.kubernetes.io/control-plane: "true"
+        public-vip: "true"
