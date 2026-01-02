@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mariadb-vaultwarden
-          image: mariadb:11.3
+          image: mariadb:11.4.9
           envFrom:
             - secretRef:
                 name: mariadb-secrets

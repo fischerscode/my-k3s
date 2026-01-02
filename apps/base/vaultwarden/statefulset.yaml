@@ -8,6 +8,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: vaultwarden
+  replicas: 0
   template:
     metadata:
       name: vaultwarden
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: vaultwarden
-          image: vaultwarden/server:1.32.4
+          image: vaultwarden/server:1.35.1
           ports:
             - name: http
               containerPort: 80
