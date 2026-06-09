@@ -90,6 +90,10 @@ spec:
       enabled: true
       architecture: standalone
 
+      image:
+        registry: docker.io
+        repository: bitnamilegacy/mariadb
+
       auth:
         database: mailu
         username: mailu
@@ -129,6 +133,9 @@ spec:
     redis:
       enabled: true
       architecture: standalone
+      image:
+        registry: docker.io
+        repository: bitnamilegacy/redis
 
     dovecot:
       enabled: true
