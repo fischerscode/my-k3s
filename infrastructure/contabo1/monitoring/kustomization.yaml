@@ -1,6 +1,9 @@
 # bases:
 #   - ../../base/monitoring
 
+resources:
+  - namespace.yaml
+
 namespace: monitoring
 
 # secretGenerator:
