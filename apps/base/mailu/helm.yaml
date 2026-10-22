@@ -108,7 +108,7 @@ spec:
       single_pvc: false
 
     ingress:
-      enabled: false
+      enabled: true
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -161,7 +161,7 @@ spec:
 
     ## @section webmail parameters
     webmail:
-      enabled: true
+      enabled: false
       uri: /webmail
       roundcubePlugins:
         - archive
