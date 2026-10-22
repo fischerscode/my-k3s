@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: mailu
-      version: 1.5.0
+      version: 2.8.0
       sourceRef:
         kind: HelmRepository
         name: mailu
@@ -51,7 +51,7 @@ spec:
     networkPolicy:
       enabled: false
 
-    mailuVersion: "2.0.41"
+    mailuVersion: "2024.06.66"
 
     logLevel: WARNING
 
@@ -93,6 +93,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnamilegacy/mariadb
+        tag: 10.11.4-debian-11-r46
 
       auth:
         database: mailu
@@ -116,6 +117,15 @@ spec:
       tls: true
       realIpHeader: X-Forwarded-For
       realIpFrom: ${NETWORK_K8S_CLUSTER_CIDR}
+      proxyProtocol:
+        smtp: true
+        smtps: true
+        submission: true
+        imaps: true
+        imap: true
+        pop3s: true
+        pop3: true
+        manageSieve: true
 
     front:
       hostPort:
@@ -123,9 +133,6 @@ spec:
       externalService:
         enabled: false
       replicaCount: 1
-      extraEnvVars:
-        - name: PROXY_PROTOCOL
-          value: "mail"
 
     admin:
       enabled: true
@@ -136,6 +143,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnamilegacy/redis
+        tag: 7.0.12-debian-11-r19
 
     dovecot:
       enabled: true
