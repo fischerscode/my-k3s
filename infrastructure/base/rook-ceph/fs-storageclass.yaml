@@ -22,5 +22,5 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
   csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
 
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 allowVolumeExpansion: true
