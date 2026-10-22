@@ -108,7 +108,7 @@ spec:
       single_pvc: false
 
     ingress:
-      enabled: true
+      enabled: false
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         cert-manager.io/cluster-issuer: letsencrypt-prod
