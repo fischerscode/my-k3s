@@ -174,7 +174,7 @@ spec:
 
     ## @section webmail parameters
     webmail:
-      enabled: false
+      enabled: true
       uri: /webmail
       roundcubePlugins:
         - archive
