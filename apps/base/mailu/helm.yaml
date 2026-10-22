@@ -115,7 +115,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: https
       tls: true
-      realIpHeader: X-Forwarded-For
+      realIpHeader: ""
       realIpFrom: ${NETWORK_K8S_CLUSTER_CIDR}
       proxyProtocol:
         smtp: true
@@ -125,7 +125,7 @@ spec:
         imap: true
         pop3s: true
         pop3: true
-        manageSieve: true
+        manageSieve: false
 
     front:
       hostPort:
@@ -133,6 +133,11 @@ spec:
       externalService:
         enabled: false
       replicaCount: 1
+      extraEnvVars:
+        - name: PROXY_PROTOCOL
+          value: "25,465,587,110,143,993,995"
+        - name: PORTS
+          value: "25,80,443,465,587,110,143,993,995,4190"
 
     admin:
       enabled: true
